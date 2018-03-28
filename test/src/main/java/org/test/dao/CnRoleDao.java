@@ -1,8 +1,8 @@
-package org.test.mapper;
+package org.test.dao;
 
 import org.test.entity.CnRole;
 
-public interface CnRoleMapper {
+public interface CnRoleDao {
     int deleteByPrimaryKey(Integer roleId);
 
     int insert(CnRole record);

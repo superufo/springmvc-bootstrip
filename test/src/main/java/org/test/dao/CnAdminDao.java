@@ -1,8 +1,8 @@
-package org.test.mapper;
+package org.test.dao;
 
 import org.test.entity.CnAdmin;
 
-public interface CnAdminMapper {
+public interface CnAdminDao {
     int deleteByPrimaryKey(Integer id);
 
     int insert(CnAdmin record);

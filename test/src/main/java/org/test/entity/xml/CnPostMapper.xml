@@ -1,0 +1,3418 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.test.service.CnPostMapper">
+  <resultMap id="BaseResultMap" type="org.test.entity.CnPost">
+    <id column="code" jdbcType="CHAR" property="code" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="fulljob" jdbcType="VARCHAR" property="fulljob" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="customer_code" jdbcType="VARCHAR" property="customerCode" />
+    <result column="customer_name" jdbcType="VARCHAR" property="customerName" />
+    <result column="department_code" jdbcType="CHAR" property="departmentCode" />
+    <result column="department_name" jdbcType="VARCHAR" property="departmentName" />
+    <result column="start_date" jdbcType="DATE" property="startDate" />
+    <result column="end_date" jdbcType="DATE" property="endDate" />
+    <result column="enabled" jdbcType="TINYINT" property="enabled" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="need_num" jdbcType="VARCHAR" property="needNum" />
+    <result column="handle_num" jdbcType="INTEGER" property="handleNum" />
+    <result column="finish_num" jdbcType="INTEGER" property="finishNum" />
+    <result column="province" jdbcType="VARCHAR" property="province" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="town" jdbcType="VARCHAR" property="town" />
+    <result column="street" jdbcType="VARCHAR" property="street" />
+    <result column="min_money" jdbcType="INTEGER" property="minMoney" />
+    <result column="max_money" jdbcType="INTEGER" property="maxMoney" />
+    <result column="work_year" jdbcType="INTEGER" property="workYear" />
+    <result column="education" jdbcType="VARCHAR" property="education" />
+    <result column="mode" jdbcType="VARCHAR" property="mode" />
+    <result column="keyin_date" jdbcType="TIMESTAMP" property="keyinDate" />
+    <result column="keyin_user" jdbcType="VARCHAR" property="keyinUser" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="org.test.entity.CnPostWithBLOBs">
+    <result column="request" jdbcType="LONGVARCHAR" property="request" />
+    <result column="duty" jdbcType="LONGVARCHAR" property="duty" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    code, name, fulljob, description, customer_code, customer_name, department_code, 
+    department_name, start_date, end_date, enabled, status, need_num, handle_num, finish_num, 
+    province, city, town, street, min_money, max_money, work_year, education, mode, keyin_date, 
+    keyin_user
+  </sql>
+  <sql id="Blob_Column_List">
+    request, duty
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from cn_post
+    where code = #{code,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from cn_post
+    where code = #{code,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="org.test.entity.CnPostWithBLOBs">
+    <selectKey keyProperty="code" order="AFTER" resultType="java.lang.String">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into cn_post (name, fulljob, description, 
+      customer_code, customer_name, department_code, 
+      department_name, start_date, end_date, 
+      enabled, status, need_num, 
+      handle_num, finish_num, province, 
+      city, town, street, 
+      min_money, max_money, work_year, 
+      education, mode, keyin_date, 
+      keyin_user, request, duty
+      )
+    values (#{name,jdbcType=VARCHAR}, #{fulljob,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{customerCode,jdbcType=VARCHAR}, #{customerName,jdbcType=VARCHAR}, #{departmentCode,jdbcType=CHAR}, 
+      #{departmentName,jdbcType=VARCHAR}, #{startDate,jdbcType=DATE}, #{endDate,jdbcType=DATE}, 
+      #{enabled,jdbcType=TINYINT}, #{status,jdbcType=TINYINT}, #{needNum,jdbcType=VARCHAR}, 
+      #{handleNum,jdbcType=INTEGER}, #{finishNum,jdbcType=INTEGER}, #{province,jdbcType=VARCHAR}, 
+      #{city,jdbcType=VARCHAR}, #{town,jdbcType=VARCHAR}, #{street,jdbcType=VARCHAR}, 
+      #{minMoney,jdbcType=INTEGER}, #{maxMoney,jdbcType=INTEGER}, #{workYear,jdbcType=INTEGER}, 
+      #{education,jdbcType=VARCHAR}, #{mode,jdbcType=VARCHAR}, #{keyinDate,jdbcType=TIMESTAMP}, 
+      #{keyinUser,jdbcType=VARCHAR}, #{request,jdbcType=LONGVARCHAR}, #{duty,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.test.entity.CnPostWithBLOBs">
+    <selectKey keyProperty="code" order="AFTER" resultType="java.lang.String">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into cn_post
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        name,
+      </if>
+      <if test="fulljob != null">
+        fulljob,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="customerCode != null">
+        customer_code,
+      </if>
+      <if test="customerName != null">
+        customer_name,
+      </if>
+      <if test="departmentCode != null">
+        department_code,
+      </if>
+      <if test="departmentName != null">
+        department_name,
+      </if>
+      <if test="startDate != null">
+        start_date,
+      </if>
+      <if test="endDate != null">
+        end_date,
+      </if>
+      <if test="enabled != null">
+        enabled,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="needNum != null">
+        need_num,
+      </if>
+      <if test="handleNum != null">
+        handle_num,
+      </if>
+      <if test="finishNum != null">
+        finish_num,
+      </if>
+      <if test="province != null">
+        province,
+      </if>
+      <if test="city != null">
+        city,
+      </if>
+      <if test="town != null">
+        town,
+      </if>
+      <if test="street != null">
+        street,
+      </if>
+      <if test="minMoney != null">
+        min_money,
+      </if>
+      <if test="maxMoney != null">
+        max_money,
+      </if>
+      <if test="workYear != null">
+        work_year,
+      </if>
+      <if test="education != null">
+        education,
+      </if>
+      <if test="mode != null">
+        mode,
+      </if>
+      <if test="keyinDate != null">
+        keyin_date,
+      </if>
+      <if test="keyinUser != null">
+        keyin_user,
+      </if>
+      <if test="request != null">
+        request,
+      </if>
+      <if test="duty != null">
+        duty,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="fulljob != null">
+        #{fulljob,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="customerCode != null">
+        #{customerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="customerName != null">
+        #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentCode != null">
+        #{departmentCode,jdbcType=CHAR},
+      </if>
+      <if test="departmentName != null">
+        #{departmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="startDate != null">
+        #{startDate,jdbcType=DATE},
+      </if>
+      <if test="endDate != null">
+        #{endDate,jdbcType=DATE},
+      </if>
+      <if test="enabled != null">
+        #{enabled,jdbcType=TINYINT},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="needNum != null">
+        #{needNum,jdbcType=VARCHAR},
+      </if>
+      <if test="handleNum != null">
+        #{handleNum,jdbcType=INTEGER},
+      </if>
+      <if test="finishNum != null">
+        #{finishNum,jdbcType=INTEGER},
+      </if>
+      <if test="province != null">
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="town != null">
+        #{town,jdbcType=VARCHAR},
+      </if>
+      <if test="street != null">
+        #{street,jdbcType=VARCHAR},
+      </if>
+      <if test="minMoney != null">
+        #{minMoney,jdbcType=INTEGER},
+      </if>
+      <if test="maxMoney != null">
+        #{maxMoney,jdbcType=INTEGER},
+      </if>
+      <if test="workYear != null">
+        #{workYear,jdbcType=INTEGER},
+      </if>
+      <if test="education != null">
+        #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="mode != null">
+        #{mode,jdbcType=VARCHAR},
+      </if>
+      <if test="keyinDate != null">
+        #{keyinDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="keyinUser != null">
+        #{keyinUser,jdbcType=VARCHAR},
+      </if>
+      <if test="request != null">
+        #{request,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="duty != null">
+        #{duty,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.test.entity.CnPostWithBLOBs">
+    update cn_post
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="fulljob != null">
+        fulljob = #{fulljob,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="customerCode != null">
+        customer_code = #{customerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="customerName != null">
+        customer_name = #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentCode != null">
+        department_code = #{departmentCode,jdbcType=CHAR},
+      </if>
+      <if test="departmentName != null">
+        department_name = #{departmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="startDate != null">
+        start_date = #{startDate,jdbcType=DATE},
+      </if>
+      <if test="endDate != null">
+        end_date = #{endDate,jdbcType=DATE},
+      </if>
+      <if test="enabled != null">
+        enabled = #{enabled,jdbcType=TINYINT},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="needNum != null">
+        need_num = #{needNum,jdbcType=VARCHAR},
+      </if>
+      <if test="handleNum != null">
+        handle_num = #{handleNum,jdbcType=INTEGER},
+      </if>
+      <if test="finishNum != null">
+        finish_num = #{finishNum,jdbcType=INTEGER},
+      </if>
+      <if test="province != null">
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="town != null">
+        town = #{town,jdbcType=VARCHAR},
+      </if>
+      <if test="street != null">
+        street = #{street,jdbcType=VARCHAR},
+      </if>
+      <if test="minMoney != null">
+        min_money = #{minMoney,jdbcType=INTEGER},
+      </if>
+      <if test="maxMoney != null">
+        max_money = #{maxMoney,jdbcType=INTEGER},
+      </if>
+      <if test="workYear != null">
+        work_year = #{workYear,jdbcType=INTEGER},
+      </if>
+      <if test="education != null">
+        education = #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="mode != null">
+        mode = #{mode,jdbcType=VARCHAR},
+      </if>
+      <if test="keyinDate != null">
+        keyin_date = #{keyinDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="keyinUser != null">
+        keyin_user = #{keyinUser,jdbcType=VARCHAR},
+      </if>
+      <if test="request != null">
+        request = #{request,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="duty != null">
+        duty = #{duty,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where code = #{code,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="org.test.entity.CnPostWithBLOBs">
+    update cn_post
+    set name = #{name,jdbcType=VARCHAR},
+      fulljob = #{fulljob,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      customer_code = #{customerCode,jdbcType=VARCHAR},
+      customer_name = #{customerName,jdbcType=VARCHAR},
+      department_code = #{departmentCode,jdbcType=CHAR},
+      department_name = #{departmentName,jdbcType=VARCHAR},
+      start_date = #{startDate,jdbcType=DATE},
+      end_date = #{endDate,jdbcType=DATE},
+      enabled = #{enabled,jdbcType=TINYINT},
+      status = #{status,jdbcType=TINYINT},
+      need_num = #{needNum,jdbcType=VARCHAR},
+      handle_num = #{handleNum,jdbcType=INTEGER},
+      finish_num = #{finishNum,jdbcType=INTEGER},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      town = #{town,jdbcType=VARCHAR},
+      street = #{street,jdbcType=VARCHAR},
+      min_money = #{minMoney,jdbcType=INTEGER},
+      max_money = #{maxMoney,jdbcType=INTEGER},
+      work_year = #{workYear,jdbcType=INTEGER},
+      education = #{education,jdbcType=VARCHAR},
+      mode = #{mode,jdbcType=VARCHAR},
+      keyin_date = #{keyinDate,jdbcType=TIMESTAMP},
+      keyin_user = #{keyinUser,jdbcType=VARCHAR},
+      request = #{request,jdbcType=LONGVARCHAR},
+      duty = #{duty,jdbcType=LONGVARCHAR}
+    where code = #{code,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.test.entity.CnPost">
+    update cn_post
+    set name = #{name,jdbcType=VARCHAR},
+      fulljob = #{fulljob,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      customer_code = #{customerCode,jdbcType=VARCHAR},
+      customer_name = #{customerName,jdbcType=VARCHAR},
+      department_code = #{departmentCode,jdbcType=CHAR},
+      department_name = #{departmentName,jdbcType=VARCHAR},
+      start_date = #{startDate,jdbcType=DATE},
+      end_date = #{endDate,jdbcType=DATE},
+      enabled = #{enabled,jdbcType=TINYINT},
+      status = #{status,jdbcType=TINYINT},
+      need_num = #{needNum,jdbcType=VARCHAR},
+      handle_num = #{handleNum,jdbcType=INTEGER},
+      finish_num = #{finishNum,jdbcType=INTEGER},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      town = #{town,jdbcType=VARCHAR},
+      street = #{street,jdbcType=VARCHAR},
+      min_money = #{minMoney,jdbcType=INTEGER},
+      max_money = #{maxMoney,jdbcType=INTEGER},
+      work_year = #{workYear,jdbcType=INTEGER},
+      education = #{education,jdbcType=VARCHAR},
+      mode = #{mode,jdbcType=VARCHAR},
+      keyin_date = #{keyinDate,jdbcType=TIMESTAMP},
+      keyin_user = #{keyinUser,jdbcType=VARCHAR}
+    where code = #{code,jdbcType=CHAR}
+  </update>
+  <resultMap id="BaseResultMap" type="org.test.entity.CnPost">
+    <id column="code" jdbcType="CHAR" property="code" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="fulljob" jdbcType="VARCHAR" property="fulljob" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="customer_code" jdbcType="VARCHAR" property="customerCode" />
+    <result column="customer_name" jdbcType="VARCHAR" property="customerName" />
+    <result column="department_code" jdbcType="CHAR" property="departmentCode" />
+    <result column="department_name" jdbcType="VARCHAR" property="departmentName" />
+    <result column="start_date" jdbcType="DATE" property="startDate" />
+    <result column="end_date" jdbcType="DATE" property="endDate" />
+    <result column="enabled" jdbcType="TINYINT" property="enabled" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="need_num" jdbcType="VARCHAR" property="needNum" />
+    <result column="handle_num" jdbcType="INTEGER" property="handleNum" />
+    <result column="finish_num" jdbcType="INTEGER" property="finishNum" />
+    <result column="province" jdbcType="VARCHAR" property="province" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="town" jdbcType="VARCHAR" property="town" />
+    <result column="street" jdbcType="VARCHAR" property="street" />
+    <result column="min_money" jdbcType="INTEGER" property="minMoney" />
+    <result column="max_money" jdbcType="INTEGER" property="maxMoney" />
+    <result column="work_year" jdbcType="INTEGER" property="workYear" />
+    <result column="education" jdbcType="VARCHAR" property="education" />
+    <result column="mode" jdbcType="VARCHAR" property="mode" />
+    <result column="keyin_date" jdbcType="TIMESTAMP" property="keyinDate" />
+    <result column="keyin_user" jdbcType="VARCHAR" property="keyinUser" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="org.test.entity.CnPostWithBLOBs">
+    <result column="request" jdbcType="LONGVARCHAR" property="request" />
+    <result column="duty" jdbcType="LONGVARCHAR" property="duty" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    code, name, fulljob, description, customer_code, customer_name, department_code, 
+    department_name, start_date, end_date, enabled, status, need_num, handle_num, finish_num, 
+    province, city, town, street, min_money, max_money, work_year, education, mode, keyin_date, 
+    keyin_user
+  </sql>
+  <sql id="Blob_Column_List">
+    request, duty
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from cn_post
+    where code = #{code,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from cn_post
+    where code = #{code,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="org.test.entity.CnPostWithBLOBs">
+    <selectKey keyProperty="code" order="AFTER" resultType="java.lang.String">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into cn_post (name, fulljob, description, 
+      customer_code, customer_name, department_code, 
+      department_name, start_date, end_date, 
+      enabled, status, need_num, 
+      handle_num, finish_num, province, 
+      city, town, street, 
+      min_money, max_money, work_year, 
+      education, mode, keyin_date, 
+      keyin_user, request, duty
+      )
+    values (#{name,jdbcType=VARCHAR}, #{fulljob,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{customerCode,jdbcType=VARCHAR}, #{customerName,jdbcType=VARCHAR}, #{departmentCode,jdbcType=CHAR}, 
+      #{departmentName,jdbcType=VARCHAR}, #{startDate,jdbcType=DATE}, #{endDate,jdbcType=DATE}, 
+      #{enabled,jdbcType=TINYINT}, #{status,jdbcType=TINYINT}, #{needNum,jdbcType=VARCHAR}, 
+      #{handleNum,jdbcType=INTEGER}, #{finishNum,jdbcType=INTEGER}, #{province,jdbcType=VARCHAR}, 
+      #{city,jdbcType=VARCHAR}, #{town,jdbcType=VARCHAR}, #{street,jdbcType=VARCHAR}, 
+      #{minMoney,jdbcType=INTEGER}, #{maxMoney,jdbcType=INTEGER}, #{workYear,jdbcType=INTEGER}, 
+      #{education,jdbcType=VARCHAR}, #{mode,jdbcType=VARCHAR}, #{keyinDate,jdbcType=TIMESTAMP}, 
+      #{keyinUser,jdbcType=VARCHAR}, #{request,jdbcType=LONGVARCHAR}, #{duty,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.test.entity.CnPostWithBLOBs">
+    <selectKey keyProperty="code" order="AFTER" resultType="java.lang.String">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into cn_post
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        name,
+      </if>
+      <if test="fulljob != null">
+        fulljob,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="customerCode != null">
+        customer_code,
+      </if>
+      <if test="customerName != null">
+        customer_name,
+      </if>
+      <if test="departmentCode != null">
+        department_code,
+      </if>
+      <if test="departmentName != null">
+        department_name,
+      </if>
+      <if test="startDate != null">
+        start_date,
+      </if>
+      <if test="endDate != null">
+        end_date,
+      </if>
+      <if test="enabled != null">
+        enabled,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="needNum != null">
+        need_num,
+      </if>
+      <if test="handleNum != null">
+        handle_num,
+      </if>
+      <if test="finishNum != null">
+        finish_num,
+      </if>
+      <if test="province != null">
+        province,
+      </if>
+      <if test="city != null">
+        city,
+      </if>
+      <if test="town != null">
+        town,
+      </if>
+      <if test="street != null">
+        street,
+      </if>
+      <if test="minMoney != null">
+        min_money,
+      </if>
+      <if test="maxMoney != null">
+        max_money,
+      </if>
+      <if test="workYear != null">
+        work_year,
+      </if>
+      <if test="education != null">
+        education,
+      </if>
+      <if test="mode != null">
+        mode,
+      </if>
+      <if test="keyinDate != null">
+        keyin_date,
+      </if>
+      <if test="keyinUser != null">
+        keyin_user,
+      </if>
+      <if test="request != null">
+        request,
+      </if>
+      <if test="duty != null">
+        duty,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="fulljob != null">
+        #{fulljob,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="customerCode != null">
+        #{customerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="customerName != null">
+        #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentCode != null">
+        #{departmentCode,jdbcType=CHAR},
+      </if>
+      <if test="departmentName != null">
+        #{departmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="startDate != null">
+        #{startDate,jdbcType=DATE},
+      </if>
+      <if test="endDate != null">
+        #{endDate,jdbcType=DATE},
+      </if>
+      <if test="enabled != null">
+        #{enabled,jdbcType=TINYINT},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="needNum != null">
+        #{needNum,jdbcType=VARCHAR},
+      </if>
+      <if test="handleNum != null">
+        #{handleNum,jdbcType=INTEGER},
+      </if>
+      <if test="finishNum != null">
+        #{finishNum,jdbcType=INTEGER},
+      </if>
+      <if test="province != null">
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="town != null">
+        #{town,jdbcType=VARCHAR},
+      </if>
+      <if test="street != null">
+        #{street,jdbcType=VARCHAR},
+      </if>
+      <if test="minMoney != null">
+        #{minMoney,jdbcType=INTEGER},
+      </if>
+      <if test="maxMoney != null">
+        #{maxMoney,jdbcType=INTEGER},
+      </if>
+      <if test="workYear != null">
+        #{workYear,jdbcType=INTEGER},
+      </if>
+      <if test="education != null">
+        #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="mode != null">
+        #{mode,jdbcType=VARCHAR},
+      </if>
+      <if test="keyinDate != null">
+        #{keyinDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="keyinUser != null">
+        #{keyinUser,jdbcType=VARCHAR},
+      </if>
+      <if test="request != null">
+        #{request,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="duty != null">
+        #{duty,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.test.entity.CnPostWithBLOBs">
+    update cn_post
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="fulljob != null">
+        fulljob = #{fulljob,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="customerCode != null">
+        customer_code = #{customerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="customerName != null">
+        customer_name = #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentCode != null">
+        department_code = #{departmentCode,jdbcType=CHAR},
+      </if>
+      <if test="departmentName != null">
+        department_name = #{departmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="startDate != null">
+        start_date = #{startDate,jdbcType=DATE},
+      </if>
+      <if test="endDate != null">
+        end_date = #{endDate,jdbcType=DATE},
+      </if>
+      <if test="enabled != null">
+        enabled = #{enabled,jdbcType=TINYINT},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="needNum != null">
+        need_num = #{needNum,jdbcType=VARCHAR},
+      </if>
+      <if test="handleNum != null">
+        handle_num = #{handleNum,jdbcType=INTEGER},
+      </if>
+      <if test="finishNum != null">
+        finish_num = #{finishNum,jdbcType=INTEGER},
+      </if>
+      <if test="province != null">
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="town != null">
+        town = #{town,jdbcType=VARCHAR},
+      </if>
+      <if test="street != null">
+        street = #{street,jdbcType=VARCHAR},
+      </if>
+      <if test="minMoney != null">
+        min_money = #{minMoney,jdbcType=INTEGER},
+      </if>
+      <if test="maxMoney != null">
+        max_money = #{maxMoney,jdbcType=INTEGER},
+      </if>
+      <if test="workYear != null">
+        work_year = #{workYear,jdbcType=INTEGER},
+      </if>
+      <if test="education != null">
+        education = #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="mode != null">
+        mode = #{mode,jdbcType=VARCHAR},
+      </if>
+      <if test="keyinDate != null">
+        keyin_date = #{keyinDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="keyinUser != null">
+        keyin_user = #{keyinUser,jdbcType=VARCHAR},
+      </if>
+      <if test="request != null">
+        request = #{request,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="duty != null">
+        duty = #{duty,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where code = #{code,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="org.test.entity.CnPostWithBLOBs">
+    update cn_post
+    set name = #{name,jdbcType=VARCHAR},
+      fulljob = #{fulljob,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      customer_code = #{customerCode,jdbcType=VARCHAR},
+      customer_name = #{customerName,jdbcType=VARCHAR},
+      department_code = #{departmentCode,jdbcType=CHAR},
+      department_name = #{departmentName,jdbcType=VARCHAR},
+      start_date = #{startDate,jdbcType=DATE},
+      end_date = #{endDate,jdbcType=DATE},
+      enabled = #{enabled,jdbcType=TINYINT},
+      status = #{status,jdbcType=TINYINT},
+      need_num = #{needNum,jdbcType=VARCHAR},
+      handle_num = #{handleNum,jdbcType=INTEGER},
+      finish_num = #{finishNum,jdbcType=INTEGER},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      town = #{town,jdbcType=VARCHAR},
+      street = #{street,jdbcType=VARCHAR},
+      min_money = #{minMoney,jdbcType=INTEGER},
+      max_money = #{maxMoney,jdbcType=INTEGER},
+      work_year = #{workYear,jdbcType=INTEGER},
+      education = #{education,jdbcType=VARCHAR},
+      mode = #{mode,jdbcType=VARCHAR},
+      keyin_date = #{keyinDate,jdbcType=TIMESTAMP},
+      keyin_user = #{keyinUser,jdbcType=VARCHAR},
+      request = #{request,jdbcType=LONGVARCHAR},
+      duty = #{duty,jdbcType=LONGVARCHAR}
+    where code = #{code,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.test.entity.CnPost">
+    update cn_post
+    set name = #{name,jdbcType=VARCHAR},
+      fulljob = #{fulljob,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      customer_code = #{customerCode,jdbcType=VARCHAR},
+      customer_name = #{customerName,jdbcType=VARCHAR},
+      department_code = #{departmentCode,jdbcType=CHAR},
+      department_name = #{departmentName,jdbcType=VARCHAR},
+      start_date = #{startDate,jdbcType=DATE},
+      end_date = #{endDate,jdbcType=DATE},
+      enabled = #{enabled,jdbcType=TINYINT},
+      status = #{status,jdbcType=TINYINT},
+      need_num = #{needNum,jdbcType=VARCHAR},
+      handle_num = #{handleNum,jdbcType=INTEGER},
+      finish_num = #{finishNum,jdbcType=INTEGER},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      town = #{town,jdbcType=VARCHAR},
+      street = #{street,jdbcType=VARCHAR},
+      min_money = #{minMoney,jdbcType=INTEGER},
+      max_money = #{maxMoney,jdbcType=INTEGER},
+      work_year = #{workYear,jdbcType=INTEGER},
+      education = #{education,jdbcType=VARCHAR},
+      mode = #{mode,jdbcType=VARCHAR},
+      keyin_date = #{keyinDate,jdbcType=TIMESTAMP},
+      keyin_user = #{keyinUser,jdbcType=VARCHAR}
+    where code = #{code,jdbcType=CHAR}
+  </update>
+  <resultMap id="BaseResultMap" type="org.test.entity.CnPost">
+    <id column="code" jdbcType="CHAR" property="code" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="fulljob" jdbcType="VARCHAR" property="fulljob" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="customer_code" jdbcType="VARCHAR" property="customerCode" />
+    <result column="customer_name" jdbcType="VARCHAR" property="customerName" />
+    <result column="department_code" jdbcType="CHAR" property="departmentCode" />
+    <result column="department_name" jdbcType="VARCHAR" property="departmentName" />
+    <result column="start_date" jdbcType="DATE" property="startDate" />
+    <result column="end_date" jdbcType="DATE" property="endDate" />
+    <result column="enabled" jdbcType="TINYINT" property="enabled" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="need_num" jdbcType="VARCHAR" property="needNum" />
+    <result column="handle_num" jdbcType="INTEGER" property="handleNum" />
+    <result column="finish_num" jdbcType="INTEGER" property="finishNum" />
+    <result column="province" jdbcType="VARCHAR" property="province" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="town" jdbcType="VARCHAR" property="town" />
+    <result column="street" jdbcType="VARCHAR" property="street" />
+    <result column="min_money" jdbcType="INTEGER" property="minMoney" />
+    <result column="max_money" jdbcType="INTEGER" property="maxMoney" />
+    <result column="work_year" jdbcType="INTEGER" property="workYear" />
+    <result column="education" jdbcType="VARCHAR" property="education" />
+    <result column="mode" jdbcType="VARCHAR" property="mode" />
+    <result column="keyin_date" jdbcType="TIMESTAMP" property="keyinDate" />
+    <result column="keyin_user" jdbcType="VARCHAR" property="keyinUser" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="org.test.entity.CnPostWithBLOBs">
+    <result column="request" jdbcType="LONGVARCHAR" property="request" />
+    <result column="duty" jdbcType="LONGVARCHAR" property="duty" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    code, name, fulljob, description, customer_code, customer_name, department_code, 
+    department_name, start_date, end_date, enabled, status, need_num, handle_num, finish_num, 
+    province, city, town, street, min_money, max_money, work_year, education, mode, keyin_date, 
+    keyin_user
+  </sql>
+  <sql id="Blob_Column_List">
+    request, duty
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="org.test.entity.CnPostExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from cn_post
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="org.test.entity.CnPostExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cn_post
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from cn_post
+    where code = #{code,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from cn_post
+    where code = #{code,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.test.entity.CnPostExample">
+    delete from cn_post
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.test.entity.CnPostWithBLOBs">
+    insert into cn_post (code, name, fulljob, 
+      description, customer_code, customer_name, 
+      department_code, department_name, start_date, 
+      end_date, enabled, status, 
+      need_num, handle_num, finish_num, 
+      province, city, town, 
+      street, min_money, max_money, 
+      work_year, education, mode, 
+      keyin_date, keyin_user, request, 
+      duty)
+    values (#{code,jdbcType=CHAR}, #{name,jdbcType=VARCHAR}, #{fulljob,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{customerCode,jdbcType=VARCHAR}, #{customerName,jdbcType=VARCHAR}, 
+      #{departmentCode,jdbcType=CHAR}, #{departmentName,jdbcType=VARCHAR}, #{startDate,jdbcType=DATE}, 
+      #{endDate,jdbcType=DATE}, #{enabled,jdbcType=TINYINT}, #{status,jdbcType=TINYINT}, 
+      #{needNum,jdbcType=VARCHAR}, #{handleNum,jdbcType=INTEGER}, #{finishNum,jdbcType=INTEGER}, 
+      #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{town,jdbcType=VARCHAR}, 
+      #{street,jdbcType=VARCHAR}, #{minMoney,jdbcType=INTEGER}, #{maxMoney,jdbcType=INTEGER}, 
+      #{workYear,jdbcType=INTEGER}, #{education,jdbcType=VARCHAR}, #{mode,jdbcType=VARCHAR}, 
+      #{keyinDate,jdbcType=TIMESTAMP}, #{keyinUser,jdbcType=VARCHAR}, #{request,jdbcType=LONGVARCHAR}, 
+      #{duty,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.test.entity.CnPostWithBLOBs">
+    insert into cn_post
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="code != null">
+        code,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="fulljob != null">
+        fulljob,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="customerCode != null">
+        customer_code,
+      </if>
+      <if test="customerName != null">
+        customer_name,
+      </if>
+      <if test="departmentCode != null">
+        department_code,
+      </if>
+      <if test="departmentName != null">
+        department_name,
+      </if>
+      <if test="startDate != null">
+        start_date,
+      </if>
+      <if test="endDate != null">
+        end_date,
+      </if>
+      <if test="enabled != null">
+        enabled,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="needNum != null">
+        need_num,
+      </if>
+      <if test="handleNum != null">
+        handle_num,
+      </if>
+      <if test="finishNum != null">
+        finish_num,
+      </if>
+      <if test="province != null">
+        province,
+      </if>
+      <if test="city != null">
+        city,
+      </if>
+      <if test="town != null">
+        town,
+      </if>
+      <if test="street != null">
+        street,
+      </if>
+      <if test="minMoney != null">
+        min_money,
+      </if>
+      <if test="maxMoney != null">
+        max_money,
+      </if>
+      <if test="workYear != null">
+        work_year,
+      </if>
+      <if test="education != null">
+        education,
+      </if>
+      <if test="mode != null">
+        mode,
+      </if>
+      <if test="keyinDate != null">
+        keyin_date,
+      </if>
+      <if test="keyinUser != null">
+        keyin_user,
+      </if>
+      <if test="request != null">
+        request,
+      </if>
+      <if test="duty != null">
+        duty,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="code != null">
+        #{code,jdbcType=CHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="fulljob != null">
+        #{fulljob,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="customerCode != null">
+        #{customerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="customerName != null">
+        #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentCode != null">
+        #{departmentCode,jdbcType=CHAR},
+      </if>
+      <if test="departmentName != null">
+        #{departmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="startDate != null">
+        #{startDate,jdbcType=DATE},
+      </if>
+      <if test="endDate != null">
+        #{endDate,jdbcType=DATE},
+      </if>
+      <if test="enabled != null">
+        #{enabled,jdbcType=TINYINT},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="needNum != null">
+        #{needNum,jdbcType=VARCHAR},
+      </if>
+      <if test="handleNum != null">
+        #{handleNum,jdbcType=INTEGER},
+      </if>
+      <if test="finishNum != null">
+        #{finishNum,jdbcType=INTEGER},
+      </if>
+      <if test="province != null">
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="town != null">
+        #{town,jdbcType=VARCHAR},
+      </if>
+      <if test="street != null">
+        #{street,jdbcType=VARCHAR},
+      </if>
+      <if test="minMoney != null">
+        #{minMoney,jdbcType=INTEGER},
+      </if>
+      <if test="maxMoney != null">
+        #{maxMoney,jdbcType=INTEGER},
+      </if>
+      <if test="workYear != null">
+        #{workYear,jdbcType=INTEGER},
+      </if>
+      <if test="education != null">
+        #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="mode != null">
+        #{mode,jdbcType=VARCHAR},
+      </if>
+      <if test="keyinDate != null">
+        #{keyinDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="keyinUser != null">
+        #{keyinUser,jdbcType=VARCHAR},
+      </if>
+      <if test="request != null">
+        #{request,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="duty != null">
+        #{duty,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.test.entity.CnPostExample" resultType="java.lang.Integer">
+    select count(*) from cn_post
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update cn_post
+    <set>
+      <if test="record.code != null">
+        code = #{record.code,jdbcType=CHAR},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fulljob != null">
+        fulljob = #{record.fulljob,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null">
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customerCode != null">
+        customer_code = #{record.customerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customerName != null">
+        customer_name = #{record.customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.departmentCode != null">
+        department_code = #{record.departmentCode,jdbcType=CHAR},
+      </if>
+      <if test="record.departmentName != null">
+        department_name = #{record.departmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startDate != null">
+        start_date = #{record.startDate,jdbcType=DATE},
+      </if>
+      <if test="record.endDate != null">
+        end_date = #{record.endDate,jdbcType=DATE},
+      </if>
+      <if test="record.enabled != null">
+        enabled = #{record.enabled,jdbcType=TINYINT},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=TINYINT},
+      </if>
+      <if test="record.needNum != null">
+        need_num = #{record.needNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.handleNum != null">
+        handle_num = #{record.handleNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.finishNum != null">
+        finish_num = #{record.finishNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.province != null">
+        province = #{record.province,jdbcType=VARCHAR},
+      </if>
+      <if test="record.city != null">
+        city = #{record.city,jdbcType=VARCHAR},
+      </if>
+      <if test="record.town != null">
+        town = #{record.town,jdbcType=VARCHAR},
+      </if>
+      <if test="record.street != null">
+        street = #{record.street,jdbcType=VARCHAR},
+      </if>
+      <if test="record.minMoney != null">
+        min_money = #{record.minMoney,jdbcType=INTEGER},
+      </if>
+      <if test="record.maxMoney != null">
+        max_money = #{record.maxMoney,jdbcType=INTEGER},
+      </if>
+      <if test="record.workYear != null">
+        work_year = #{record.workYear,jdbcType=INTEGER},
+      </if>
+      <if test="record.education != null">
+        education = #{record.education,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mode != null">
+        mode = #{record.mode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.keyinDate != null">
+        keyin_date = #{record.keyinDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.keyinUser != null">
+        keyin_user = #{record.keyinUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.request != null">
+        request = #{record.request,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.duty != null">
+        duty = #{record.duty,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update cn_post
+    set code = #{record.code,jdbcType=CHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      fulljob = #{record.fulljob,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR},
+      customer_code = #{record.customerCode,jdbcType=VARCHAR},
+      customer_name = #{record.customerName,jdbcType=VARCHAR},
+      department_code = #{record.departmentCode,jdbcType=CHAR},
+      department_name = #{record.departmentName,jdbcType=VARCHAR},
+      start_date = #{record.startDate,jdbcType=DATE},
+      end_date = #{record.endDate,jdbcType=DATE},
+      enabled = #{record.enabled,jdbcType=TINYINT},
+      status = #{record.status,jdbcType=TINYINT},
+      need_num = #{record.needNum,jdbcType=VARCHAR},
+      handle_num = #{record.handleNum,jdbcType=INTEGER},
+      finish_num = #{record.finishNum,jdbcType=INTEGER},
+      province = #{record.province,jdbcType=VARCHAR},
+      city = #{record.city,jdbcType=VARCHAR},
+      town = #{record.town,jdbcType=VARCHAR},
+      street = #{record.street,jdbcType=VARCHAR},
+      min_money = #{record.minMoney,jdbcType=INTEGER},
+      max_money = #{record.maxMoney,jdbcType=INTEGER},
+      work_year = #{record.workYear,jdbcType=INTEGER},
+      education = #{record.education,jdbcType=VARCHAR},
+      mode = #{record.mode,jdbcType=VARCHAR},
+      keyin_date = #{record.keyinDate,jdbcType=TIMESTAMP},
+      keyin_user = #{record.keyinUser,jdbcType=VARCHAR},
+      request = #{record.request,jdbcType=LONGVARCHAR},
+      duty = #{record.duty,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update cn_post
+    set code = #{record.code,jdbcType=CHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      fulljob = #{record.fulljob,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR},
+      customer_code = #{record.customerCode,jdbcType=VARCHAR},
+      customer_name = #{record.customerName,jdbcType=VARCHAR},
+      department_code = #{record.departmentCode,jdbcType=CHAR},
+      department_name = #{record.departmentName,jdbcType=VARCHAR},
+      start_date = #{record.startDate,jdbcType=DATE},
+      end_date = #{record.endDate,jdbcType=DATE},
+      enabled = #{record.enabled,jdbcType=TINYINT},
+      status = #{record.status,jdbcType=TINYINT},
+      need_num = #{record.needNum,jdbcType=VARCHAR},
+      handle_num = #{record.handleNum,jdbcType=INTEGER},
+      finish_num = #{record.finishNum,jdbcType=INTEGER},
+      province = #{record.province,jdbcType=VARCHAR},
+      city = #{record.city,jdbcType=VARCHAR},
+      town = #{record.town,jdbcType=VARCHAR},
+      street = #{record.street,jdbcType=VARCHAR},
+      min_money = #{record.minMoney,jdbcType=INTEGER},
+      max_money = #{record.maxMoney,jdbcType=INTEGER},
+      work_year = #{record.workYear,jdbcType=INTEGER},
+      education = #{record.education,jdbcType=VARCHAR},
+      mode = #{record.mode,jdbcType=VARCHAR},
+      keyin_date = #{record.keyinDate,jdbcType=TIMESTAMP},
+      keyin_user = #{record.keyinUser,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.test.entity.CnPostWithBLOBs">
+    update cn_post
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="fulljob != null">
+        fulljob = #{fulljob,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="customerCode != null">
+        customer_code = #{customerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="customerName != null">
+        customer_name = #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentCode != null">
+        department_code = #{departmentCode,jdbcType=CHAR},
+      </if>
+      <if test="departmentName != null">
+        department_name = #{departmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="startDate != null">
+        start_date = #{startDate,jdbcType=DATE},
+      </if>
+      <if test="endDate != null">
+        end_date = #{endDate,jdbcType=DATE},
+      </if>
+      <if test="enabled != null">
+        enabled = #{enabled,jdbcType=TINYINT},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="needNum != null">
+        need_num = #{needNum,jdbcType=VARCHAR},
+      </if>
+      <if test="handleNum != null">
+        handle_num = #{handleNum,jdbcType=INTEGER},
+      </if>
+      <if test="finishNum != null">
+        finish_num = #{finishNum,jdbcType=INTEGER},
+      </if>
+      <if test="province != null">
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="town != null">
+        town = #{town,jdbcType=VARCHAR},
+      </if>
+      <if test="street != null">
+        street = #{street,jdbcType=VARCHAR},
+      </if>
+      <if test="minMoney != null">
+        min_money = #{minMoney,jdbcType=INTEGER},
+      </if>
+      <if test="maxMoney != null">
+        max_money = #{maxMoney,jdbcType=INTEGER},
+      </if>
+      <if test="workYear != null">
+        work_year = #{workYear,jdbcType=INTEGER},
+      </if>
+      <if test="education != null">
+        education = #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="mode != null">
+        mode = #{mode,jdbcType=VARCHAR},
+      </if>
+      <if test="keyinDate != null">
+        keyin_date = #{keyinDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="keyinUser != null">
+        keyin_user = #{keyinUser,jdbcType=VARCHAR},
+      </if>
+      <if test="request != null">
+        request = #{request,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="duty != null">
+        duty = #{duty,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where code = #{code,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="org.test.entity.CnPostWithBLOBs">
+    update cn_post
+    set name = #{name,jdbcType=VARCHAR},
+      fulljob = #{fulljob,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      customer_code = #{customerCode,jdbcType=VARCHAR},
+      customer_name = #{customerName,jdbcType=VARCHAR},
+      department_code = #{departmentCode,jdbcType=CHAR},
+      department_name = #{departmentName,jdbcType=VARCHAR},
+      start_date = #{startDate,jdbcType=DATE},
+      end_date = #{endDate,jdbcType=DATE},
+      enabled = #{enabled,jdbcType=TINYINT},
+      status = #{status,jdbcType=TINYINT},
+      need_num = #{needNum,jdbcType=VARCHAR},
+      handle_num = #{handleNum,jdbcType=INTEGER},
+      finish_num = #{finishNum,jdbcType=INTEGER},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      town = #{town,jdbcType=VARCHAR},
+      street = #{street,jdbcType=VARCHAR},
+      min_money = #{minMoney,jdbcType=INTEGER},
+      max_money = #{maxMoney,jdbcType=INTEGER},
+      work_year = #{workYear,jdbcType=INTEGER},
+      education = #{education,jdbcType=VARCHAR},
+      mode = #{mode,jdbcType=VARCHAR},
+      keyin_date = #{keyinDate,jdbcType=TIMESTAMP},
+      keyin_user = #{keyinUser,jdbcType=VARCHAR},
+      request = #{request,jdbcType=LONGVARCHAR},
+      duty = #{duty,jdbcType=LONGVARCHAR}
+    where code = #{code,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.test.entity.CnPost">
+    update cn_post
+    set name = #{name,jdbcType=VARCHAR},
+      fulljob = #{fulljob,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      customer_code = #{customerCode,jdbcType=VARCHAR},
+      customer_name = #{customerName,jdbcType=VARCHAR},
+      department_code = #{departmentCode,jdbcType=CHAR},
+      department_name = #{departmentName,jdbcType=VARCHAR},
+      start_date = #{startDate,jdbcType=DATE},
+      end_date = #{endDate,jdbcType=DATE},
+      enabled = #{enabled,jdbcType=TINYINT},
+      status = #{status,jdbcType=TINYINT},
+      need_num = #{needNum,jdbcType=VARCHAR},
+      handle_num = #{handleNum,jdbcType=INTEGER},
+      finish_num = #{finishNum,jdbcType=INTEGER},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      town = #{town,jdbcType=VARCHAR},
+      street = #{street,jdbcType=VARCHAR},
+      min_money = #{minMoney,jdbcType=INTEGER},
+      max_money = #{maxMoney,jdbcType=INTEGER},
+      work_year = #{workYear,jdbcType=INTEGER},
+      education = #{education,jdbcType=VARCHAR},
+      mode = #{mode,jdbcType=VARCHAR},
+      keyin_date = #{keyinDate,jdbcType=TIMESTAMP},
+      keyin_user = #{keyinUser,jdbcType=VARCHAR}
+    where code = #{code,jdbcType=CHAR}
+  </update>
+  <resultMap id="BaseResultMap" type="org.test.entity.CnPost">
+    <id column="code" jdbcType="CHAR" property="code" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="fulljob" jdbcType="VARCHAR" property="fulljob" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="customer_code" jdbcType="VARCHAR" property="customerCode" />
+    <result column="customer_name" jdbcType="VARCHAR" property="customerName" />
+    <result column="department_code" jdbcType="CHAR" property="departmentCode" />
+    <result column="department_name" jdbcType="VARCHAR" property="departmentName" />
+    <result column="start_date" jdbcType="DATE" property="startDate" />
+    <result column="end_date" jdbcType="DATE" property="endDate" />
+    <result column="enabled" jdbcType="TINYINT" property="enabled" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="need_num" jdbcType="VARCHAR" property="needNum" />
+    <result column="handle_num" jdbcType="INTEGER" property="handleNum" />
+    <result column="finish_num" jdbcType="INTEGER" property="finishNum" />
+    <result column="province" jdbcType="VARCHAR" property="province" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="town" jdbcType="VARCHAR" property="town" />
+    <result column="street" jdbcType="VARCHAR" property="street" />
+    <result column="min_money" jdbcType="INTEGER" property="minMoney" />
+    <result column="max_money" jdbcType="INTEGER" property="maxMoney" />
+    <result column="work_year" jdbcType="INTEGER" property="workYear" />
+    <result column="education" jdbcType="VARCHAR" property="education" />
+    <result column="mode" jdbcType="VARCHAR" property="mode" />
+    <result column="keyin_date" jdbcType="TIMESTAMP" property="keyinDate" />
+    <result column="keyin_user" jdbcType="VARCHAR" property="keyinUser" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="org.test.entity.CnPostWithBLOBs">
+    <result column="request" jdbcType="LONGVARCHAR" property="request" />
+    <result column="duty" jdbcType="LONGVARCHAR" property="duty" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    code, name, fulljob, description, customer_code, customer_name, department_code, 
+    department_name, start_date, end_date, enabled, status, need_num, handle_num, finish_num, 
+    province, city, town, street, min_money, max_money, work_year, education, mode, keyin_date, 
+    keyin_user
+  </sql>
+  <sql id="Blob_Column_List">
+    request, duty
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="org.test.entity.CnPostExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from cn_post
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="org.test.entity.CnPostExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cn_post
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from cn_post
+    where code = #{code,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from cn_post
+    where code = #{code,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.test.entity.CnPostExample">
+    delete from cn_post
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.test.entity.CnPostWithBLOBs">
+    insert into cn_post (code, name, fulljob, 
+      description, customer_code, customer_name, 
+      department_code, department_name, start_date, 
+      end_date, enabled, status, 
+      need_num, handle_num, finish_num, 
+      province, city, town, 
+      street, min_money, max_money, 
+      work_year, education, mode, 
+      keyin_date, keyin_user, request, 
+      duty)
+    values (#{code,jdbcType=CHAR}, #{name,jdbcType=VARCHAR}, #{fulljob,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{customerCode,jdbcType=VARCHAR}, #{customerName,jdbcType=VARCHAR}, 
+      #{departmentCode,jdbcType=CHAR}, #{departmentName,jdbcType=VARCHAR}, #{startDate,jdbcType=DATE}, 
+      #{endDate,jdbcType=DATE}, #{enabled,jdbcType=TINYINT}, #{status,jdbcType=TINYINT}, 
+      #{needNum,jdbcType=VARCHAR}, #{handleNum,jdbcType=INTEGER}, #{finishNum,jdbcType=INTEGER}, 
+      #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{town,jdbcType=VARCHAR}, 
+      #{street,jdbcType=VARCHAR}, #{minMoney,jdbcType=INTEGER}, #{maxMoney,jdbcType=INTEGER}, 
+      #{workYear,jdbcType=INTEGER}, #{education,jdbcType=VARCHAR}, #{mode,jdbcType=VARCHAR}, 
+      #{keyinDate,jdbcType=TIMESTAMP}, #{keyinUser,jdbcType=VARCHAR}, #{request,jdbcType=LONGVARCHAR}, 
+      #{duty,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.test.entity.CnPostWithBLOBs">
+    insert into cn_post
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="code != null">
+        code,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="fulljob != null">
+        fulljob,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="customerCode != null">
+        customer_code,
+      </if>
+      <if test="customerName != null">
+        customer_name,
+      </if>
+      <if test="departmentCode != null">
+        department_code,
+      </if>
+      <if test="departmentName != null">
+        department_name,
+      </if>
+      <if test="startDate != null">
+        start_date,
+      </if>
+      <if test="endDate != null">
+        end_date,
+      </if>
+      <if test="enabled != null">
+        enabled,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="needNum != null">
+        need_num,
+      </if>
+      <if test="handleNum != null">
+        handle_num,
+      </if>
+      <if test="finishNum != null">
+        finish_num,
+      </if>
+      <if test="province != null">
+        province,
+      </if>
+      <if test="city != null">
+        city,
+      </if>
+      <if test="town != null">
+        town,
+      </if>
+      <if test="street != null">
+        street,
+      </if>
+      <if test="minMoney != null">
+        min_money,
+      </if>
+      <if test="maxMoney != null">
+        max_money,
+      </if>
+      <if test="workYear != null">
+        work_year,
+      </if>
+      <if test="education != null">
+        education,
+      </if>
+      <if test="mode != null">
+        mode,
+      </if>
+      <if test="keyinDate != null">
+        keyin_date,
+      </if>
+      <if test="keyinUser != null">
+        keyin_user,
+      </if>
+      <if test="request != null">
+        request,
+      </if>
+      <if test="duty != null">
+        duty,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="code != null">
+        #{code,jdbcType=CHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="fulljob != null">
+        #{fulljob,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="customerCode != null">
+        #{customerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="customerName != null">
+        #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentCode != null">
+        #{departmentCode,jdbcType=CHAR},
+      </if>
+      <if test="departmentName != null">
+        #{departmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="startDate != null">
+        #{startDate,jdbcType=DATE},
+      </if>
+      <if test="endDate != null">
+        #{endDate,jdbcType=DATE},
+      </if>
+      <if test="enabled != null">
+        #{enabled,jdbcType=TINYINT},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="needNum != null">
+        #{needNum,jdbcType=VARCHAR},
+      </if>
+      <if test="handleNum != null">
+        #{handleNum,jdbcType=INTEGER},
+      </if>
+      <if test="finishNum != null">
+        #{finishNum,jdbcType=INTEGER},
+      </if>
+      <if test="province != null">
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="town != null">
+        #{town,jdbcType=VARCHAR},
+      </if>
+      <if test="street != null">
+        #{street,jdbcType=VARCHAR},
+      </if>
+      <if test="minMoney != null">
+        #{minMoney,jdbcType=INTEGER},
+      </if>
+      <if test="maxMoney != null">
+        #{maxMoney,jdbcType=INTEGER},
+      </if>
+      <if test="workYear != null">
+        #{workYear,jdbcType=INTEGER},
+      </if>
+      <if test="education != null">
+        #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="mode != null">
+        #{mode,jdbcType=VARCHAR},
+      </if>
+      <if test="keyinDate != null">
+        #{keyinDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="keyinUser != null">
+        #{keyinUser,jdbcType=VARCHAR},
+      </if>
+      <if test="request != null">
+        #{request,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="duty != null">
+        #{duty,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.test.entity.CnPostExample" resultType="java.lang.Integer">
+    select count(*) from cn_post
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update cn_post
+    <set>
+      <if test="record.code != null">
+        code = #{record.code,jdbcType=CHAR},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fulljob != null">
+        fulljob = #{record.fulljob,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null">
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customerCode != null">
+        customer_code = #{record.customerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customerName != null">
+        customer_name = #{record.customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.departmentCode != null">
+        department_code = #{record.departmentCode,jdbcType=CHAR},
+      </if>
+      <if test="record.departmentName != null">
+        department_name = #{record.departmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startDate != null">
+        start_date = #{record.startDate,jdbcType=DATE},
+      </if>
+      <if test="record.endDate != null">
+        end_date = #{record.endDate,jdbcType=DATE},
+      </if>
+      <if test="record.enabled != null">
+        enabled = #{record.enabled,jdbcType=TINYINT},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=TINYINT},
+      </if>
+      <if test="record.needNum != null">
+        need_num = #{record.needNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.handleNum != null">
+        handle_num = #{record.handleNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.finishNum != null">
+        finish_num = #{record.finishNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.province != null">
+        province = #{record.province,jdbcType=VARCHAR},
+      </if>
+      <if test="record.city != null">
+        city = #{record.city,jdbcType=VARCHAR},
+      </if>
+      <if test="record.town != null">
+        town = #{record.town,jdbcType=VARCHAR},
+      </if>
+      <if test="record.street != null">
+        street = #{record.street,jdbcType=VARCHAR},
+      </if>
+      <if test="record.minMoney != null">
+        min_money = #{record.minMoney,jdbcType=INTEGER},
+      </if>
+      <if test="record.maxMoney != null">
+        max_money = #{record.maxMoney,jdbcType=INTEGER},
+      </if>
+      <if test="record.workYear != null">
+        work_year = #{record.workYear,jdbcType=INTEGER},
+      </if>
+      <if test="record.education != null">
+        education = #{record.education,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mode != null">
+        mode = #{record.mode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.keyinDate != null">
+        keyin_date = #{record.keyinDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.keyinUser != null">
+        keyin_user = #{record.keyinUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.request != null">
+        request = #{record.request,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.duty != null">
+        duty = #{record.duty,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update cn_post
+    set code = #{record.code,jdbcType=CHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      fulljob = #{record.fulljob,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR},
+      customer_code = #{record.customerCode,jdbcType=VARCHAR},
+      customer_name = #{record.customerName,jdbcType=VARCHAR},
+      department_code = #{record.departmentCode,jdbcType=CHAR},
+      department_name = #{record.departmentName,jdbcType=VARCHAR},
+      start_date = #{record.startDate,jdbcType=DATE},
+      end_date = #{record.endDate,jdbcType=DATE},
+      enabled = #{record.enabled,jdbcType=TINYINT},
+      status = #{record.status,jdbcType=TINYINT},
+      need_num = #{record.needNum,jdbcType=VARCHAR},
+      handle_num = #{record.handleNum,jdbcType=INTEGER},
+      finish_num = #{record.finishNum,jdbcType=INTEGER},
+      province = #{record.province,jdbcType=VARCHAR},
+      city = #{record.city,jdbcType=VARCHAR},
+      town = #{record.town,jdbcType=VARCHAR},
+      street = #{record.street,jdbcType=VARCHAR},
+      min_money = #{record.minMoney,jdbcType=INTEGER},
+      max_money = #{record.maxMoney,jdbcType=INTEGER},
+      work_year = #{record.workYear,jdbcType=INTEGER},
+      education = #{record.education,jdbcType=VARCHAR},
+      mode = #{record.mode,jdbcType=VARCHAR},
+      keyin_date = #{record.keyinDate,jdbcType=TIMESTAMP},
+      keyin_user = #{record.keyinUser,jdbcType=VARCHAR},
+      request = #{record.request,jdbcType=LONGVARCHAR},
+      duty = #{record.duty,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update cn_post
+    set code = #{record.code,jdbcType=CHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      fulljob = #{record.fulljob,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR},
+      customer_code = #{record.customerCode,jdbcType=VARCHAR},
+      customer_name = #{record.customerName,jdbcType=VARCHAR},
+      department_code = #{record.departmentCode,jdbcType=CHAR},
+      department_name = #{record.departmentName,jdbcType=VARCHAR},
+      start_date = #{record.startDate,jdbcType=DATE},
+      end_date = #{record.endDate,jdbcType=DATE},
+      enabled = #{record.enabled,jdbcType=TINYINT},
+      status = #{record.status,jdbcType=TINYINT},
+      need_num = #{record.needNum,jdbcType=VARCHAR},
+      handle_num = #{record.handleNum,jdbcType=INTEGER},
+      finish_num = #{record.finishNum,jdbcType=INTEGER},
+      province = #{record.province,jdbcType=VARCHAR},
+      city = #{record.city,jdbcType=VARCHAR},
+      town = #{record.town,jdbcType=VARCHAR},
+      street = #{record.street,jdbcType=VARCHAR},
+      min_money = #{record.minMoney,jdbcType=INTEGER},
+      max_money = #{record.maxMoney,jdbcType=INTEGER},
+      work_year = #{record.workYear,jdbcType=INTEGER},
+      education = #{record.education,jdbcType=VARCHAR},
+      mode = #{record.mode,jdbcType=VARCHAR},
+      keyin_date = #{record.keyinDate,jdbcType=TIMESTAMP},
+      keyin_user = #{record.keyinUser,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.test.entity.CnPostWithBLOBs">
+    update cn_post
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="fulljob != null">
+        fulljob = #{fulljob,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="customerCode != null">
+        customer_code = #{customerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="customerName != null">
+        customer_name = #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentCode != null">
+        department_code = #{departmentCode,jdbcType=CHAR},
+      </if>
+      <if test="departmentName != null">
+        department_name = #{departmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="startDate != null">
+        start_date = #{startDate,jdbcType=DATE},
+      </if>
+      <if test="endDate != null">
+        end_date = #{endDate,jdbcType=DATE},
+      </if>
+      <if test="enabled != null">
+        enabled = #{enabled,jdbcType=TINYINT},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="needNum != null">
+        need_num = #{needNum,jdbcType=VARCHAR},
+      </if>
+      <if test="handleNum != null">
+        handle_num = #{handleNum,jdbcType=INTEGER},
+      </if>
+      <if test="finishNum != null">
+        finish_num = #{finishNum,jdbcType=INTEGER},
+      </if>
+      <if test="province != null">
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="town != null">
+        town = #{town,jdbcType=VARCHAR},
+      </if>
+      <if test="street != null">
+        street = #{street,jdbcType=VARCHAR},
+      </if>
+      <if test="minMoney != null">
+        min_money = #{minMoney,jdbcType=INTEGER},
+      </if>
+      <if test="maxMoney != null">
+        max_money = #{maxMoney,jdbcType=INTEGER},
+      </if>
+      <if test="workYear != null">
+        work_year = #{workYear,jdbcType=INTEGER},
+      </if>
+      <if test="education != null">
+        education = #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="mode != null">
+        mode = #{mode,jdbcType=VARCHAR},
+      </if>
+      <if test="keyinDate != null">
+        keyin_date = #{keyinDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="keyinUser != null">
+        keyin_user = #{keyinUser,jdbcType=VARCHAR},
+      </if>
+      <if test="request != null">
+        request = #{request,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="duty != null">
+        duty = #{duty,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where code = #{code,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="org.test.entity.CnPostWithBLOBs">
+    update cn_post
+    set name = #{name,jdbcType=VARCHAR},
+      fulljob = #{fulljob,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      customer_code = #{customerCode,jdbcType=VARCHAR},
+      customer_name = #{customerName,jdbcType=VARCHAR},
+      department_code = #{departmentCode,jdbcType=CHAR},
+      department_name = #{departmentName,jdbcType=VARCHAR},
+      start_date = #{startDate,jdbcType=DATE},
+      end_date = #{endDate,jdbcType=DATE},
+      enabled = #{enabled,jdbcType=TINYINT},
+      status = #{status,jdbcType=TINYINT},
+      need_num = #{needNum,jdbcType=VARCHAR},
+      handle_num = #{handleNum,jdbcType=INTEGER},
+      finish_num = #{finishNum,jdbcType=INTEGER},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      town = #{town,jdbcType=VARCHAR},
+      street = #{street,jdbcType=VARCHAR},
+      min_money = #{minMoney,jdbcType=INTEGER},
+      max_money = #{maxMoney,jdbcType=INTEGER},
+      work_year = #{workYear,jdbcType=INTEGER},
+      education = #{education,jdbcType=VARCHAR},
+      mode = #{mode,jdbcType=VARCHAR},
+      keyin_date = #{keyinDate,jdbcType=TIMESTAMP},
+      keyin_user = #{keyinUser,jdbcType=VARCHAR},
+      request = #{request,jdbcType=LONGVARCHAR},
+      duty = #{duty,jdbcType=LONGVARCHAR}
+    where code = #{code,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.test.entity.CnPost">
+    update cn_post
+    set name = #{name,jdbcType=VARCHAR},
+      fulljob = #{fulljob,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      customer_code = #{customerCode,jdbcType=VARCHAR},
+      customer_name = #{customerName,jdbcType=VARCHAR},
+      department_code = #{departmentCode,jdbcType=CHAR},
+      department_name = #{departmentName,jdbcType=VARCHAR},
+      start_date = #{startDate,jdbcType=DATE},
+      end_date = #{endDate,jdbcType=DATE},
+      enabled = #{enabled,jdbcType=TINYINT},
+      status = #{status,jdbcType=TINYINT},
+      need_num = #{needNum,jdbcType=VARCHAR},
+      handle_num = #{handleNum,jdbcType=INTEGER},
+      finish_num = #{finishNum,jdbcType=INTEGER},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      town = #{town,jdbcType=VARCHAR},
+      street = #{street,jdbcType=VARCHAR},
+      min_money = #{minMoney,jdbcType=INTEGER},
+      max_money = #{maxMoney,jdbcType=INTEGER},
+      work_year = #{workYear,jdbcType=INTEGER},
+      education = #{education,jdbcType=VARCHAR},
+      mode = #{mode,jdbcType=VARCHAR},
+      keyin_date = #{keyinDate,jdbcType=TIMESTAMP},
+      keyin_user = #{keyinUser,jdbcType=VARCHAR}
+    where code = #{code,jdbcType=CHAR}
+  </update>
+  <resultMap id="BaseResultMap" type="org.test.entity.CnPost">
+    <id column="code" jdbcType="CHAR" property="code" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="fulljob" jdbcType="VARCHAR" property="fulljob" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="customer_code" jdbcType="VARCHAR" property="customerCode" />
+    <result column="customer_name" jdbcType="VARCHAR" property="customerName" />
+    <result column="department_code" jdbcType="CHAR" property="departmentCode" />
+    <result column="department_name" jdbcType="VARCHAR" property="departmentName" />
+    <result column="start_date" jdbcType="DATE" property="startDate" />
+    <result column="end_date" jdbcType="DATE" property="endDate" />
+    <result column="enabled" jdbcType="TINYINT" property="enabled" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="need_num" jdbcType="VARCHAR" property="needNum" />
+    <result column="handle_num" jdbcType="INTEGER" property="handleNum" />
+    <result column="finish_num" jdbcType="INTEGER" property="finishNum" />
+    <result column="province" jdbcType="VARCHAR" property="province" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="town" jdbcType="VARCHAR" property="town" />
+    <result column="street" jdbcType="VARCHAR" property="street" />
+    <result column="min_money" jdbcType="INTEGER" property="minMoney" />
+    <result column="max_money" jdbcType="INTEGER" property="maxMoney" />
+    <result column="work_year" jdbcType="INTEGER" property="workYear" />
+    <result column="education" jdbcType="VARCHAR" property="education" />
+    <result column="mode" jdbcType="VARCHAR" property="mode" />
+    <result column="keyin_date" jdbcType="TIMESTAMP" property="keyinDate" />
+    <result column="keyin_user" jdbcType="VARCHAR" property="keyinUser" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="org.test.entity.CnPostWithBLOBs">
+    <result column="request" jdbcType="LONGVARCHAR" property="request" />
+    <result column="duty" jdbcType="LONGVARCHAR" property="duty" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    code, name, fulljob, description, customer_code, customer_name, department_code, 
+    department_name, start_date, end_date, enabled, status, need_num, handle_num, finish_num, 
+    province, city, town, street, min_money, max_money, work_year, education, mode, keyin_date, 
+    keyin_user
+  </sql>
+  <sql id="Blob_Column_List">
+    request, duty
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="org.test.entity.CnPostExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from cn_post
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="org.test.entity.CnPostExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cn_post
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from cn_post
+    where code = #{code,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from cn_post
+    where code = #{code,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.test.entity.CnPostExample">
+    delete from cn_post
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.test.entity.CnPostWithBLOBs">
+    insert into cn_post (code, name, fulljob, 
+      description, customer_code, customer_name, 
+      department_code, department_name, start_date, 
+      end_date, enabled, status, 
+      need_num, handle_num, finish_num, 
+      province, city, town, 
+      street, min_money, max_money, 
+      work_year, education, mode, 
+      keyin_date, keyin_user, request, 
+      duty)
+    values (#{code,jdbcType=CHAR}, #{name,jdbcType=VARCHAR}, #{fulljob,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{customerCode,jdbcType=VARCHAR}, #{customerName,jdbcType=VARCHAR}, 
+      #{departmentCode,jdbcType=CHAR}, #{departmentName,jdbcType=VARCHAR}, #{startDate,jdbcType=DATE}, 
+      #{endDate,jdbcType=DATE}, #{enabled,jdbcType=TINYINT}, #{status,jdbcType=TINYINT}, 
+      #{needNum,jdbcType=VARCHAR}, #{handleNum,jdbcType=INTEGER}, #{finishNum,jdbcType=INTEGER}, 
+      #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{town,jdbcType=VARCHAR}, 
+      #{street,jdbcType=VARCHAR}, #{minMoney,jdbcType=INTEGER}, #{maxMoney,jdbcType=INTEGER}, 
+      #{workYear,jdbcType=INTEGER}, #{education,jdbcType=VARCHAR}, #{mode,jdbcType=VARCHAR}, 
+      #{keyinDate,jdbcType=TIMESTAMP}, #{keyinUser,jdbcType=VARCHAR}, #{request,jdbcType=LONGVARCHAR}, 
+      #{duty,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.test.entity.CnPostWithBLOBs">
+    insert into cn_post
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="code != null">
+        code,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="fulljob != null">
+        fulljob,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="customerCode != null">
+        customer_code,
+      </if>
+      <if test="customerName != null">
+        customer_name,
+      </if>
+      <if test="departmentCode != null">
+        department_code,
+      </if>
+      <if test="departmentName != null">
+        department_name,
+      </if>
+      <if test="startDate != null">
+        start_date,
+      </if>
+      <if test="endDate != null">
+        end_date,
+      </if>
+      <if test="enabled != null">
+        enabled,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="needNum != null">
+        need_num,
+      </if>
+      <if test="handleNum != null">
+        handle_num,
+      </if>
+      <if test="finishNum != null">
+        finish_num,
+      </if>
+      <if test="province != null">
+        province,
+      </if>
+      <if test="city != null">
+        city,
+      </if>
+      <if test="town != null">
+        town,
+      </if>
+      <if test="street != null">
+        street,
+      </if>
+      <if test="minMoney != null">
+        min_money,
+      </if>
+      <if test="maxMoney != null">
+        max_money,
+      </if>
+      <if test="workYear != null">
+        work_year,
+      </if>
+      <if test="education != null">
+        education,
+      </if>
+      <if test="mode != null">
+        mode,
+      </if>
+      <if test="keyinDate != null">
+        keyin_date,
+      </if>
+      <if test="keyinUser != null">
+        keyin_user,
+      </if>
+      <if test="request != null">
+        request,
+      </if>
+      <if test="duty != null">
+        duty,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="code != null">
+        #{code,jdbcType=CHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="fulljob != null">
+        #{fulljob,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="customerCode != null">
+        #{customerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="customerName != null">
+        #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentCode != null">
+        #{departmentCode,jdbcType=CHAR},
+      </if>
+      <if test="departmentName != null">
+        #{departmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="startDate != null">
+        #{startDate,jdbcType=DATE},
+      </if>
+      <if test="endDate != null">
+        #{endDate,jdbcType=DATE},
+      </if>
+      <if test="enabled != null">
+        #{enabled,jdbcType=TINYINT},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="needNum != null">
+        #{needNum,jdbcType=VARCHAR},
+      </if>
+      <if test="handleNum != null">
+        #{handleNum,jdbcType=INTEGER},
+      </if>
+      <if test="finishNum != null">
+        #{finishNum,jdbcType=INTEGER},
+      </if>
+      <if test="province != null">
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="town != null">
+        #{town,jdbcType=VARCHAR},
+      </if>
+      <if test="street != null">
+        #{street,jdbcType=VARCHAR},
+      </if>
+      <if test="minMoney != null">
+        #{minMoney,jdbcType=INTEGER},
+      </if>
+      <if test="maxMoney != null">
+        #{maxMoney,jdbcType=INTEGER},
+      </if>
+      <if test="workYear != null">
+        #{workYear,jdbcType=INTEGER},
+      </if>
+      <if test="education != null">
+        #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="mode != null">
+        #{mode,jdbcType=VARCHAR},
+      </if>
+      <if test="keyinDate != null">
+        #{keyinDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="keyinUser != null">
+        #{keyinUser,jdbcType=VARCHAR},
+      </if>
+      <if test="request != null">
+        #{request,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="duty != null">
+        #{duty,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.test.entity.CnPostExample" resultType="java.lang.Integer">
+    select count(*) from cn_post
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update cn_post
+    <set>
+      <if test="record.code != null">
+        code = #{record.code,jdbcType=CHAR},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fulljob != null">
+        fulljob = #{record.fulljob,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null">
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customerCode != null">
+        customer_code = #{record.customerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customerName != null">
+        customer_name = #{record.customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.departmentCode != null">
+        department_code = #{record.departmentCode,jdbcType=CHAR},
+      </if>
+      <if test="record.departmentName != null">
+        department_name = #{record.departmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startDate != null">
+        start_date = #{record.startDate,jdbcType=DATE},
+      </if>
+      <if test="record.endDate != null">
+        end_date = #{record.endDate,jdbcType=DATE},
+      </if>
+      <if test="record.enabled != null">
+        enabled = #{record.enabled,jdbcType=TINYINT},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=TINYINT},
+      </if>
+      <if test="record.needNum != null">
+        need_num = #{record.needNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.handleNum != null">
+        handle_num = #{record.handleNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.finishNum != null">
+        finish_num = #{record.finishNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.province != null">
+        province = #{record.province,jdbcType=VARCHAR},
+      </if>
+      <if test="record.city != null">
+        city = #{record.city,jdbcType=VARCHAR},
+      </if>
+      <if test="record.town != null">
+        town = #{record.town,jdbcType=VARCHAR},
+      </if>
+      <if test="record.street != null">
+        street = #{record.street,jdbcType=VARCHAR},
+      </if>
+      <if test="record.minMoney != null">
+        min_money = #{record.minMoney,jdbcType=INTEGER},
+      </if>
+      <if test="record.maxMoney != null">
+        max_money = #{record.maxMoney,jdbcType=INTEGER},
+      </if>
+      <if test="record.workYear != null">
+        work_year = #{record.workYear,jdbcType=INTEGER},
+      </if>
+      <if test="record.education != null">
+        education = #{record.education,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mode != null">
+        mode = #{record.mode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.keyinDate != null">
+        keyin_date = #{record.keyinDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.keyinUser != null">
+        keyin_user = #{record.keyinUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.request != null">
+        request = #{record.request,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.duty != null">
+        duty = #{record.duty,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update cn_post
+    set code = #{record.code,jdbcType=CHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      fulljob = #{record.fulljob,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR},
+      customer_code = #{record.customerCode,jdbcType=VARCHAR},
+      customer_name = #{record.customerName,jdbcType=VARCHAR},
+      department_code = #{record.departmentCode,jdbcType=CHAR},
+      department_name = #{record.departmentName,jdbcType=VARCHAR},
+      start_date = #{record.startDate,jdbcType=DATE},
+      end_date = #{record.endDate,jdbcType=DATE},
+      enabled = #{record.enabled,jdbcType=TINYINT},
+      status = #{record.status,jdbcType=TINYINT},
+      need_num = #{record.needNum,jdbcType=VARCHAR},
+      handle_num = #{record.handleNum,jdbcType=INTEGER},
+      finish_num = #{record.finishNum,jdbcType=INTEGER},
+      province = #{record.province,jdbcType=VARCHAR},
+      city = #{record.city,jdbcType=VARCHAR},
+      town = #{record.town,jdbcType=VARCHAR},
+      street = #{record.street,jdbcType=VARCHAR},
+      min_money = #{record.minMoney,jdbcType=INTEGER},
+      max_money = #{record.maxMoney,jdbcType=INTEGER},
+      work_year = #{record.workYear,jdbcType=INTEGER},
+      education = #{record.education,jdbcType=VARCHAR},
+      mode = #{record.mode,jdbcType=VARCHAR},
+      keyin_date = #{record.keyinDate,jdbcType=TIMESTAMP},
+      keyin_user = #{record.keyinUser,jdbcType=VARCHAR},
+      request = #{record.request,jdbcType=LONGVARCHAR},
+      duty = #{record.duty,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update cn_post
+    set code = #{record.code,jdbcType=CHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      fulljob = #{record.fulljob,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR},
+      customer_code = #{record.customerCode,jdbcType=VARCHAR},
+      customer_name = #{record.customerName,jdbcType=VARCHAR},
+      department_code = #{record.departmentCode,jdbcType=CHAR},
+      department_name = #{record.departmentName,jdbcType=VARCHAR},
+      start_date = #{record.startDate,jdbcType=DATE},
+      end_date = #{record.endDate,jdbcType=DATE},
+      enabled = #{record.enabled,jdbcType=TINYINT},
+      status = #{record.status,jdbcType=TINYINT},
+      need_num = #{record.needNum,jdbcType=VARCHAR},
+      handle_num = #{record.handleNum,jdbcType=INTEGER},
+      finish_num = #{record.finishNum,jdbcType=INTEGER},
+      province = #{record.province,jdbcType=VARCHAR},
+      city = #{record.city,jdbcType=VARCHAR},
+      town = #{record.town,jdbcType=VARCHAR},
+      street = #{record.street,jdbcType=VARCHAR},
+      min_money = #{record.minMoney,jdbcType=INTEGER},
+      max_money = #{record.maxMoney,jdbcType=INTEGER},
+      work_year = #{record.workYear,jdbcType=INTEGER},
+      education = #{record.education,jdbcType=VARCHAR},
+      mode = #{record.mode,jdbcType=VARCHAR},
+      keyin_date = #{record.keyinDate,jdbcType=TIMESTAMP},
+      keyin_user = #{record.keyinUser,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.test.entity.CnPostWithBLOBs">
+    update cn_post
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="fulljob != null">
+        fulljob = #{fulljob,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="customerCode != null">
+        customer_code = #{customerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="customerName != null">
+        customer_name = #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentCode != null">
+        department_code = #{departmentCode,jdbcType=CHAR},
+      </if>
+      <if test="departmentName != null">
+        department_name = #{departmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="startDate != null">
+        start_date = #{startDate,jdbcType=DATE},
+      </if>
+      <if test="endDate != null">
+        end_date = #{endDate,jdbcType=DATE},
+      </if>
+      <if test="enabled != null">
+        enabled = #{enabled,jdbcType=TINYINT},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="needNum != null">
+        need_num = #{needNum,jdbcType=VARCHAR},
+      </if>
+      <if test="handleNum != null">
+        handle_num = #{handleNum,jdbcType=INTEGER},
+      </if>
+      <if test="finishNum != null">
+        finish_num = #{finishNum,jdbcType=INTEGER},
+      </if>
+      <if test="province != null">
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="town != null">
+        town = #{town,jdbcType=VARCHAR},
+      </if>
+      <if test="street != null">
+        street = #{street,jdbcType=VARCHAR},
+      </if>
+      <if test="minMoney != null">
+        min_money = #{minMoney,jdbcType=INTEGER},
+      </if>
+      <if test="maxMoney != null">
+        max_money = #{maxMoney,jdbcType=INTEGER},
+      </if>
+      <if test="workYear != null">
+        work_year = #{workYear,jdbcType=INTEGER},
+      </if>
+      <if test="education != null">
+        education = #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="mode != null">
+        mode = #{mode,jdbcType=VARCHAR},
+      </if>
+      <if test="keyinDate != null">
+        keyin_date = #{keyinDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="keyinUser != null">
+        keyin_user = #{keyinUser,jdbcType=VARCHAR},
+      </if>
+      <if test="request != null">
+        request = #{request,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="duty != null">
+        duty = #{duty,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where code = #{code,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="org.test.entity.CnPostWithBLOBs">
+    update cn_post
+    set name = #{name,jdbcType=VARCHAR},
+      fulljob = #{fulljob,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      customer_code = #{customerCode,jdbcType=VARCHAR},
+      customer_name = #{customerName,jdbcType=VARCHAR},
+      department_code = #{departmentCode,jdbcType=CHAR},
+      department_name = #{departmentName,jdbcType=VARCHAR},
+      start_date = #{startDate,jdbcType=DATE},
+      end_date = #{endDate,jdbcType=DATE},
+      enabled = #{enabled,jdbcType=TINYINT},
+      status = #{status,jdbcType=TINYINT},
+      need_num = #{needNum,jdbcType=VARCHAR},
+      handle_num = #{handleNum,jdbcType=INTEGER},
+      finish_num = #{finishNum,jdbcType=INTEGER},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      town = #{town,jdbcType=VARCHAR},
+      street = #{street,jdbcType=VARCHAR},
+      min_money = #{minMoney,jdbcType=INTEGER},
+      max_money = #{maxMoney,jdbcType=INTEGER},
+      work_year = #{workYear,jdbcType=INTEGER},
+      education = #{education,jdbcType=VARCHAR},
+      mode = #{mode,jdbcType=VARCHAR},
+      keyin_date = #{keyinDate,jdbcType=TIMESTAMP},
+      keyin_user = #{keyinUser,jdbcType=VARCHAR},
+      request = #{request,jdbcType=LONGVARCHAR},
+      duty = #{duty,jdbcType=LONGVARCHAR}
+    where code = #{code,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.test.entity.CnPost">
+    update cn_post
+    set name = #{name,jdbcType=VARCHAR},
+      fulljob = #{fulljob,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      customer_code = #{customerCode,jdbcType=VARCHAR},
+      customer_name = #{customerName,jdbcType=VARCHAR},
+      department_code = #{departmentCode,jdbcType=CHAR},
+      department_name = #{departmentName,jdbcType=VARCHAR},
+      start_date = #{startDate,jdbcType=DATE},
+      end_date = #{endDate,jdbcType=DATE},
+      enabled = #{enabled,jdbcType=TINYINT},
+      status = #{status,jdbcType=TINYINT},
+      need_num = #{needNum,jdbcType=VARCHAR},
+      handle_num = #{handleNum,jdbcType=INTEGER},
+      finish_num = #{finishNum,jdbcType=INTEGER},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      town = #{town,jdbcType=VARCHAR},
+      street = #{street,jdbcType=VARCHAR},
+      min_money = #{minMoney,jdbcType=INTEGER},
+      max_money = #{maxMoney,jdbcType=INTEGER},
+      work_year = #{workYear,jdbcType=INTEGER},
+      education = #{education,jdbcType=VARCHAR},
+      mode = #{mode,jdbcType=VARCHAR},
+      keyin_date = #{keyinDate,jdbcType=TIMESTAMP},
+      keyin_user = #{keyinUser,jdbcType=VARCHAR}
+    where code = #{code,jdbcType=CHAR}
+  </update>
+  <resultMap id="BaseResultMap" type="org.test.entity.CnPost">
+    <id column="code" jdbcType="CHAR" property="code" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="fulljob" jdbcType="VARCHAR" property="fulljob" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="customer_code" jdbcType="VARCHAR" property="customerCode" />
+    <result column="customer_name" jdbcType="VARCHAR" property="customerName" />
+    <result column="department_code" jdbcType="CHAR" property="departmentCode" />
+    <result column="department_name" jdbcType="VARCHAR" property="departmentName" />
+    <result column="start_date" jdbcType="DATE" property="startDate" />
+    <result column="end_date" jdbcType="DATE" property="endDate" />
+    <result column="enabled" jdbcType="TINYINT" property="enabled" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="need_num" jdbcType="VARCHAR" property="needNum" />
+    <result column="handle_num" jdbcType="INTEGER" property="handleNum" />
+    <result column="finish_num" jdbcType="INTEGER" property="finishNum" />
+    <result column="province" jdbcType="VARCHAR" property="province" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="town" jdbcType="VARCHAR" property="town" />
+    <result column="street" jdbcType="VARCHAR" property="street" />
+    <result column="min_money" jdbcType="INTEGER" property="minMoney" />
+    <result column="max_money" jdbcType="INTEGER" property="maxMoney" />
+    <result column="work_year" jdbcType="INTEGER" property="workYear" />
+    <result column="education" jdbcType="VARCHAR" property="education" />
+    <result column="mode" jdbcType="VARCHAR" property="mode" />
+    <result column="keyin_date" jdbcType="TIMESTAMP" property="keyinDate" />
+    <result column="keyin_user" jdbcType="VARCHAR" property="keyinUser" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="org.test.entity.CnPostWithBLOBs">
+    <result column="request" jdbcType="LONGVARCHAR" property="request" />
+    <result column="duty" jdbcType="LONGVARCHAR" property="duty" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    code, name, fulljob, description, customer_code, customer_name, department_code, 
+    department_name, start_date, end_date, enabled, status, need_num, handle_num, finish_num, 
+    province, city, town, street, min_money, max_money, work_year, education, mode, keyin_date, 
+    keyin_user
+  </sql>
+  <sql id="Blob_Column_List">
+    request, duty
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="org.test.entity.CnPostExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from cn_post
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="org.test.entity.CnPostExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cn_post
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from cn_post
+    where code = #{code,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from cn_post
+    where code = #{code,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.test.entity.CnPostExample">
+    delete from cn_post
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.test.entity.CnPostWithBLOBs">
+    insert into cn_post (code, name, fulljob, 
+      description, customer_code, customer_name, 
+      department_code, department_name, start_date, 
+      end_date, enabled, status, 
+      need_num, handle_num, finish_num, 
+      province, city, town, 
+      street, min_money, max_money, 
+      work_year, education, mode, 
+      keyin_date, keyin_user, request, 
+      duty)
+    values (#{code,jdbcType=CHAR}, #{name,jdbcType=VARCHAR}, #{fulljob,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{customerCode,jdbcType=VARCHAR}, #{customerName,jdbcType=VARCHAR}, 
+      #{departmentCode,jdbcType=CHAR}, #{departmentName,jdbcType=VARCHAR}, #{startDate,jdbcType=DATE}, 
+      #{endDate,jdbcType=DATE}, #{enabled,jdbcType=TINYINT}, #{status,jdbcType=TINYINT}, 
+      #{needNum,jdbcType=VARCHAR}, #{handleNum,jdbcType=INTEGER}, #{finishNum,jdbcType=INTEGER}, 
+      #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{town,jdbcType=VARCHAR}, 
+      #{street,jdbcType=VARCHAR}, #{minMoney,jdbcType=INTEGER}, #{maxMoney,jdbcType=INTEGER}, 
+      #{workYear,jdbcType=INTEGER}, #{education,jdbcType=VARCHAR}, #{mode,jdbcType=VARCHAR}, 
+      #{keyinDate,jdbcType=TIMESTAMP}, #{keyinUser,jdbcType=VARCHAR}, #{request,jdbcType=LONGVARCHAR}, 
+      #{duty,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.test.entity.CnPostWithBLOBs">
+    insert into cn_post
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="code != null">
+        code,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="fulljob != null">
+        fulljob,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="customerCode != null">
+        customer_code,
+      </if>
+      <if test="customerName != null">
+        customer_name,
+      </if>
+      <if test="departmentCode != null">
+        department_code,
+      </if>
+      <if test="departmentName != null">
+        department_name,
+      </if>
+      <if test="startDate != null">
+        start_date,
+      </if>
+      <if test="endDate != null">
+        end_date,
+      </if>
+      <if test="enabled != null">
+        enabled,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="needNum != null">
+        need_num,
+      </if>
+      <if test="handleNum != null">
+        handle_num,
+      </if>
+      <if test="finishNum != null">
+        finish_num,
+      </if>
+      <if test="province != null">
+        province,
+      </if>
+      <if test="city != null">
+        city,
+      </if>
+      <if test="town != null">
+        town,
+      </if>
+      <if test="street != null">
+        street,
+      </if>
+      <if test="minMoney != null">
+        min_money,
+      </if>
+      <if test="maxMoney != null">
+        max_money,
+      </if>
+      <if test="workYear != null">
+        work_year,
+      </if>
+      <if test="education != null">
+        education,
+      </if>
+      <if test="mode != null">
+        mode,
+      </if>
+      <if test="keyinDate != null">
+        keyin_date,
+      </if>
+      <if test="keyinUser != null">
+        keyin_user,
+      </if>
+      <if test="request != null">
+        request,
+      </if>
+      <if test="duty != null">
+        duty,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="code != null">
+        #{code,jdbcType=CHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="fulljob != null">
+        #{fulljob,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="customerCode != null">
+        #{customerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="customerName != null">
+        #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentCode != null">
+        #{departmentCode,jdbcType=CHAR},
+      </if>
+      <if test="departmentName != null">
+        #{departmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="startDate != null">
+        #{startDate,jdbcType=DATE},
+      </if>
+      <if test="endDate != null">
+        #{endDate,jdbcType=DATE},
+      </if>
+      <if test="enabled != null">
+        #{enabled,jdbcType=TINYINT},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="needNum != null">
+        #{needNum,jdbcType=VARCHAR},
+      </if>
+      <if test="handleNum != null">
+        #{handleNum,jdbcType=INTEGER},
+      </if>
+      <if test="finishNum != null">
+        #{finishNum,jdbcType=INTEGER},
+      </if>
+      <if test="province != null">
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="town != null">
+        #{town,jdbcType=VARCHAR},
+      </if>
+      <if test="street != null">
+        #{street,jdbcType=VARCHAR},
+      </if>
+      <if test="minMoney != null">
+        #{minMoney,jdbcType=INTEGER},
+      </if>
+      <if test="maxMoney != null">
+        #{maxMoney,jdbcType=INTEGER},
+      </if>
+      <if test="workYear != null">
+        #{workYear,jdbcType=INTEGER},
+      </if>
+      <if test="education != null">
+        #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="mode != null">
+        #{mode,jdbcType=VARCHAR},
+      </if>
+      <if test="keyinDate != null">
+        #{keyinDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="keyinUser != null">
+        #{keyinUser,jdbcType=VARCHAR},
+      </if>
+      <if test="request != null">
+        #{request,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="duty != null">
+        #{duty,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.test.entity.CnPostExample" resultType="java.lang.Integer">
+    select count(*) from cn_post
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update cn_post
+    <set>
+      <if test="record.code != null">
+        code = #{record.code,jdbcType=CHAR},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fulljob != null">
+        fulljob = #{record.fulljob,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null">
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customerCode != null">
+        customer_code = #{record.customerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customerName != null">
+        customer_name = #{record.customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.departmentCode != null">
+        department_code = #{record.departmentCode,jdbcType=CHAR},
+      </if>
+      <if test="record.departmentName != null">
+        department_name = #{record.departmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startDate != null">
+        start_date = #{record.startDate,jdbcType=DATE},
+      </if>
+      <if test="record.endDate != null">
+        end_date = #{record.endDate,jdbcType=DATE},
+      </if>
+      <if test="record.enabled != null">
+        enabled = #{record.enabled,jdbcType=TINYINT},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=TINYINT},
+      </if>
+      <if test="record.needNum != null">
+        need_num = #{record.needNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.handleNum != null">
+        handle_num = #{record.handleNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.finishNum != null">
+        finish_num = #{record.finishNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.province != null">
+        province = #{record.province,jdbcType=VARCHAR},
+      </if>
+      <if test="record.city != null">
+        city = #{record.city,jdbcType=VARCHAR},
+      </if>
+      <if test="record.town != null">
+        town = #{record.town,jdbcType=VARCHAR},
+      </if>
+      <if test="record.street != null">
+        street = #{record.street,jdbcType=VARCHAR},
+      </if>
+      <if test="record.minMoney != null">
+        min_money = #{record.minMoney,jdbcType=INTEGER},
+      </if>
+      <if test="record.maxMoney != null">
+        max_money = #{record.maxMoney,jdbcType=INTEGER},
+      </if>
+      <if test="record.workYear != null">
+        work_year = #{record.workYear,jdbcType=INTEGER},
+      </if>
+      <if test="record.education != null">
+        education = #{record.education,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mode != null">
+        mode = #{record.mode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.keyinDate != null">
+        keyin_date = #{record.keyinDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.keyinUser != null">
+        keyin_user = #{record.keyinUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.request != null">
+        request = #{record.request,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.duty != null">
+        duty = #{record.duty,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update cn_post
+    set code = #{record.code,jdbcType=CHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      fulljob = #{record.fulljob,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR},
+      customer_code = #{record.customerCode,jdbcType=VARCHAR},
+      customer_name = #{record.customerName,jdbcType=VARCHAR},
+      department_code = #{record.departmentCode,jdbcType=CHAR},
+      department_name = #{record.departmentName,jdbcType=VARCHAR},
+      start_date = #{record.startDate,jdbcType=DATE},
+      end_date = #{record.endDate,jdbcType=DATE},
+      enabled = #{record.enabled,jdbcType=TINYINT},
+      status = #{record.status,jdbcType=TINYINT},
+      need_num = #{record.needNum,jdbcType=VARCHAR},
+      handle_num = #{record.handleNum,jdbcType=INTEGER},
+      finish_num = #{record.finishNum,jdbcType=INTEGER},
+      province = #{record.province,jdbcType=VARCHAR},
+      city = #{record.city,jdbcType=VARCHAR},
+      town = #{record.town,jdbcType=VARCHAR},
+      street = #{record.street,jdbcType=VARCHAR},
+      min_money = #{record.minMoney,jdbcType=INTEGER},
+      max_money = #{record.maxMoney,jdbcType=INTEGER},
+      work_year = #{record.workYear,jdbcType=INTEGER},
+      education = #{record.education,jdbcType=VARCHAR},
+      mode = #{record.mode,jdbcType=VARCHAR},
+      keyin_date = #{record.keyinDate,jdbcType=TIMESTAMP},
+      keyin_user = #{record.keyinUser,jdbcType=VARCHAR},
+      request = #{record.request,jdbcType=LONGVARCHAR},
+      duty = #{record.duty,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update cn_post
+    set code = #{record.code,jdbcType=CHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      fulljob = #{record.fulljob,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR},
+      customer_code = #{record.customerCode,jdbcType=VARCHAR},
+      customer_name = #{record.customerName,jdbcType=VARCHAR},
+      department_code = #{record.departmentCode,jdbcType=CHAR},
+      department_name = #{record.departmentName,jdbcType=VARCHAR},
+      start_date = #{record.startDate,jdbcType=DATE},
+      end_date = #{record.endDate,jdbcType=DATE},
+      enabled = #{record.enabled,jdbcType=TINYINT},
+      status = #{record.status,jdbcType=TINYINT},
+      need_num = #{record.needNum,jdbcType=VARCHAR},
+      handle_num = #{record.handleNum,jdbcType=INTEGER},
+      finish_num = #{record.finishNum,jdbcType=INTEGER},
+      province = #{record.province,jdbcType=VARCHAR},
+      city = #{record.city,jdbcType=VARCHAR},
+      town = #{record.town,jdbcType=VARCHAR},
+      street = #{record.street,jdbcType=VARCHAR},
+      min_money = #{record.minMoney,jdbcType=INTEGER},
+      max_money = #{record.maxMoney,jdbcType=INTEGER},
+      work_year = #{record.workYear,jdbcType=INTEGER},
+      education = #{record.education,jdbcType=VARCHAR},
+      mode = #{record.mode,jdbcType=VARCHAR},
+      keyin_date = #{record.keyinDate,jdbcType=TIMESTAMP},
+      keyin_user = #{record.keyinUser,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.test.entity.CnPostWithBLOBs">
+    update cn_post
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="fulljob != null">
+        fulljob = #{fulljob,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="customerCode != null">
+        customer_code = #{customerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="customerName != null">
+        customer_name = #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentCode != null">
+        department_code = #{departmentCode,jdbcType=CHAR},
+      </if>
+      <if test="departmentName != null">
+        department_name = #{departmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="startDate != null">
+        start_date = #{startDate,jdbcType=DATE},
+      </if>
+      <if test="endDate != null">
+        end_date = #{endDate,jdbcType=DATE},
+      </if>
+      <if test="enabled != null">
+        enabled = #{enabled,jdbcType=TINYINT},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="needNum != null">
+        need_num = #{needNum,jdbcType=VARCHAR},
+      </if>
+      <if test="handleNum != null">
+        handle_num = #{handleNum,jdbcType=INTEGER},
+      </if>
+      <if test="finishNum != null">
+        finish_num = #{finishNum,jdbcType=INTEGER},
+      </if>
+      <if test="province != null">
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="town != null">
+        town = #{town,jdbcType=VARCHAR},
+      </if>
+      <if test="street != null">
+        street = #{street,jdbcType=VARCHAR},
+      </if>
+      <if test="minMoney != null">
+        min_money = #{minMoney,jdbcType=INTEGER},
+      </if>
+      <if test="maxMoney != null">
+        max_money = #{maxMoney,jdbcType=INTEGER},
+      </if>
+      <if test="workYear != null">
+        work_year = #{workYear,jdbcType=INTEGER},
+      </if>
+      <if test="education != null">
+        education = #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="mode != null">
+        mode = #{mode,jdbcType=VARCHAR},
+      </if>
+      <if test="keyinDate != null">
+        keyin_date = #{keyinDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="keyinUser != null">
+        keyin_user = #{keyinUser,jdbcType=VARCHAR},
+      </if>
+      <if test="request != null">
+        request = #{request,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="duty != null">
+        duty = #{duty,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where code = #{code,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="org.test.entity.CnPostWithBLOBs">
+    update cn_post
+    set name = #{name,jdbcType=VARCHAR},
+      fulljob = #{fulljob,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      customer_code = #{customerCode,jdbcType=VARCHAR},
+      customer_name = #{customerName,jdbcType=VARCHAR},
+      department_code = #{departmentCode,jdbcType=CHAR},
+      department_name = #{departmentName,jdbcType=VARCHAR},
+      start_date = #{startDate,jdbcType=DATE},
+      end_date = #{endDate,jdbcType=DATE},
+      enabled = #{enabled,jdbcType=TINYINT},
+      status = #{status,jdbcType=TINYINT},
+      need_num = #{needNum,jdbcType=VARCHAR},
+      handle_num = #{handleNum,jdbcType=INTEGER},
+      finish_num = #{finishNum,jdbcType=INTEGER},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      town = #{town,jdbcType=VARCHAR},
+      street = #{street,jdbcType=VARCHAR},
+      min_money = #{minMoney,jdbcType=INTEGER},
+      max_money = #{maxMoney,jdbcType=INTEGER},
+      work_year = #{workYear,jdbcType=INTEGER},
+      education = #{education,jdbcType=VARCHAR},
+      mode = #{mode,jdbcType=VARCHAR},
+      keyin_date = #{keyinDate,jdbcType=TIMESTAMP},
+      keyin_user = #{keyinUser,jdbcType=VARCHAR},
+      request = #{request,jdbcType=LONGVARCHAR},
+      duty = #{duty,jdbcType=LONGVARCHAR}
+    where code = #{code,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.test.entity.CnPost">
+    update cn_post
+    set name = #{name,jdbcType=VARCHAR},
+      fulljob = #{fulljob,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      customer_code = #{customerCode,jdbcType=VARCHAR},
+      customer_name = #{customerName,jdbcType=VARCHAR},
+      department_code = #{departmentCode,jdbcType=CHAR},
+      department_name = #{departmentName,jdbcType=VARCHAR},
+      start_date = #{startDate,jdbcType=DATE},
+      end_date = #{endDate,jdbcType=DATE},
+      enabled = #{enabled,jdbcType=TINYINT},
+      status = #{status,jdbcType=TINYINT},
+      need_num = #{needNum,jdbcType=VARCHAR},
+      handle_num = #{handleNum,jdbcType=INTEGER},
+      finish_num = #{finishNum,jdbcType=INTEGER},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      town = #{town,jdbcType=VARCHAR},
+      street = #{street,jdbcType=VARCHAR},
+      min_money = #{minMoney,jdbcType=INTEGER},
+      max_money = #{maxMoney,jdbcType=INTEGER},
+      work_year = #{workYear,jdbcType=INTEGER},
+      education = #{education,jdbcType=VARCHAR},
+      mode = #{mode,jdbcType=VARCHAR},
+      keyin_date = #{keyinDate,jdbcType=TIMESTAMP},
+      keyin_user = #{keyinUser,jdbcType=VARCHAR}
+    where code = #{code,jdbcType=CHAR}
+  </update>
+</mapper>

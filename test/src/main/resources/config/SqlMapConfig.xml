@@ -23,5 +23,7 @@
         <mapper resource="config/mybatis/mapper/CnAdminMapper.xml" />
         <mapper resource="config/mybatis/mapper/CnUserMapper.xml" />
         <mapper resource="config/mybatis/mapper/CnRoleMapper.xml" />
+        <mapper resource="config/mybatis/mapper/CnPostMapper.xml" />
+        <mapper resource="config/mybatis/mapper/CnCustomerMapper.xml" />
     </mappers>
 </configuration>

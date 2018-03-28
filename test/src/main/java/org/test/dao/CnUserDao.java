@@ -1,8 +1,8 @@
-package org.test.mapper;
+package org.test.dao;
 
 import org.test.entity.CnUser;
 
-public interface CnUserMapper {
+public interface CnUserDao {
     int deleteByPrimaryKey(String openid);
 
     int insert(CnUser record);

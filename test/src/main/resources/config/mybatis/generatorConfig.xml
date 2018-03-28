@@ -49,11 +49,31 @@
             <property name="enableSubPackages" value="false"/>
         </javaClientGenerator>
 
-        <!-- 指定数据库表 -->
-        <table tableName="cn_admin"></table>
-        <table tableName="cn_user"></table>
-        <table tableName="cn_role"></table>
-     
+        <!-- 指定数据库表    配置不产生exmaple  -->
+        <table tableName="cn_admin" schema=""  enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false" >
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+
+        <table tableName="cn_user"  schema=""  enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false" >
+            <generatedKey column="openid" sqlStatement="Mysql" identity="true"/>
+        </table>
+        
+        <table tableName="cn_role" schema=""  enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false" >
+            <generatedKey column="role_id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        
+        <table tableName="cn_post" schema=""  enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false" >
+            <generatedKey column="code" sqlStatement="Mysql" identity="true"/>
+        </table>
+        
+        <table tableName="cn_customer" schema=""  enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false" >
+            <generatedKey column="code" sqlStatement="Mysql" identity="true"/>
+        </table>
 
         <!-- <table schema="" tableName="sys_user"></table>
         <table schema="" tableName="sys_role"></table>
