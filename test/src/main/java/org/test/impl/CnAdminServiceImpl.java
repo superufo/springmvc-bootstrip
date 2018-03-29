@@ -1,14 +1,13 @@
 package org.test.impl;
 
 import org.test.entity.CnAdmin;
-
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 import org.test.dao.CnAdminDao;
 import org.test.service.ICnAdminService;
 
-@Service("ICnAdminService")
+@Service("CnAdminServiceImpl")
 public class CnAdminServiceImpl implements ICnAdminService {
 
 	@Resource

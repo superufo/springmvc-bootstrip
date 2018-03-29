@@ -9,9 +9,7 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	
-	<groupId>org.superufo.lion</groupId>
 	<artifactId>admin</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<name>admin Maven Webapp</name>
 	<url>http://maven.apache.org</url>

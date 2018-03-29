@@ -1,5 +1,7 @@
 package org.test.dao;
 
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import org.test.entity.CnAdmin;
 
 public interface CnAdminDao {
