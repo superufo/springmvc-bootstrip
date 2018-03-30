@@ -20,9 +20,8 @@ public class testCnAdmin {
 	private static Logger logger = Logger.getLogger(testCnAdmin.class);
 
 	@Resource
-	private ICnAdminService cnAdminService = null;
+	private ICnAdminService cnAdminService;
 
-	@Test
 	public void test1() {
 		CnAdmin adminInfo = cnAdminService.getAdminInfoByid(1);
 		// System.out.println(user.getUserName());

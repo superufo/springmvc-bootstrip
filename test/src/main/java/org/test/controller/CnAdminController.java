@@ -19,6 +19,7 @@ public class CnAdminController {
 	@Autowired
 	private CnAdminServiceImpl  inAdminServiceImpl;
 	
+	@RequestMapping("method=getAdminInfo")
 	public String getAdminInfo(HttpServletRequest request,Model model) {
 		int adminId = Integer.parseInt(request.getParameter("id"));
 		CnAdmin  cnAdmin  = this.inAdminServiceImpl.getAdminInfoByid(adminId);
