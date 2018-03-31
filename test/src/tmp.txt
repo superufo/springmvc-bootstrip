@@ -1,0 +1,4 @@
+&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true  出问题
+如此 jdbc.url=jdbc:mysql://localhost:3306/cnlw?zeroDateTimeBehavior=convertToNull&useUnicode=true&amp;characterEncoding=UTF-8
+java.sql.SQLException: Cannot convert value '0000-00-00 00:00:00' from column 7 to TIMESTAMP
+
