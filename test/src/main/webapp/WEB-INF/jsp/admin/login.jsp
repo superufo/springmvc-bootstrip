@@ -36,5 +36,6 @@
 <body>
     ${adminInfo.userName}
     <p> ${test} </p>
+      <a href="testFtl">testfreemaker</a>
 </body>
 </html>

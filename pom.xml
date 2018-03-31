@@ -17,8 +17,10 @@
 		<spring.version>4.2.5.RELEASE</spring.version>
 		<mybatis.version>3.2.8</mybatis.version>
 		<tomcat.version>2.2</tomcat.version>
-		 <webserver.port>8016</webserver.port>
+		<webserver.port>8016</webserver.port>
 		<jetty.version>7.6.14.v20131031</jetty.version>
+		
+		<freemarker.version>2.3.23</freemarker.version>
 	</properties>
 
 	<dependencies>
@@ -165,7 +167,21 @@
 			<version>2.5</version>
 		</dependency>
 		
-		
+		<!-- freemarker 标签库 -->
+		 <!-- freeMarker start -->
+		<dependency>
+            <groupId>org.freemarker</groupId>
+            <artifactId>freemarker</artifactId>
+            <version>${freemarker.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+		<!-- freeMarker end -->
+        
 		<!-- 格式化对象，方便输出日志 -->
 		<dependency>
 			<groupId>com.alibaba</groupId>
