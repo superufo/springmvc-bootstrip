@@ -27,7 +27,7 @@
         <!-- 加载mybatis的配置文件 -->
         <property name="configLocation" value="classpath:config/SqlMapConfig.xml"/>
          <!-- 自动扫描mappers.xml文件 -->  
-        <property name="mapperLocations" value="classpath:org/test/entity/xml/*.xml"></property>  
+        <property name="mapperLocations" value="classpath:com/earlybird/entity/xml/*.xml"></property>  
         <!-- 加载数据源 -->
         <property name="dataSource" ref="dataSource"/>
     </bean>
@@ -38,7 +38,7 @@
      -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <!-- 指定扫描的包，如果存在多个包使用(逗号,)分割 -->
-        <property name="basePackage" value="org.test.dao" />
+        <property name="basePackage" value="com.earlybird.dao" />
         <!-- 注意此处是sqlSessionFactoryBeanName，如果写成 sqlSessionFactory，ref="sqlSessionFactory"
              会造成 <context:property-placeholder location="classpath:config/db.properties"/> 失效 而连接不上数据库
          -->

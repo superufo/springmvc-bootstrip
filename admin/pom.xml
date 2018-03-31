@@ -10,26 +10,80 @@
 	</parent>
 	
 	<artifactId>admin</artifactId>
-	<packaging>war</packaging>
 	<name>admin Maven Webapp</name>
 	<url>http://maven.apache.org</url>
+	<packaging>war</packaging>
 	
 	<dependencies>
+		<!-- <dependency> <groupId>org.superufo.lion</groupId> <artifactId>framework</artifactId> 
+			<version>0.0.1-SNAPSHOT</version> </dependency> -->
+
+		<!-- https://mvnrepository.com/artifact/junit/junit -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>3.8.1</version>
-			<scope>test</scope>
+			<version>4.8.2</version>
+			<!-- 表示开发的时候引入，发布的时候不会加载此包 -->
+			<!-- <scope>test</scope> -->
 		</dependency>
+
 
 		<dependency>
-			<groupId>org.superufo.lion</groupId>
-			<artifactId>framework</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<groupId>org.mybatis.generator</groupId>
+			<artifactId>mybatis-generator-core</artifactId>
+			<version>1.3.2</version>
 		</dependency>
-
 	</dependencies>
+
 	<build>
 		<finalName>admin</finalName>
+		<!-- 如果不添加此节点mybatis的mapper.xml文件都会被漏掉。 -->  
+        <resources>  
+            <resource>  
+                <directory>src/main/java</directory>  
+                <includes>  
+                    <include>**/*.properties</include>  
+                    <include>**/*.xml</include>  
+                </includes>  
+                <filtering>false</filtering>  
+            </resource>  
+            <resource>  
+                <directory>src/main/resources</directory>  
+                <includes>  
+                    <include>**/*.properties</include>  
+                    <include>**/*.xml</include>  
+                </includes>  
+                <filtering>false</filtering>  
+            </resource>  
+        </resources>
+		<plugins>
+			<!-- 执行命令 mvn mybatis-generator:generate E:\springmvc\space_tp\springmvc-template\test\src\main\java -->
+			<plugin>
+				<groupId>org.mybatis.generator</groupId>
+				<artifactId>mybatis-generator-maven-plugin</artifactId>
+				<version>1.3.2</version>
+				<configuration>
+					<configurationFile>src/main/resources/config/mybatis/generatorConfig.xml</configurationFile>
+					<verbose>true</verbose>
+					<overwrite>true</overwrite>
+				</configuration>
+				<!-- <executions> <execution> <id>Generate MyBatis Artifacts</id> <goals> 
+					<goal>generate</goal> </goals> </execution> </executions> -->
+				<dependencies>
+					<dependency>
+						<groupId>org.mybatis.generator</groupId>
+						<artifactId>mybatis-generator-core</artifactId>
+						<version>1.3.2</version>
+					</dependency>
+					<dependency>
+						<groupId>mysql</groupId>
+						<artifactId>mysql-connector-java</artifactId>
+						<version>5.1.38</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+		</plugins>
+
+
 	</build>
 </project>
