@@ -42,7 +42,20 @@ public class CnAdminController {
 		
 		model.addAttribute("test", "hello test demo");
 		model.addAttribute("adminInfo", cnAdmin);
-		return "admin/login";
+		return "admin/test";
+	}
+	
+	
+	@RequestMapping("/index")
+	public String index(HttpServletRequest request,Model model) {
+		int adminId =  21 ; /** 配置session Integer.parseInt(request.getParameter("id"));**/
+		CnAdmin  cnAdmin  = this.inAdminServiceImpl.getAdminInfoByid(adminId);
+		
+		logger.info(" enter into Index ");
+		logger.info("cnAdmin:"+ JSON.toJSONString(cnAdmin) );
+		
+		model.addAttribute("adminInfo", cnAdmin);
+		return "admin/index";
 	}
 	
 	

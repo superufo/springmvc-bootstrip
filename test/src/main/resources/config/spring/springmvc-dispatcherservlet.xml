@@ -15,12 +15,13 @@
 		input 支持@RequestMapping或@ExceptionHandler method的 @RequestBody method parameters和@ResponseBody 
 		method 返回值 -->
 	<mvc:annotation-driven />
-
+	<!-- 表示把 webapp /static/win8/ 下资源 映射为   对应url /win8   两个*，它表示映射resources/下所有的URL，包括子路径（即接多个/） -->
+	<!-- <mvc:resources  mapping="/win8/**" location="/static/win8/" /> -->
+	
 	<context:component-scan base-package="org.test.controller,org.test.impl" />
 
 	<!-- 该 BeanPostProcessor 将自动起作用，对标注 @Autowired 的 Bean 进行自动注入 -->
-	<bean
-		class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" />
+	<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" />
 
 	<!-- 整合Freemarker -->
 	<!-- ftl参数配置 -->
@@ -68,5 +69,5 @@
 		<property name="suffix" value=".jsp" />
 		<property name="order" value="1" />
 	</bean>
-
+	
 </beans>
