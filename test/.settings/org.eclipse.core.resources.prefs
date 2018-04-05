@@ -1,4 +1,9 @@
 eclipse.preferences.version=1
 encoding//src/main/java=UTF-8
 encoding//src/main/resources=UTF-8
+encoding//src/main/webapp/WEB-INF/jsp/admin/common/foot.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/jsp/admin/common/header.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/jsp/admin/common/headerJsAndCss.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/jsp/admin/common/sidebar.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/jsp/admin/decorators/taglib/taglib.jsp=UTF-8
 encoding/<project>=UTF-8

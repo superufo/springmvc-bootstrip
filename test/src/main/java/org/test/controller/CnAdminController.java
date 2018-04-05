@@ -58,6 +58,18 @@ public class CnAdminController {
 		return "admin/index";
 	}
 	
+	@RequestMapping("/index2")
+	public String index2(HttpServletRequest request,Model model) {
+		logger.info(" enter into Index2 ");
+		return "admin/index2";
+	}
+	
+	@RequestMapping("/index3")
+	public String index3(HttpServletRequest request,Model model) {
+		logger.info(" enter into Index3 ");
+		return "admin/index3";
+	}
+	
 	
     @RequestMapping("/testFtl")
     public String testFtl(Model model) {
@@ -78,7 +90,7 @@ public class CnAdminController {
     	logger.info("testtime:"+ JSON.toJSONString(str1));
     	logger.info(" enter into testFtl ");
         model.addAttribute("hello", "hello world!");
-        model.addAttribute("testtime", date);
+        model.addAttribute("testtime", date.toString());
         //model.addAttribute("date", str1);
         return "admin/testFtl.html";
     }

@@ -17,6 +17,8 @@
 	<mvc:annotation-driven />
 	<!-- 表示把 webapp /static/win8/ 下资源 映射为   对应url /win8   两个*，它表示映射resources/下所有的URL，包括子路径（即接多个/） -->
 	<!-- <mvc:resources  mapping="/win8/**" location="/static/win8/" /> -->
+	<!-- 加载配置属性文件 -->
+	<context:property-placeholder ignore-unresolvable="true" location="classpath:config/test.properties" />
 	
 	<context:component-scan base-package="org.test.controller,org.test.impl" />
 

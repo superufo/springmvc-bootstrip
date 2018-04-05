@@ -38,5 +38,7 @@
     <p> ${test} </p>
       <a href="testFtl">testfreemaker</a>
       <a href="index?id=${adminInfo.id}" >index</a>
+      <a href="index2?id=${adminInfo.id}">index2裝飾頁面bootstrip</a>
+      <a href="index3?id=${adminInfo.id}">index3裝飾頁面简单测试</a>
 </body>
 </html>

@@ -19,6 +19,17 @@
 		<param-value>classpath:config/spring/applicationContext*.xml</param-value>
 	</context-param>
 
+	<!-- sitemesh3 Conforms to Servlet 2.3 or higher specifications 3.0的强大功能 
+		参考 https://www.cnblogs.com/andrewlee/p/3825556.html -->
+	<filter>
+		<filter-name>sitemesh</filter-name>
+		<filter-class>org.sitemesh.config.ConfigurableSiteMeshFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>sitemesh</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
 	<!-- 字符集过滤器 文件中配置Filter的时候要将该过滤器的配置放到Servlet配置之前 -->
 	<filter>
 		<filter-name>encodingFilter</filter-name>
@@ -68,6 +79,11 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 
+	<taglib>
+		<taglib-uri>http://www.springframework.org/tags/form</taglib-uri>
+		<taglib-location>spring-form.tld</taglib-location>
+	</taglib>
+
 	<!--如果你的DispatcherServlet拦截"/"，为了实现REST风格，拦截了所有的请求，那么同时对*.js,*.jpg等静态文件的访问也就被拦截了。 -->
 	<!--方案一：激活Tomcat的defaultServlet来处理静态文件 -->
 	<!--要写在DispatcherServlet的前面， 让 defaultServlet先拦截请求，这样请求就不会进入Spring了，我想性能是最好的吧。 -->
@@ -115,15 +131,12 @@
 		<servlet-name>default</servlet-name>
 		<url-pattern>*.txt</url-pattern>
 	</servlet-mapping>
-    <servlet-mapping>
+	<servlet-mapping>
 		<servlet-name>default</servlet-name>
 		<url-pattern>*.ttf</url-pattern>
 	</servlet-mapping>
-    <servlet-mapping>
+	<servlet-mapping>
 		<servlet-name>default</servlet-name>
 		<url-pattern>*.woff</url-pattern>
 	</servlet-mapping>
-
-
-
 </web-app>
