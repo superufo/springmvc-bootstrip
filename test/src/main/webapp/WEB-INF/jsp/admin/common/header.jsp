@@ -12,7 +12,7 @@
                <!--END SIDEBAR TOGGLE-->
                <!-- BEGIN LOGO -->
                <a class="brand" href="index.jsp">
-                   <img src="img/logo.png" alt="Metro Lab" />
+                   <img src="static/win8/img/logo.png" alt="Metro Lab" />
                </a>
                <!-- END LOGO -->
                <!-- BEGIN RESPONSIVE MENU TOGGLER -->
@@ -109,7 +109,7 @@
                                </li>
                                <li>
                                    <a href="#">
-                                       <span class="photo"><img src="./img/avatar-mini.png" alt="avatar" /></span>
+                                       <span class="photo"><img src="static/win8/img/avatar-mini.png" alt="avatar" /></span>
 									<span class="subject">
 									<span class="from">Jonathan Smith</span>
 									<span class="time">Just now</span>
@@ -121,7 +121,7 @@
                                </li>
                                <li>
                                    <a href="#">
-                                       <span class="photo"><img src="./img/avatar-mini.png" alt="avatar" /></span>
+                                       <span class="photo"><img src="static/win8/img/avatar-mini.png" alt="avatar" /></span>
 									<span class="subject">
 									<span class="from">Jhon Doe</span>
 									<span class="time">10 mins</span>
@@ -133,7 +133,7 @@
                                </li>
                                <li>
                                    <a href="#">
-                                       <span class="photo"><img src="./img/avatar-mini.png" alt="avatar" /></span>
+                                       <span class="photo"><img src="static/win8/img/avatar-mini.png" alt="avatar" /></span>
 									<span class="subject">
 									<span class="from">Jason Stathum</span>
 									<span class="time">3 hrs</span>
@@ -145,7 +145,7 @@
                                </li>
                                <li>
                                    <a href="#">
-                                       <span class="photo"><img src="./img/avatar-mini.png" alt="avatar" /></span>
+                                       <span class="photo"><img src="static/win8/img/avatar-mini.png" alt="avatar" /></span>
 									<span class="subject">
 									<span class="from">Jondi Rose</span>
 									<span class="time">Just now</span>
@@ -221,7 +221,6 @@
                    <ul class="nav pull-right top-menu" >
                        <!-- BEGIN SUPPORT -->
                        <li class="dropdown mtop5">
-
                            <a class="dropdown-toggle element" data-placement="bottom" data-toggle="tooltip" href="#" data-original-title="Chat">
                                <i class="icon-comments-alt"></i>
                            </a>
@@ -235,7 +234,7 @@
                        <!-- BEGIN USER LOGIN DROPDOWN -->
                        <li class="dropdown">
                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                               <img src="img/avatar1_small.jpg" alt="">
+                               <img src="static/win8/img/avatar1_small.jpg" alt="">
                                <span class="username">Jhon Doe</span>
                                <b class="caret"></b>
                            </a>
