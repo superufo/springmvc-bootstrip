@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 3.0版本中对我来说最喜欢的更新就是装饰器链   <mapping><path>/*</path><decorator>/header.html</decorator><decorator>/body.html</decorator><decorator>/footer.html</decorator</mapping>
+                 将该请求的页面放入装饰页面 header.html中，然后将装饰后的页面一起放入body.html，最后再穿过footer.html页面-->
+
+<sitemesh>
+     <!-- 指明满足“/*”的页面，将被“/WEB-INF/views/decorators/decorator.html”所装饰-->
+     <!-- <mapping path="/WEB-INF/jsp/index3.jsp" decorator="/WEB-INF/decorators/decoratorTwo.html" /> 
+     <mapping path="/WEB-INF/jsp/*" decorator="/WEB-INF/decorators/decorator.html" />  -->
+
+     
+    <mapping>
+	    <path>/admin/*</path>
+	    <decorator>/WEB-INF/jsp/admin/decorators/decorator.jsp</decorator>
+
+	    <!-- <excludes>
+	        <pattern>/static/**</pattern>
+	        <pattern>/login</pattern>
+	        <pattern>/WEB-INF/jsp/admin/common/*.*</pattern>
+	    </excludes> -->
+	</mapping>
+	<!-- 指明满足“/exclude.jsp*”的页面，将被排除，不被装饰 --> 
+	 <mapping path="/static/**" exclue="true" />
+	 <mapping path="/login" exclue="true" />
+	 <mapping path="/common/**" exclue="true" />
+ 
+    <!--<excludes>
+        <pattern>/static/*</pattern>
+    </excludes>
+    <decorator name="default" page="decorator.jsp">
+        <pattern>/*</pattern>
+    </decorator>-->
+     
+</sitemesh>

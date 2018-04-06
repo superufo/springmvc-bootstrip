@@ -1,40 +1,74 @@
-<%@ page language="java"  isELIgnored="false"  contentType="text/html;"    import="java.util.*"  pageEncoding="utf-8" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" isELIgnored="false" contentType="text/html;"
+	import="java.util.*" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!-- isELIgnored="false" 和     taglib 必须加 -->
+
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>test admin</title>
+  <%  
+    String path = request.getContextPath();  
+    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";  
+   %>  
+    <base href="<%=basePath%>" > 
+
+   <meta charset="utf-8" />
+   <title>登录--晨鳥勞務系統</title>
+   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+   <meta content="" name="description" />
+   <meta content="" name="author" />
+   <link href="static/win8/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+   <link href="static/win8/assets/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" />
+   <link href="static/win8/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+   <link href="static/win8/css/style.css" rel="stylesheet" />
+   <link href="static/win8/css/style-responsive.css" rel="stylesheet" />
+   <link href="static/win8/css/style-default.css" rel="stylesheet" id="style_color" />
 </head>
-<%! 
-  private int initVar=0;
-  private int serviceVar=0;
-  private int destroyVar=0;
-%>
-
-<%!
-  public void jspInit(){
-    initVar++;
-    System.out.println("jspInit(): JSP被初始化了"+initVar+"次");
-  }
-
-  public void jspDestroy(){
-    destroyVar++;
-    System.out.println("jspDestroy(): JSP被销毁了"+destroyVar+"次");
-  }
-%>
-<%
-  serviceVar++;
-  System.out.println("_jspService(): JSP共响应了"+serviceVar+"次请求");
-
-  String content1="初始化次数 : "+initVar;
-  String content2="响应客户请求次数 : "+serviceVar;
-  String content3="销毁次数 : "+destroyVar;
-%>
-
-<body>
-    ${adminInfo.userName}
-    <p> ${test} </p>
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+<body class="lock">
+    <div class="lock-header">
+        <!-- BEGIN LOGO -->
+        <a class="center" id="logo" href="static/win8/index.html">
+            <img class="center" alt="logo" src="static/win8/img/logo.png">
+        </a>
+        <!-- END LOGO -->
+    </div>
+    <div class="login-wrap">
+        <div class="metro single-size red">
+            <div class="locked">
+                <i class="icon-lock"></i>
+                <span>登录</span>
+            </div>
+        </div>
+        <div class="metro double-size green">
+            <form action="index.html">
+                <div class="input-append lock-input">
+                    <input type="text" class="" placeholder="Username">
+                </div>
+            </form>
+        </div>
+        <div class="metro double-size yellow">
+            <form action="index.html">
+                <div class="input-append lock-input">
+                    <input type="password" class="" placeholder="Password">
+                </div>
+            </form>
+        </div>
+        <div class="metro single-size terques login">
+            <form action="index">
+                <button type="submit" class="btn login-btn">
+                    登录
+                    <i class=" icon-long-arrow-right"></i>
+                </button>
+            </form>
+        </div>
+        <div class="login-footer">
+            <div class="remember-hint pull-left">
+                <input type="checkbox" id=""> 记住密码
+            </div>
+            <div class="forgot-hint pull-right">
+                <a id="forget-password" class="" href="static/win8/javascript:;">忘记密码?</a>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

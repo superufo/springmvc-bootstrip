@@ -19,6 +19,17 @@
 		<param-value>classpath:config/spring/applicationContext*.xml</param-value>
 	</context-param>
 	
+	<!-- sitemesh3 Conforms to Servlet 2.3 or higher specifications 3.0的强大功能 
+		参考 https://www.cnblogs.com/andrewlee/p/3825556.html -->
+	<filter>
+		<filter-name>sitemesh</filter-name>
+		<filter-class>org.sitemesh.config.ConfigurableSiteMeshFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>sitemesh</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
 	<!-- 字符集过滤器  文件中配置Filter的时候要将该过滤器的配置放到Servlet配置之前-->  
 	<filter>  
 	    <filter-name>encodingFilter</filter-name>  
@@ -105,17 +116,25 @@
         <servlet-name>default</servlet-name>  
         <url-pattern>*.xml</url-pattern>  
     </servlet-mapping>  
-    <servlet-mapping>  
-        <servlet-name>default</servlet-name>  
-        <url-pattern>*.json</url-pattern>  
-    </servlet-mapping>  
-    <servlet-mapping>  
-        <servlet-name>default</servlet-name>  
-        <url-pattern>*.map</url-pattern>  
-    </servlet-mapping>  
-    <servlet-mapping>  
-        <servlet-name>default</servlet-name>  
-        <url-pattern>*.txt</url-pattern>  
-    </servlet-mapping>  
+    <servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.json</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.map</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.txt</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.ttf</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.woff</url-pattern>
+	</servlet-mapping>  
     
 </web-app>

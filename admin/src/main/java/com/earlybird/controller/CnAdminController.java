@@ -15,7 +15,7 @@ import com.earlybird.service.ICnAdminService;
 
 import org.apache.log4j.Logger;
 
-// http://localhost:8080/test/admin/getAdminInfo?id=1
+// http://localhost:8081/admin/getAdminInfo?id=21
 @Controller
 public class CnAdminController {
 	private static Logger logger = Logger.getLogger(CnAdminController.class);
@@ -33,6 +33,6 @@ public class CnAdminController {
 		
 		model.addAttribute("test", "hello test demo");
 		model.addAttribute("adminInfo", cnAdmin);
-		return "admin/login";
+		return "admin/index";
 	}
 }

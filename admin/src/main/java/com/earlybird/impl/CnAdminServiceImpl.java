@@ -21,4 +21,11 @@ public class CnAdminServiceImpl implements ICnAdminService {
 		// TODO Auto-generated method stub
 		return this.cnAdminDao.selectByPrimaryKey(id);
 	}
+	
+	@Override
+	public CnAdmin login(String userName,String pwd) {
+		// TODO Auto-generated method stub
+		return this.cnAdminDao.selectByLoginInfo(userName,pwd);
+	}
+	
 }

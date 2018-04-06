@@ -15,9 +15,9 @@
 	<!--  持@NumberFormat注解通过ConversionService 来格式化Number字段      @DateTimeFormat @Valid校验@Controller input 
 	                   支持@RequestMapping或@ExceptionHandler method的 @RequestBody method parameters和@ResponseBody method 返回值   -->
 	<mvc:annotation-driven/>
+	<context:property-placeholder ignore-unresolvable="true" location="classpath:config/early.properties" />
 	
 	<context:component-scan base-package="com.earlybird.controller,com.earlybird.impl" />
-	
 	 <!-- 该 BeanPostProcessor 将自动起作用，对标注 @Autowired 的 Bean 进行自动注入 -->  
      <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/> 
 

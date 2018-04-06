@@ -29,6 +29,13 @@
     from cn_admin
     where id = #{id,jdbcType=INTEGER}
   </select>
+  
+  <select id="selectByLoginInfo" parameterType="com.earlybird.entity.CnAdmin" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cn_admin
+    where user_name = #{userName,jdbcType=VARCHAR} AND password = #{password,jdbcType=VARCHAR}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from cn_admin
     where id = #{id,jdbcType=INTEGER}

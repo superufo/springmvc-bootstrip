@@ -17,4 +17,6 @@ public interface CnAdminDao {
     int updateByPrimaryKeySelective(CnAdmin record);
 
     int updateByPrimaryKey(CnAdmin record);
+    
+    CnAdmin selectByLoginInfo(String userName,String pwd);
 }
