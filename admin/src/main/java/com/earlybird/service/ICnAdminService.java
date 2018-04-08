@@ -9,5 +9,5 @@ import com.earlybird.entity.CnAdmin;
 public interface  ICnAdminService {
 	public CnAdmin  getAdminInfoByid(int id);
 
-	public CnAdmin login(String userName,String pwd);
+	public CnAdmin selectByLoginInfo(String userName, String pwd);
 }

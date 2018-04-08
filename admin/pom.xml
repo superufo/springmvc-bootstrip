@@ -14,9 +14,19 @@
 	<url>http://maven.apache.org</url>
 	<packaging>war</packaging>
 	
+	
 	<dependencies>
-		<!-- <dependency> <groupId>org.superufo.lion</groupId> <artifactId>framework</artifactId> 
-			<version>0.0.1-SNAPSHOT</version> </dependency> -->
+		<!--<dependency> 
+			<groupId>org.superufo.lion</groupId> 
+			<artifactId>framework</artifactId> 
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency> -->
+		
+		<dependency> 
+			<groupId>org.superufo.lion</groupId> 
+			<artifactId>common</artifactId> 
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/junit/junit -->
 		<dependency>
@@ -86,4 +96,5 @@
 
 
 	</build>
+	
 </project>

@@ -1,6 +1,10 @@
 <%@ page language="java" isELIgnored="false" contentType="text/html;"
 	import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ include file="decorators/taglib/taglib.jsp"%>
+
+<jsp:useBean id="cnAdmin" class="com.earlybird.entity.CnAdmin" scope="request"></jsp:useBean>
 
 <html>
 <head>
@@ -32,6 +36,7 @@
         </a>
         <!-- END LOGO -->
     </div>
+    <form:form modelAttribute="cnAdmin" method="post"  action="/admin/index" >
     <div class="login-wrap">
         <div class="metro single-size red">
             <div class="locked">
@@ -40,26 +45,24 @@
             </div>
         </div>
         <div class="metro double-size green">
-            <form action="index.html">
                 <div class="input-append lock-input">
-                    <input type="text" class="" placeholder="Username">
+                    <form:input type="text" class="" placeholder="Username"  path="userName" />
+                    <form:errors path="userName" />
                 </div>
-            </form>
         </div>
         <div class="metro double-size yellow">
-            <form action="index.html">
                 <div class="input-append lock-input">
-                    <input type="password" class="" placeholder="Password">
+                    <form:input type="password" class="" placeholder="Password" path="password" />
+                    <form:errors path="password" ></form:errors>
                 </div>
-            </form>
         </div>
         <div class="metro single-size terques login">
-            <form action="index">
                 <button type="submit" class="btn login-btn">
                     登录
                     <i class=" icon-long-arrow-right"></i>
                 </button>
-            </form>
+                <form:errors path="*" cssClass="error" />
+                ${errorHint}
         </div>
         <div class="login-footer">
             <div class="remember-hint pull-left">
@@ -70,5 +73,6 @@
             </div>
         </div>
     </div>
+    </form:form>
 </body>
 </html>

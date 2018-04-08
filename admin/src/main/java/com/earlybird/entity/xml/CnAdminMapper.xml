@@ -34,7 +34,7 @@
     select 
     <include refid="Base_Column_List" />
     from cn_admin
-    where user_name = #{userName,jdbcType=VARCHAR} AND password = #{password,jdbcType=VARCHAR}
+    where user_name = #{0} AND password = #{1}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from cn_admin

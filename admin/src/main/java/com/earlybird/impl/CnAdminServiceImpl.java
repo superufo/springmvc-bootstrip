@@ -23,7 +23,7 @@ public class CnAdminServiceImpl implements ICnAdminService {
 	}
 	
 	@Override
-	public CnAdmin login(String userName,String pwd) {
+	public CnAdmin selectByLoginInfo(String userName,String pwd) {
 		// TODO Auto-generated method stub
 		return this.cnAdminDao.selectByLoginInfo(userName,pwd);
 	}

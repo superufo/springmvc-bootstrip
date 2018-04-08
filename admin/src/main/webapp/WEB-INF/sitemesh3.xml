@@ -21,6 +21,7 @@
 	<!-- 指明满足“/exclude.jsp*”的页面，将被排除，不被装饰 --> 
 	 <mapping path="/static/**" exclue="true" />
 	 <mapping path="/login" exclue="true" />
+	 <mapping path="/admin/login" exclue="true" />
 	 <mapping path="/common/**" exclue="true" />
  
     <!--<excludes>
