@@ -2,9 +2,7 @@ package com.earlybird.entity;
 
 import java.util.Date;
 
-public class CnAdmin {
-    private Integer id;
-
+public class CnAdminRoleDetail {
     private String userName;
 
     private String name;
@@ -45,14 +43,36 @@ public class CnAdmin {
 
     private String delFlag;
 
-    public Integer getId() {
-        return id;
+    private String adminId;
+
+    private String roleId;
+    
+    private String adminRoleId;
+
+    public String getAdminRoleId() {
+        return adminId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setAdminRoleId(String adminRoleId) {
+        this.adminRoleId = adminRoleId == null ? null : adminRoleId.trim();
+    }
+    
+    public String getAdminId() {
+        return adminId;
     }
 
+    public void setAdminId(String adminId) {
+        this.adminId = adminId == null ? null : adminId.trim();
+    }
+
+    public String getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(String roleId) {
+        this.roleId = roleId == null ? null : roleId.trim();
+    }
+    
     public String getUserName() {
         return userName;
     }

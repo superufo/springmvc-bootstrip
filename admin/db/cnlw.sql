@@ -1,5 +1,5 @@
 ﻿# Host: localhost  (Version: 5.7.17)
-# Date: 2018-03-31 10:57:08
+# Date: 2018-04-12 00:19:56
 # Generator: MySQL-Front 5.3  (Build 4.234)
 
 /*!40101 SET NAMES utf8 */;
@@ -39,17 +39,22 @@ CREATE TABLE `cn_admin` (
   `name` varchar(80) NOT NULL,
   `password` varchar(80) NOT NULL,
   `email` varchar(300) NOT NULL,
-  `user_login` enum('Y','N') NOT NULL DEFAULT 'N',
-  `delete_reason` varchar(80) NOT NULL,
-  `createdate` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `modifydate` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `deleted` enum('Y','N') NOT NULL DEFAULT 'N',
   `mobile` varchar(14) NOT NULL COMMENT '用户电话',
   `sex` tinyint(4) DEFAULT NULL COMMENT '0为女 1为男',
   `imagin` varchar(255) NOT NULL COMMENT '用户头像',
   `birth` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `identity_id` varchar(18) DEFAULT NULL COMMENT '身份证',
   `full_name` varchar(100) DEFAULT NULL COMMENT '姓名 与身份证相同',
+  `status` varchar(255) DEFAULT '1',
+  `last_login_time` datetime DEFAULT NULL,
+  `login_ip` varchar(100) DEFAULT NULL COMMENT '最后登陆IP',
+  `login_flag` varchar(64) DEFAULT NULL COMMENT '是否可登录',
+  `create_by` varchar(64) NOT NULL COMMENT '创建者',
+  `create_date` datetime NOT NULL COMMENT '创建时间',
+  `update_by` varchar(64) NOT NULL COMMENT '更新者',
+  `update_date` datetime NOT NULL COMMENT '更新时间',
+  `remarks` varchar(255) DEFAULT NULL COMMENT '备注信息',
+  `del_flag` char(1) NOT NULL DEFAULT '0' COMMENT '删除标记',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
 
@@ -57,7 +62,24 @@ CREATE TABLE `cn_admin` (
 # Data for table "cn_admin"
 #
 
-INSERT INTO `cn_admin` VALUES (21,'奇洛李维斯','小李','e10adc3949ba59abbe56e057f20f883e','12345678@xx.com','N','','2016-12-14 17:35:08','2016-12-14 17:42:51','N','1388888888',NULL,'','1984-06-06 00:00:00','440xxxxxxxxxxxx','李莉莉'),(22,'peter','peter','e10adc3949ba59abbe56e057f20f883e','1121545@qq.com','N','','0000-00-00 00:00:00','2017-01-19 05:20:10','N','18399887288',NULL,'','0000-00-00 00:00:00','440199887263664758','peter parker'),(23,'joy','小辛','e10adc3949ba59abbe56e057f20f883e','1121545@aaa.com','N','','2016-12-14 17:44:51','2016-12-14 17:46:57','N','15888888888',NULL,'','0000-00-00 00:00:00','44822144564651561','阿诺舒华辛力加');
+INSERT INTO `cn_admin` VALUES (21,'奇洛李维斯','小李','e10adc3949ba59abbe56e057f20f883e','12345678@xx.com','1388888888',NULL,'','1984-06-06 00:00:00','440xxxxxxxxxxxx','李莉莉','1',NULL,NULL,NULL,'','0000-00-00 00:00:00','','0000-00-00 00:00:00',NULL,'0'),(22,'peter','peter','e10adc3949ba59abbe56e057f20f883e','1121545@qq.com','18399887288',NULL,'','0000-00-00 00:00:00','440199887263664758','peter parker','1',NULL,NULL,NULL,'','0000-00-00 00:00:00','','0000-00-00 00:00:00',NULL,'0'),(23,'joy','小辛','e10adc3949ba59abbe56e057f20f883e','1121545@aaa.com','15888888888',NULL,'','0000-00-00 00:00:00','44822144564651561','阿诺舒华辛力加','1',NULL,NULL,NULL,'','0000-00-00 00:00:00','','0000-00-00 00:00:00',NULL,'0');
+
+#
+# Structure for table "cn_admin_role"
+#
+
+DROP TABLE IF EXISTS `cn_admin_role`;
+CREATE TABLE `cn_admin_role` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `admin_id` varchar(255) NOT NULL DEFAULT '',
+  `role_id` varchar(255) NOT NULL DEFAULT '',
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+#
+# Data for table "cn_admin_role"
+#
+
 
 #
 # Structure for table "cn_area"
@@ -209,6 +231,61 @@ CREATE TABLE `cn_file` (
 INSERT INTO `cn_file` VALUES (52,'uploads\\20171108\\0bfcc39c4e8c45ff4fce6546f2c46be7.jpg','0bfcc39c4e8c45ff4fce6546f2c46be7.jpg',NULL,'2017-11-08 16:10:58'),(56,'uploads\\20171108\\77e5fb53f8199f37245d634d90c9541b.jpg','77e5fb53f8199f37245d634d90c9541b.jpg',NULL,'2017-11-08 16:50:52'),(58,'uploads\\20171108\\1934c5098b6e10f7315caa7612861be9.jpg','1934c5098b6e10f7315caa7612861be9.jpg',NULL,'2017-11-08 18:28:57'),(63,'uploads\\20171108\\4c8200cf95e2349c6d770d5de1fe6d3e.jpg','4c8200cf95e2349c6d770d5de1fe6d3e.jpg',NULL,'2017-11-08 21:58:08'),(64,'uploads\\20171110\\da5ce0ef152328e18bd8970d7bb9110a.jpg','da5ce0ef152328e18bd8970d7bb9110a.jpg',NULL,'2017-11-10 12:54:40'),(65,'uploads\\20171110\\4c83ef87d785f5ce40e4623cc508933c.jpg','4c83ef87d785f5ce40e4623cc508933c.jpg',NULL,'2017-11-10 12:54:55'),(66,'uploads\\20171110\\6b330cf3260951c2a86b965a2910e86d.jpg','6b330cf3260951c2a86b965a2910e86d.jpg',NULL,'2017-11-10 12:55:30'),(67,'uploads\\20171110\\ed424dc2f03d492ee138d7725913db44.jpg','ed424dc2f03d492ee138d7725913db44.jpg',NULL,'2017-11-10 15:17:48'),(68,'uploads\\20171110\\c12e3187b7d5112f74aa1954d0f872b0.jpg','c12e3187b7d5112f74aa1954d0f872b0.jpg',NULL,'2017-11-10 15:17:56'),(69,'uploads\\20171110\\fcb7160976dfe130f9564e8ac903d780.jpg','fcb7160976dfe130f9564e8ac903d780.jpg',NULL,'2017-11-10 15:17:58'),(70,'uploads\\20171110\\ebf9d5e4a669eb7c9141eda6aa926440.jpg','ebf9d5e4a669eb7c9141eda6aa926440.jpg',NULL,'2017-11-10 15:17:58'),(71,'uploads\\20171110\\a0bc64705c7ec2127476b5a722c93820.jpg','a0bc64705c7ec2127476b5a722c93820.jpg',NULL,'2017-11-10 15:18:07'),(72,'uploads\\logo\\20171110\\adcf3d18ae89bfbcfc36de4ce96ce106.jpg','adcf3d18ae89bfbcfc36de4ce96ce106.jpg',NULL,'2017-11-10 15:39:43'),(73,'uploads\\20171119\\7641fd753556b77938962b675d70c309.JPG','7641fd753556b77938962b675d70c309.JPG',NULL,'2017-11-19 16:39:49');
 
 #
+# Structure for table "cn_menu"
+#
+
+DROP TABLE IF EXISTS `cn_menu`;
+CREATE TABLE `cn_menu` (
+  `id` varchar(64) NOT NULL COMMENT '编号',
+  `parent_id` varchar(64) NOT NULL COMMENT '父级编号',
+  `parent_ids` varchar(2000) NOT NULL COMMENT '所有父级编号',
+  `name` varchar(100) NOT NULL COMMENT '名称',
+  `sort` decimal(10,0) NOT NULL COMMENT '排序',
+  `href` varchar(2000) DEFAULT NULL COMMENT '链接',
+  `target` varchar(20) DEFAULT NULL COMMENT '目标',
+  `icon` varchar(100) DEFAULT NULL COMMENT '图标',
+  `is_show` char(1) NOT NULL COMMENT '是否在菜单中显示',
+  `permission` varchar(200) DEFAULT NULL COMMENT '权限标识',
+  `create_by` varchar(64) NOT NULL COMMENT '创建者',
+  `create_date` datetime NOT NULL COMMENT '创建时间',
+  `update_by` varchar(64) NOT NULL COMMENT '更新者',
+  `update_date` datetime NOT NULL COMMENT '更新时间',
+  `remarks` varchar(255) DEFAULT NULL COMMENT '备注信息',
+  `del_flag` char(1) NOT NULL DEFAULT '0' COMMENT '删除标记',
+  PRIMARY KEY (`id`),
+  KEY `sys_menu_parent_id` (`parent_id`),
+  KEY `sys_menu_del_flag` (`del_flag`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='菜单表';
+
+#
+# Data for table "cn_menu"
+#
+
+
+#
+# Structure for table "cn_permission"
+#
+
+DROP TABLE IF EXISTS `cn_permission`;
+CREATE TABLE `cn_permission` (
+  `id` bigint(20) NOT NULL COMMENT '主键',
+  `name` varchar(128) NOT NULL COMMENT '资源名称',
+  `type` varchar(32) NOT NULL COMMENT '资源类型：menu,button,',
+  `url` varchar(128) DEFAULT NULL COMMENT '访问url地址',
+  `percode` varchar(128) DEFAULT NULL COMMENT '权限代码字符串',
+  `parentid` bigint(20) DEFAULT NULL COMMENT '父结点id',
+  `parentids` varchar(128) DEFAULT NULL COMMENT '父结点id列表串',
+  `sortstring` varchar(128) DEFAULT NULL COMMENT '排序号',
+  `available` char(1) DEFAULT NULL COMMENT '是否可用,1：可用，0不可用',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+#
+# Data for table "cn_permission"
+#
+
+
+#
 # Structure for table "cn_post"
 #
 
@@ -302,38 +379,62 @@ INSERT INTO `cn_resume` VALUES ('10000006','ab77611314db87d981e2','贵州大学\
 
 DROP TABLE IF EXISTS `cn_role`;
 CREATE TABLE `cn_role` (
-  `role_id` int(11) NOT NULL AUTO_INCREMENT,
-  `role_name` varchar(80) NOT NULL,
-  `role_delete_reason` varchar(80) NOT NULL,
-  `role_createdate` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `role_modifydate` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `role_deleted` enum('Y','N') NOT NULL DEFAULT 'N',
-  PRIMARY KEY (`role_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+  `id` varchar(64) NOT NULL COMMENT '编号',
+  `office_id` varchar(64) DEFAULT NULL COMMENT '归属机构',
+  `name` varchar(100) NOT NULL COMMENT '角色名称',
+  `enname` varchar(255) DEFAULT NULL COMMENT '英文名称',
+  `role_type` varchar(255) DEFAULT NULL COMMENT '角色类型',
+  `data_scope` char(1) DEFAULT NULL COMMENT '数据范围',
+  `is_sys` varchar(64) DEFAULT NULL COMMENT '是否系统数据',
+  `useable` varchar(64) DEFAULT NULL COMMENT '是否可用',
+  `create_by` varchar(64) DEFAULT NULL COMMENT '创建者',
+  `create_date` datetime DEFAULT NULL COMMENT '创建时间',
+  `update_by` varchar(64) DEFAULT NULL COMMENT '更新者',
+  `update_date` datetime DEFAULT NULL COMMENT '更新时间',
+  `remarks` varchar(255) DEFAULT NULL COMMENT '备注信息',
+  `del_flag` char(1) NOT NULL DEFAULT '0' COMMENT '删除标记',
+  PRIMARY KEY (`id`),
+  KEY `sys_role_del_flag` (`del_flag`),
+  KEY `sys_role_enname` (`enname`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='角色表';
 
 #
 # Data for table "cn_role"
 #
 
-INSERT INTO `cn_role` VALUES (1,'管理员','','2016-11-08 00:00:00','2016-11-08 00:00:00','N'),(2,'销售部经理','','2016-11-08 00:00:00','2016-11-08 00:00:00','N'),(3,'人事部经理','','2016-11-08 00:00:00','2016-11-08 00:00:00','N'),(4,'CEO','','2016-12-14 12:29:39','2016-12-14 12:29:39','N'),(5,'销售员','','2016-12-14 18:43:45','2016-12-14 18:43:45','N'),(6,'仓管员','','2016-12-14 18:45:20','2016-12-14 18:45:20','N'),(7,'财务总监','','2016-12-14 18:45:30','2016-12-14 18:45:30','N'),(8,'出纳','','2016-12-14 18:45:38','2016-12-14 18:45:38','N'),(9,'会计','','2016-12-14 18:45:46','2016-12-14 18:45:46','N');
 
 #
-# Structure for table "cn_role_user"
+# Structure for table "cn_role_menu"
 #
 
-DROP TABLE IF EXISTS `cn_role_user`;
-CREATE TABLE `cn_role_user` (
-  `role_user_role_id` int(11) NOT NULL,
-  `role_user_user_id` int(11) NOT NULL,
-  KEY `role_user_role_id` (`role_user_role_id`),
-  KEY `role_user_user_id` (`role_user_user_id`)
+DROP TABLE IF EXISTS `cn_role_menu`;
+CREATE TABLE `cn_role_menu` (
+  `role_id` varchar(64) NOT NULL COMMENT '角色编号',
+  `menu_id` varchar(64) NOT NULL COMMENT '菜单编号',
+  PRIMARY KEY (`role_id`,`menu_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='角色-菜单';
+
+#
+# Data for table "cn_role_menu"
+#
+
+
+#
+# Structure for table "cn_role_permission"
+#
+
+DROP TABLE IF EXISTS `cn_role_permission`;
+CREATE TABLE `cn_role_permission` (
+  `id` varchar(36) NOT NULL,
+  `sys_role_id` varchar(32) NOT NULL COMMENT '角色id',
+  `sys_permission_id` varchar(32) NOT NULL COMMENT '权限id',
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #
-# Data for table "cn_role_user"
+# Data for table "cn_role_permission"
 #
 
-INSERT INTO `cn_role_user` VALUES (4,3),(1,16),(1,17),(1,18),(1,1),(3,1),(2,21),(3,22),(7,22);
 
 #
 # Structure for table "cn_struct"
@@ -425,6 +526,7 @@ CREATE TABLE `cn_user` (
   `fullname` varchar(255) DEFAULT NULL,
   `profession` varchar(100) DEFAULT NULL COMMENT '职业',
   `acount` varchar(255) DEFAULT NULL COMMENT '账号',
+  `status` tinyint(3) DEFAULT '1' COMMENT '1:有效，0:禁止登录',
   PRIMARY KEY (`openid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='cn_weixin_user  主要依据微信授权';
 
@@ -432,7 +534,22 @@ CREATE TABLE `cn_user` (
 # Data for table "cn_user"
 #
 
-INSERT INTO `cn_user` VALUES ('ab77611314db87d981e2','http://wx.qlogo.cn/mmhead/Q3auHgzwzM7xSlicoNic07QoCb2OIwDoG9PzQ6TyqOHLdx4okTHUCnIw/132','刘勇俊',1,'Hunan','深圳','18685200001',NULL,'1998-01-01','','','10000008','10000002','','','广东','广州','在职','保密','2001-07-30',32,'jumny','学生','liuyongjun'),('ab77611314db87d981e3','http://wx.qlogo.cn/mmhead/Q3auHgzwzM7xSlicoNic07QoCb2OIwDoG9PzQ6TyqOHLdx4okTHUCnIw/132','刘勇俊',1,'Hunan','广州','18685002630',NULL,'1990-01-01',NULL,NULL,'10000008','10000002',NULL,NULL,NULL,'长沙','在职','初中','2001-07-30',32,'刘勇俊',NULL,'liuniuyou'),('adab1144196a533417','http://soupu.oss-cn-shanghai.aliyuncs.com/images/banner3.jpg','小丸子',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'qewe'),('adab1414368a875916','http://soupu.oss-cn-shanghai.aliyuncs.com/images/banner6.jpg','张珊珊',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'wew'),('adab1418061a741425','http://soupu.oss-cn-shanghai.aliyuncs.com/images/banner2.jpg','丶Song',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'wrwe'),('adab1418702a21454','http://soupu.oss-cn-shanghai.aliyuncs.com/images/bg2.jpg','Sarbanes-Oxley',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'wrew'),('adab1721467a468354','http://soupu.oss-cn-shanghai.aliyuncs.com/images/banner5.jpg','麦田的守望者',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'rrrt'),('adab180872a187745','http://soupu.oss-cn-shanghai.aliyuncs.com/images/bg2.jpg','Sarbanes-Oxley',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'wre'),('adab1936615a63721','http://soupu.oss-cn-shanghai.aliyuncs.com/images/banner1.jpg','狂凝眉',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'weer'),('adab1954834a81025','http://soupu.oss-cn-shanghai.aliyuncs.com/images/banner4.jpg','雨碎江南',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'ttthffff');
+INSERT INTO `cn_user` VALUES ('ab77611314db87d981e2','http://wx.qlogo.cn/mmhead/Q3auHgzwzM7xSlicoNic07QoCb2OIwDoG9PzQ6TyqOHLdx4okTHUCnIw/132','刘勇俊',1,'Hunan','深圳','18685200001',NULL,'1998-01-01','','','10000008','10000002','','','广东','广州','在职','保密','2001-07-30',32,'jumny','学生','liuyongjun',1),('ab77611314db87d981e3','http://wx.qlogo.cn/mmhead/Q3auHgzwzM7xSlicoNic07QoCb2OIwDoG9PzQ6TyqOHLdx4okTHUCnIw/132','刘勇俊',1,'Hunan','广州','18685002630',NULL,'1990-01-01',NULL,NULL,'10000008','10000002',NULL,NULL,NULL,'长沙','在职','初中','2001-07-30',32,'刘勇俊',NULL,'liuniuyou',1),('adab1144196a533417','http://soupu.oss-cn-shanghai.aliyuncs.com/images/banner3.jpg','小丸子',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'qewe',1),('adab1414368a875916','http://soupu.oss-cn-shanghai.aliyuncs.com/images/banner6.jpg','张珊珊',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'wew',1),('adab1418061a741425','http://soupu.oss-cn-shanghai.aliyuncs.com/images/banner2.jpg','丶Song',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'wrwe',1),('adab1418702a21454','http://soupu.oss-cn-shanghai.aliyuncs.com/images/bg2.jpg','Sarbanes-Oxley',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'wrew',1),('adab1721467a468354','http://soupu.oss-cn-shanghai.aliyuncs.com/images/banner5.jpg','麦田的守望者',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'rrrt',1),('adab180872a187745','http://soupu.oss-cn-shanghai.aliyuncs.com/images/bg2.jpg','Sarbanes-Oxley',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'wre',1),('adab1936615a63721','http://soupu.oss-cn-shanghai.aliyuncs.com/images/banner1.jpg','狂凝眉',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'weer',1),('adab1954834a81025','http://soupu.oss-cn-shanghai.aliyuncs.com/images/banner4.jpg','雨碎江南',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'ttthffff',1);
+
+#
+# Structure for table "cn_user_role"
+#
+
+DROP TABLE IF EXISTS `cn_user_role`;
+CREATE TABLE `cn_user_role` (
+  `uid` bigint(20) DEFAULT NULL COMMENT '用户ID',
+  `rid` bigint(20) DEFAULT NULL COMMENT '角色ID'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+#
+# Data for table "cn_user_role"
+#
+
 
 #
 # Structure for table "cn_vue_user"

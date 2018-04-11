@@ -26,6 +26,11 @@
 		
 		<shiro.version>1.2.3</shiro.version>
 		
+		<ehcache.version>2.6.11</ehcache.version>
+		<ehcache-web.version>2.0.4</ehcache-web.version>
+		
+		<guava.version>17.0</guava.version>
+		
 		<hibernate.validator.version>5.1.2.Final</hibernate.validator.version>
         <javax.validation.version>1.1.0.Final</javax.validation.version>
 	</properties>
@@ -141,6 +146,24 @@
 			<artifactId>javassist</artifactId>
 			<version>3.17.1-GA</version>
 		</dependency>
+		
+		<!-- CACHE begin -->
+		<dependency>
+			<groupId>net.sf.ehcache</groupId>
+			<artifactId>ehcache-core</artifactId>
+			<version>${ehcache.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.ehcache</groupId>
+			<artifactId>ehcache-web</artifactId>
+			<version>${ehcache-web.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
+			<version>2.5.1</version>
+		</dependency>
+		<!-- CACHE end -->
 
 		<!-- logger -->
 		<dependency>
@@ -176,6 +199,13 @@
 			<version>1.2.2</version>
 		</dependency>
 		
+		<!-- google java lib -->
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>${guava.version}</version>
+		</dependency>
+		
 		<!-- SECURITY begin -->
 		<dependency>
 			<groupId>org.apache.shiro</groupId>
@@ -198,6 +228,8 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		
+		
 		<dependency>
 			<groupId>org.apache.shiro</groupId>
 			<artifactId>shiro-web</artifactId>

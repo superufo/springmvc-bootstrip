@@ -1,8 +1,8 @@
-package com.earlybird.dao;
+package com.earlybird.service;
 
 import com.earlybird.entity.CnRole;
 
-public interface CnRoleDao {
+public interface ICnRoleService {
     int deleteByPrimaryKey(String id);
 
     int insert(CnRole record);

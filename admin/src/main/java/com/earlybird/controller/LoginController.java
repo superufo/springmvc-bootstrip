@@ -43,7 +43,7 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/index", method=RequestMethod.POST)
-	public String index(Model model,@Valid @ModelAttribute("cnAdmin") CnAdmin cnAdmin,BindingResult result,RedirectAttributes  redirectAttributes) {
+	public String index(Model model,@Valid @ModelAttribute("form") CnAdmin cnAdmin,BindingResult result,RedirectAttributes  redirectAttributes) {
 		logger.info("enter into index");
 		
 		String userName = cnAdmin.getUserName();

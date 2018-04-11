@@ -27,7 +27,7 @@
          this value should be an existing directory on the local file system.   即对于非eclipse项目需要指定绝对路径
          -->
         <javaModelGenerator targetPackage="com.earlybird.entity"
-                            targetProject="E:\springmvc\space_tp\springmvc-template\test\src\main\java">
+                            targetProject="E:\springmvc\space_tp\springmvc-template\admin\src\main\java">
             <!-- enableSubPackages:是否让schema作为包的后缀 -->
             <property name="enableSubPackages" value="false"/>
             <!-- 从数据库返回的值被清理前后的空格 -->
@@ -36,7 +36,7 @@
 
         <!-- targetProject:mapper映射文件生成的位置 -->
         <sqlMapGenerator targetPackage="com.earlybird.entity.xml"
-                         targetProject="E:\springmvc\space_tp\springmvc-template\test\src\main\java" >
+                         targetProject="E:\springmvc\space_tp\springmvc-template\admin\src\main\java" >
             <!-- enableSubPackages:是否让schema作为包的后缀 -->
             <property name="enableSubPackages" value="false"/>
         </sqlMapGenerator>
@@ -44,18 +44,29 @@
         <!-- targetPackage：mapper接口生成的位置 -->
         <javaClientGenerator type="XMLMAPPER"
                              targetPackage="com.earlybird.dao"
-                             targetProject="E:\springmvc\space_tp\springmvc-template\test\src\main\java">
+                             targetProject="E:\springmvc\space_tp\springmvc-template\admin\src\main\java">
             <!-- enableSubPackages:是否让schema作为包的后缀 -->
             <property name="enableSubPackages" value="false"/>
         </javaClientGenerator>
 
         <!-- 指定数据库表    配置不产生exmaple  -->
-        <table tableName="cn_admin" schema=""  enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+        
+        <table tableName="cn_admin_role"  schema=""  enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
                enableSelectByExample="false" selectByExampleQueryId="false" >
             <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
         </table>
-
-        <table tableName="cn_user"  schema=""  enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+        
+        <!-- <table tableName="cn_menu"  schema=""  enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false" >
+            <generatedKey column="openid" sqlStatement="Mysql" identity="true"/>
+        </table>
+        
+        <table tableName="cn_permission"  schema=""  enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false" >
+            <generatedKey column="openid" sqlStatement="Mysql" identity="true"/>
+        </table>
+        
+        <table tableName="cn_role_permission"  schema=""  enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
                enableSelectByExample="false" selectByExampleQueryId="false" >
             <generatedKey column="openid" sqlStatement="Mysql" identity="true"/>
         </table>
@@ -63,6 +74,17 @@
         <table tableName="cn_role" schema=""  enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
                enableSelectByExample="false" selectByExampleQueryId="false" >
             <generatedKey column="role_id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        
+        
+        <table tableName="cn_admin" schema=""  enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false" >
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        
+        <table tableName="cn_user"  schema=""  enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false" >
+            <generatedKey column="openid" sqlStatement="Mysql" identity="true"/>
         </table>
         
         <table tableName="cn_post" schema=""  enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
@@ -73,13 +95,7 @@
         <table tableName="cn_customer" schema=""  enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
                enableSelectByExample="false" selectByExampleQueryId="false" >
             <generatedKey column="code" sqlStatement="Mysql" identity="true"/>
-        </table>
-
-        <!-- <table schema="" tableName="sys_user"></table>
-        <table schema="" tableName="sys_role"></table>
-        <table schema="" tableName="sys_permission"></table>
-        <table schema="" tableName="sys_user_role"></table>
-        <table schema="" tableName="sys_role_permission"></table> -->
+        </table> -->
 
         <!-- 有些表的字段需要指定java类型
          <table schema="" tableName="">

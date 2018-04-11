@@ -2,7 +2,7 @@ package com.earlybird.dao;
 
 import com.earlybird.entity.CnRole;
 
-public interface CnRoleDao {
+public interface CnRoleMapper {
     int deleteByPrimaryKey(String id);
 
     int insert(CnRole record);

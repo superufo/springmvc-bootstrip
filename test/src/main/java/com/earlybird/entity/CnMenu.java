@@ -2,22 +2,26 @@ package com.earlybird.entity;
 
 import java.util.Date;
 
-public class CnRole {
+public class CnMenu {
     private String id;
 
-    private String officeId;
+    private String parentId;
+
+    private String parentIds;
 
     private String name;
 
-    private String enname;
+    private Long sort;
 
-    private String roleType;
+    private String href;
 
-    private String dataScope;
+    private String target;
 
-    private String isSys;
+    private String icon;
 
-    private String useable;
+    private String isShow;
+
+    private String permission;
 
     private String createBy;
 
@@ -39,12 +43,20 @@ public class CnRole {
         this.id = id == null ? null : id.trim();
     }
 
-    public String getOfficeId() {
-        return officeId;
+    public String getParentId() {
+        return parentId;
     }
 
-    public void setOfficeId(String officeId) {
-        this.officeId = officeId == null ? null : officeId.trim();
+    public void setParentId(String parentId) {
+        this.parentId = parentId == null ? null : parentId.trim();
+    }
+
+    public String getParentIds() {
+        return parentIds;
+    }
+
+    public void setParentIds(String parentIds) {
+        this.parentIds = parentIds == null ? null : parentIds.trim();
     }
 
     public String getName() {
@@ -55,44 +67,52 @@ public class CnRole {
         this.name = name == null ? null : name.trim();
     }
 
-    public String getEnname() {
-        return enname;
+    public Long getSort() {
+        return sort;
     }
 
-    public void setEnname(String enname) {
-        this.enname = enname == null ? null : enname.trim();
+    public void setSort(Long sort) {
+        this.sort = sort;
     }
 
-    public String getRoleType() {
-        return roleType;
+    public String getHref() {
+        return href;
     }
 
-    public void setRoleType(String roleType) {
-        this.roleType = roleType == null ? null : roleType.trim();
+    public void setHref(String href) {
+        this.href = href == null ? null : href.trim();
     }
 
-    public String getDataScope() {
-        return dataScope;
+    public String getTarget() {
+        return target;
     }
 
-    public void setDataScope(String dataScope) {
-        this.dataScope = dataScope == null ? null : dataScope.trim();
+    public void setTarget(String target) {
+        this.target = target == null ? null : target.trim();
     }
 
-    public String getIsSys() {
-        return isSys;
+    public String getIcon() {
+        return icon;
     }
 
-    public void setIsSys(String isSys) {
-        this.isSys = isSys == null ? null : isSys.trim();
+    public void setIcon(String icon) {
+        this.icon = icon == null ? null : icon.trim();
     }
 
-    public String getUseable() {
-        return useable;
+    public String getIsShow() {
+        return isShow;
     }
 
-    public void setUseable(String useable) {
-        this.useable = useable == null ? null : useable.trim();
+    public void setIsShow(String isShow) {
+        this.isShow = isShow == null ? null : isShow.trim();
+    }
+
+    public String getPermission() {
+        return permission;
+    }
+
+    public void setPermission(String permission) {
+        this.permission = permission == null ? null : permission.trim();
     }
 
     public String getCreateBy() {
