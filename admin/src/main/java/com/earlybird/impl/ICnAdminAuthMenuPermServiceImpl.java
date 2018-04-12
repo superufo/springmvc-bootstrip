@@ -1,5 +1,6 @@
 package com.earlybird.impl;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -7,6 +8,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 
+import com.earlybird.common.utils.StringUtils;
 import com.earlybird.dao.CnAdminDao;
 import com.earlybird.dao.CnAdminRoleDao;
 import com.earlybird.service.ICnAdminAuthMenuPerm;
@@ -17,7 +19,7 @@ import com.earlybird.entity.CnRole;
 import com.earlybird.entity.CnAdminRoleDetail;
 
 
-public class ICnAdminAuthMenuPermServiceImpl  implements ICnAdminAuthMenuPerm {
+public class ICnAdminAuthMenuPermServiceImpl  implements ICnAdminAuthMenuPerm , Serializable {
 
 	@Autowired
 	private CnAdminDao cnAdminDao;
@@ -62,11 +64,11 @@ public class ICnAdminAuthMenuPermServiceImpl  implements ICnAdminAuthMenuPerm {
 		
 		CnAdminRoleDetail  cnAdminRoleInfo = this.cnAdminRoleDao.selectAdminRoleByUserName(userName);
 		
-	    adminDetailMap.put("adminInfo", cnAdminRoleInfo.getAdminId());
+		String role_id = cnAdminRoleInfo.getAdminRoleId();	
 		
+	    adminDetailMap.put("adminRoleInfo", cnAdminRoleInfo);
 		
-		
-		return null;
+		return adminDetailMap;
 	}
 
 }

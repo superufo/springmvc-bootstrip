@@ -1,6 +1,8 @@
 package com.earlybird.entity;
 
 import java.util.Date;
+import java.util.List;
+import com.earlybird.entity.CnRole;
 
 public class CnAdmin {
     private Integer id;
@@ -44,6 +46,8 @@ public class CnAdmin {
     private String remarks;
 
     private String delFlag;
+    
+    private List<CnRole>  roles;
 
     public Integer getId() {
         return id;
@@ -52,6 +56,15 @@ public class CnAdmin {
     public void setId(Integer id) {
         this.id = id;
     }
+    
+    public List<CnRole> getRoles() {  
+        return roles;  
+    }  
+  
+    public void setRoles(List<CnRole> roles) {  
+        this.roles = roles;  
+    }  
+    
 
     public String getUserName() {
         return userName;
