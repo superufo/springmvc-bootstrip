@@ -1,5 +1,5 @@
 ﻿# Host: localhost  (Version: 5.7.17)
-# Date: 2018-04-12 00:19:56
+# Date: 2018-04-16 11:35:14
 # Generator: MySQL-Front 5.3  (Build 4.234)
 
 /*!40101 SET NAMES utf8 */;
@@ -80,6 +80,7 @@ CREATE TABLE `cn_admin_role` (
 # Data for table "cn_admin_role"
 #
 
+INSERT INTO `cn_admin_role` VALUES (1,'22','1');
 
 #
 # Structure for table "cn_area"
@@ -284,6 +285,7 @@ CREATE TABLE `cn_permission` (
 # Data for table "cn_permission"
 #
 
+INSERT INTO `cn_permission` VALUES (1,'主頁浏览','menu','/admin/index','index:view',NULL,NULL,'1','1'),(2,'查看用户信息','menu','getAdminInfo','getAdminInfo:view',NULL,NULL,'2','1'),(3,'增加用户信息','menu','addUserInfo','user:add',NULL,NULL,'3','1'),(4,'删除用户信息','menu','delUserInfo','user:del',NULL,NULL,'4','1'),(5,'审核用户信息','menu','approveUserInfo','user:approve',NULL,NULL,'5','1'),(6,'增加权限','menu','addPerms','perms:add',NULL,NULL,'6','1');
 
 #
 # Structure for table "cn_post"
@@ -402,6 +404,7 @@ CREATE TABLE `cn_role` (
 # Data for table "cn_role"
 #
 
+INSERT INTO `cn_role` VALUES ('1','1','管理员','admin','1','1','1','1',NULL,NULL,NULL,NULL,NULL,'0');
 
 #
 # Structure for table "cn_role_menu"
@@ -426,8 +429,8 @@ CREATE TABLE `cn_role_menu` (
 DROP TABLE IF EXISTS `cn_role_permission`;
 CREATE TABLE `cn_role_permission` (
   `id` varchar(36) NOT NULL,
-  `sys_role_id` varchar(32) NOT NULL COMMENT '角色id',
-  `sys_permission_id` varchar(32) NOT NULL COMMENT '权限id',
+  `role_id` varchar(32) NOT NULL DEFAULT '' COMMENT '角色id',
+  `permission_id` varchar(32) NOT NULL DEFAULT '' COMMENT '权限id',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -435,6 +438,7 @@ CREATE TABLE `cn_role_permission` (
 # Data for table "cn_role_permission"
 #
 
+INSERT INTO `cn_role_permission` VALUES ('1','1','1'),('2','1','2');
 
 #
 # Structure for table "cn_struct"

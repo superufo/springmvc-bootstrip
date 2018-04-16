@@ -47,7 +47,7 @@
 		<filter-name>encodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-	
+
 	<!-- Spring监听器 -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -70,11 +70,11 @@
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
-	
+
 	<listener>
-	    <listener-class>org.apache.shiro.web.env.EnvironmentLoaderListener</listener-class>
+		<listener-class>org.apache.shiro.web.env.EnvironmentLoaderListener</listener-class>
 	</listener>
-	<!--在这里配置shiro的filter-->
+	<!--在这里配置shiro的filter -->
 	<!-- shiro过虑器，DelegatingFilterProxy通过代理模式将spring容器中的bean和filter关联起来 -->
 	<filter>
 		<filter-name>shiroFilter</filter-name>
@@ -82,7 +82,7 @@
 		<!-- 设置true由servlet容器控制filter的生命周期 -->
 		<init-param>
 			<param-name>targetFilterLifecycle</param-name>
-			<param-value>true</param-value> 
+			<param-value>true</param-value>
 		</init-param>
 		<!-- 设置spring容器filter的bean id，如果不设置则找与filter-name一致的bean -->
 		<init-param>
@@ -94,7 +94,7 @@
 		<filter-name>shiroFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-	
+
 	<!--url-pattern 的三种配置方式： 第一种：*.action ： 访问.action结尾的资源时，由 DispatcherServlet 
 		解析 第二种：/ ： 访问所有资源都由 DispatcherServlet 解析，对于html、css、js、image等静态资源，需要配置不让 
 		DispatcherServlet 解析 第三种：/* ： 注意这种方式错误，因为使用这种配置方式，最终咬转发到一个jsp页面时，仍然会由 DispatcherServlet 

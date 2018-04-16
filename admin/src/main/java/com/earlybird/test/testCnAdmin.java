@@ -13,17 +13,17 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.alibaba.fastjson.JSON;
-import com.earlybird.entity.CnAdmin;
-import com.earlybird.service.ICnAdminService;
+import com.earlybird.entity.sys.Admin;
+import com.earlybird.server.sys.AdminService;
 
 public class testCnAdmin {
 	private static Logger logger = Logger.getLogger(testCnAdmin.class);
 
 	@Resource
-	private ICnAdminService cnAdminService;
+	private AdminService adminService;
 
 	public void test1() {
-		CnAdmin adminInfo = cnAdminService.getAdminInfoByid(1);
+		Admin adminInfo = adminService.getAdminInfoByid(1);
 		// System.out.println(user.getUserName());
 		logger.info("值：" + adminInfo.getUserName());
 		logger.info(JSON.toJSONString(adminInfo));

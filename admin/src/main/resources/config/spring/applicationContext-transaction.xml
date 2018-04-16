@@ -36,7 +36,7 @@
 	<!-- 配置切面 aop -->
 	<aop:config>
 		<aop:advisor advice-ref="interceptorAdvice"
-			pointcut="execution(* com.earlybird.impl.*.*(..))" />
+			pointcut="execution(* com.earlybird.service.*.*.*(..)) || execution(* com.earlybird.system.*.*(..)) || execution(* com.earlybird.security.*.*(..))" />
 	</aop:config>
 
 </beans>

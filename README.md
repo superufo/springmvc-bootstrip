@@ -8,4 +8,6 @@ Build id: 20171218-0600   64位   jdk1.8  mysql5.7
 
 tomcat 去掉  server modules without publish 否则  <form:form 表格会报错
 
+v200 是之前版本
 
+之后整理包的分类 改动较大  添加了测试数据

@@ -2,12 +2,16 @@ package com.earlybird.controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.session.Session;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,10 +24,17 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.alibaba.fastjson.JSON;
 import com.earlybird.common.utils.ObjectUtils;
 import com.earlybird.common.utils.StringUtils;
+import com.earlybird.dao.sys.PermsDao;
 import com.earlybird.common.utils.Md5Utils;
 
-import com.earlybird.entity.CnAdmin;
-import com.earlybird.impl.CnAdminServiceImpl;
+import com.earlybird.entity.sys.Admin;
+import com.earlybird.entity.sys.Perms;
+import com.earlybird.server.sys.AdminService;
+import com.earlybird.shiro.cash.RedisManager;
+import com.earlybird.system.SysRedisCache;
+import com.earlybird.system.SysRedisKey;
+
+import redis.clients.jedis.Jedis;
 
 //http://localhost:8081/admin/login
 @Controller
@@ -31,10 +42,10 @@ public class LoginController {
 	private static Logger logger = Logger.getLogger(LoginController.class);
 	
 	@Autowired
-	private CnAdminServiceImpl  inAdminServiceImpl;
+	private AdminService  adminService;
 	
-	//@Autowired
-	//private ObjectUtils objectUtils;
+	@Autowired
+	private PermsDao permsDao;
 	
 	@RequestMapping("/login")
 	public String login(HttpServletRequest request,Model model) {
@@ -43,28 +54,40 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/index", method=RequestMethod.POST)
-	public String index(Model model,@Valid @ModelAttribute("form") CnAdmin cnAdmin,BindingResult result,RedirectAttributes  redirectAttributes) {
-		logger.info("enter into index");
+	public String index(Model model,@Valid @ModelAttribute("form") Admin cnAdmin,BindingResult result,RedirectAttributes  redirectAttributes) {
+	    Subject currentUser = SecurityUtils.getSubject();
 		
+		// Try to get session from redis
+        Session session = currentUser.getSession();
+        
+        // Try to set value to redis-based session
+        session.setAttribute("someKey", "aValue");
+		
+        logger.info("enter into index");
+        logger.info("session："+JSON.toJSONString(session));
+		
+        SysRedisCache sysRedisCache = new SysRedisCache();
+        logger.info(" sysRedisCache.getALlPerms："+JSON.toJSONString(sysRedisCache.getALlPerms()));
+        
 		String userName = cnAdmin.getUserName();
 		String pwd =  Md5Utils.getMD5(cnAdmin.getPassword());
 		logger.info("userName:"+ JSON.toJSONString(userName) );
 		logger.info("pwd:"+ JSON.toJSONString(pwd) );
 		
-		CnAdmin  retCnAdminInfo  = this.inAdminServiceImpl.selectByLoginInfo(userName,pwd);
-		logger.info("cnAdminInfo:"+ JSON.toJSONString(retCnAdminInfo) );
+		Admin  retAdminInfo  = this.adminService.selectByLoginInfo(userName,pwd);
+		logger.info("cnAdminInfo:"+ JSON.toJSONString(retAdminInfo) );
 		
 		/** todo 判断 */
-		if( retCnAdminInfo==null  ) {
+		if( retAdminInfo==null  ) {
 			logger.info("hint:failure" );
 			
 			model.addAttribute("errorHint", "用户名或密码错误！");
 			return "redirect:login";
 		}else {
-			logger.info("cnAdminInfo:"+ JSON.toJSONString(retCnAdminInfo) );
+			logger.info("cnAdminInfo:"+ JSON.toJSONString(retAdminInfo) );
 			logger.info("hint:succes");
-			model.addAttribute("userName",retCnAdminInfo.getUserName() );
-			model.addAttribute("adminInfo", retCnAdminInfo);
+			model.addAttribute("userName",retAdminInfo.getUserName() );
+			model.addAttribute("adminInfo", retAdminInfo);
 			return "admin/index";
 		}
 		
@@ -79,7 +102,7 @@ public class LoginController {
 		logger.info("userName:"+ JSON.toJSONString(userName) );
 		logger.info("pwd:"+ JSON.toJSONString(pwd) );
 		
-		CnAdmin  cnAdmin  = this.inAdminServiceImpl.selectByLoginInfo(userName,pwd);
+		Admin  cnAdmin  = this.adminService.selectByLoginInfo(userName,pwd);
 		/** todo 判断 */
 		if( ObjectUtils.isNullOrEmpty(cnAdmin)==false ) {
 			model.addAttribute("errorHint", "用户名或密码错误！");

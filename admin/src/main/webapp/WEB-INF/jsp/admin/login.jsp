@@ -4,7 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ include file="decorators/taglib/taglib.jsp"%>
 
-<jsp:useBean id="cnAdmin" class="com.earlybird.entity.CnAdmin" scope="request"></jsp:useBean>
+<jsp:useBean id="cnAdmin" class="com.earlybird.entity.sys.Admin" scope="request"></jsp:useBean>
 
 <html>
 <head>

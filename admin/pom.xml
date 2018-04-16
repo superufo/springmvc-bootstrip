@@ -8,23 +8,26 @@
 		<artifactId>parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	
+
 	<artifactId>admin</artifactId>
 	<name>admin Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 	<packaging>war</packaging>
-	
-	
+
+
 	<dependencies>
-		<!--<dependency> 
-			<groupId>org.superufo.lion</groupId> 
-			<artifactId>framework</artifactId> 
+		<!--<dependency> <groupId>org.superufo.lion</groupId> <artifactId>framework</artifactId> 
+			<version>0.0.1-SNAPSHOT</version> </dependency> -->
+
+		<dependency>
+			<groupId>org.superufo.lion</groupId>
+			<artifactId>shiroRedis</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
-		</dependency> -->
-		
-		<dependency> 
-			<groupId>org.superufo.lion</groupId> 
-			<artifactId>common</artifactId> 
+		</dependency>
+
+		<dependency>
+			<groupId>org.superufo.lion</groupId>
+			<artifactId>common</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 
@@ -47,25 +50,25 @@
 
 	<build>
 		<finalName>admin</finalName>
-		<!-- 如果不添加此节点mybatis的mapper.xml文件都会被漏掉。 -->  
-        <resources>  
-            <resource>  
-                <directory>src/main/java</directory>  
-                <includes>  
-                    <include>**/*.properties</include>  
-                    <include>**/*.xml</include>  
-                </includes>  
-                <filtering>false</filtering>  
-            </resource>  
-            <resource>  
-                <directory>src/main/resources</directory>  
-                <includes>  
-                    <include>**/*.properties</include>  
-                    <include>**/*.xml</include>  
-                </includes>  
-                <filtering>false</filtering>  
-            </resource>  
-        </resources>
+		<!-- 如果不添加此节点mybatis的mapper.xml文件都会被漏掉。 -->
+		<resources>
+			<resource>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**/*.properties</include>
+					<include>**/*.xml</include>
+				</includes>
+				<filtering>false</filtering>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>**/*.properties</include>
+					<include>**/*.xml</include>
+				</includes>
+				<filtering>false</filtering>
+			</resource>
+		</resources>
 		<plugins>
 			<!-- 执行命令 mvn mybatis-generator:generate E:\springmvc\space_tp\springmvc-template\test\src\main\java -->
 			<plugin>
@@ -92,9 +95,12 @@
 					</dependency>
 				</dependencies>
 			</plugin>
+
+			
+
 		</plugins>
 
 
 	</build>
-	
+
 </project>

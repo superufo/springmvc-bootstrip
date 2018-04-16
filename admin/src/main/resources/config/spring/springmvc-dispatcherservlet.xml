@@ -18,6 +18,13 @@
 	<context:property-placeholder ignore-unresolvable="true" location="classpath:config/early.properties" />
 	<context:property-placeholder ignore-unresolvable="true" location="classpath:config/cn_message.properties" />
 	
+	<!-- 使用Annotation自动注册Bean,只扫描@Controller -->
+	<context:component-scan base-package="com.earlybird.controller" use-default-filters="false"><!-- base-package 如果多个，用“,”分隔 -->
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+	</context:component-scan>
+	 <!-- 该 BeanPostProcessor 将自动起作用，对标注 @Autowired 的 Bean 进行自动注入 -->
+	<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
+	
 	<!-- spring mvc验证开始 ，若不使用这种配置，需要将错误信息硬编码到代码里，不易修改 -->
 	<!-- 默认的注解映射的支持 -->
     <bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver" />
@@ -37,10 +44,6 @@
 	</bean>
 	<!-- spring mvc验证结束 -->
 	
-	<context:component-scan base-package="com.earlybird.controller,com.earlybird.impl" />
-	 <!-- 该 BeanPostProcessor 将自动起作用，对标注 @Autowired 的 Bean 进行自动注入 -->  
-     <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/> 
-
 	<!-- 配置视图解析器 -->
 	<bean id="viewResolver-freemaker"
 		class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">

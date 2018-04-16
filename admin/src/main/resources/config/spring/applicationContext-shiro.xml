@@ -13,34 +13,52 @@
 		http://www.springframework.org/schema/tx
 		http://www.springframework.org/schema/tx/spring-tx-3.2.xsd ">
 
-    <!--web.xml中shiro的filter对应的bean-->
-    <!-- Shiro 的Web过滤器 -->
-    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
-        <property name="securityManager" ref="securityManager" />
-        <!-- loginUrl认证提交地址，如果没有认证将会请求此地址进行认证，请求此地址将由formAuthenticationFilter进行表单认证 -->
-        <property name="loginUrl" value="/login" />
-        <!--认证成功统一跳转到first.actio，建议不配置，不配置的话shiro认证成功会自动到上一个请求路径-->
-       <property name="successUrl" value="/index"/>
-        <property name="unauthorizedUrl" value="/refuse" />
-        <!-- 过虑器链定义，从上向下顺序执行，一般将/**放在最下边 -->
-        <property name="filterChainDefinitions">
-            <value>
-                <!--对静态资源设置匿名访问-->
-                /static/**=anon
-               
-                <!--/**=anon 表示所有的url都可以匿名访问，anon是shiro中一个过滤器的简写，关于shiro中的过滤器介绍见-->
-                /**=anon
-            </value>
-        </property>
+    <!-- shiro-redis configuration [start] -->
+    <!-- shiro redisManager -->
+    <bean id="redisManager" class="com.earlybird.shiro.cash.RedisManager">
+        <property name="host" value="127.0.0.1:6379"/>
+        <!-- optional properties:
+        <property name="timeout" value="10000"/>
+        <property name="password" value="123456"/>
+        <property name="database" value="1"/>
+        <property name="jedisPoolConfig" ref="jedisPoolConfig"/>
+        <property name="count" value="100"/>
+        -->
     </bean>
 
-    <!--securityManage-->
-    <!-- 安全管理器 -->
+    <!-- Redis-based session configuration -->
+    <bean id="redisSessionDAO" class="com.earlybird.shiro.cash.RedisSessionDAO">
+        <property name="redisManager" ref="redisManager" />
+        <property name="expire" value="1800"/>
+        <property name="keyPrefix" value="shiro:mikesession:" />
+    </bean>
+
+    <bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
+        <property name="sessionDAO" ref="redisSessionDAO" />
+    </bean>
+
+    <!-- Redis-based cache configuration -->
+    <bean id="cacheManager" class="com.earlybird.shiro.cash.RedisCacheManager">
+        <property name="redisManager" ref="redisManager" />
+        <property name="expire" value="1800"/>
+        <property name="keyPrefix" value="shiro:mikecache:" />
+    </bean>
+
+    <!-- securityManager -->
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
-        <property name="realm" ref="authAdminRealm" />
+        <property name="realm" ref="AdminRealm"/>
+        <property name="rememberMeManager.cipherKey" value="kPH+bIxk5D2deZiIxcaaaA==" />
+        <property name="sessionManager" ref="sessionManager" />
+        <property name="cacheManager" ref="cacheManager" />
+    </bean>
+    <!-- shiro-redis configuration [end] -->
+
+    <!-- The following configuration is only for tutorial -->
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <property name="securityManager" ref="securityManager"/>
     </bean>
 
-    <!--自定义realm-->
-    <bean id="authAdminRealm" class="com.earlybird.security.shiro.auth.AdminAuthorityReamlm">
-    </bean>
+    <bean id="AdminRealm" class="com.earlybird.security.shiro.AdminRealm" />
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+
 </beans>

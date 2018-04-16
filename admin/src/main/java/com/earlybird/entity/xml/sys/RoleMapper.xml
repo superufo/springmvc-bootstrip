@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.earlybird.dao.sys.RoleDao">
+  <sql id="RoleColumn">
+    id, office_id, name, enname, role_type, data_scope, is_sys, useable, create_by, create_date, 
+    update_by, update_date, remarks, del_flag
+  </sql>
+  
+  <sql id="RolePermsColumn">
+    r.id AS role_id, r.office_id, r.name AS role_name, r.enname, r.role_type, r.data_scope, r.is_sys, r.useable, r.create_by, r.create_date, 
+    r.update_by, r.update_date, r.remarks, r.del_flag, p.id AS permission_id, name AS resouce_name, p.type, p.url, 
+    p.percode AS percode, p.parentid, p.parentids, p.sortstring, p.available 
+  </sql>
+  
+   <select id="queryById" resultType="com.earlybird.entity.sys.Role">
+    select <include refid="RoleColumn" /> from cn_role  where id = #{id,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="query" resultType="com.earlybird.entity.sys.Role">
+    select <include refid="RoleColumn" />  from cn_role
+  </select>
+  
+  <select id="queryPermsByRoleId" resultType="com.earlybird.entity.sys.Role">
+    select 
+    <include refid="RolePermsColumn" />
+    from cn_role AS r join cn_role_permission AS rl on r.id=rl.role_id join cn_permission AS p
+    where role_id = #{0}
+  </select>
+  
+  <delete id="delete">
+    delete from cn_role where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  
+  <insert id="insert" parameterType="com.earlybird.entity.sys.Role">
+    insert into cn_role
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="officeId != null">
+        office_id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="enname != null">
+        enname,
+      </if>
+      <if test="roleType != null">
+        role_type,
+      </if>
+      <if test="dataScope != null">
+        data_scope,
+      </if>
+      <if test="isSys != null">
+        is_sys,
+      </if>
+      <if test="useable != null">
+        useable,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateBy != null">
+        update_by,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+      <if test="delFlag != null">
+        del_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="officeId != null">
+        #{officeId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="enname != null">
+        #{enname,jdbcType=VARCHAR},
+      </if>
+      <if test="roleType != null">
+        #{roleType,jdbcType=VARCHAR},
+      </if>
+      <if test="dataScope != null">
+        #{dataScope,jdbcType=CHAR},
+      </if>
+      <if test="isSys != null">
+        #{isSys,jdbcType=VARCHAR},
+      </if>
+      <if test="useable != null">
+        #{useable,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="update" parameterType="com.earlybird.entity.sys.Role">
+    update cn_role
+    <set>
+      <if test="officeId != null">
+        office_id = #{officeId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="enname != null">
+        enname = #{enname,jdbcType=VARCHAR},
+      </if>
+      <if test="roleType != null">
+        role_type = #{roleType,jdbcType=VARCHAR},
+      </if>
+      <if test="dataScope != null">
+        data_scope = #{dataScope,jdbcType=CHAR},
+      </if>
+      <if test="isSys != null">
+        is_sys = #{isSys,jdbcType=VARCHAR},
+      </if>
+      <if test="useable != null">
+        useable = #{useable,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null">
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null">
+        del_flag = #{delFlag,jdbcType=CHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

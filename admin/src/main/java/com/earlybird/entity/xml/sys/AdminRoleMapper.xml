@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.earlybird.dao.sys.AdminRoleDao">
+	<sql id="AdminRoleColumn">
+		cn_admin_role.adminRoleId, admin_id, role_id,cn_admin.user_name, cn_admin.name,
+		cn_admin.password, cn_admin.email,
+		cn_admin.mobile, cn_admin.sex, cn_admin.imagin, cn_admin.birth, cn_admin.identity_id,
+		cn_admin.full_name,
+		cn_admin.status, cn_admin.last_login_time, cn_admin.login_ip, cn_admin.login_flag,
+		cn_admin.create_by, cn_admin.create_date,
+		cn_admin.update_by, cn_admin.update_date, cn_admin.remarks, cn_admin.del_flag AS
+		admin_del_flag,
+		cn_role.office_id,cn_role.name As role_name, cn_role.enname,cn_role.role_type, cn_role.data_scope
+	</sql>
+	<select id="queryAdminRoleByUserName" resultType="com.earlybird.entity.sys.AdminRoleDetail">
+		select
+		<include refid="AdminRoleColumn" />
+		from cn_admin_role INNER JOIN cn_admin ON
+		cn_admin_role.admin_id=cn_admin.id
+		INNER JOIN cn_role ON cn_admin_role.role_id=cn_role.id
+		where cn_admin.user_name = #{0} LIMIT 1
+	</select>
+</mapper>

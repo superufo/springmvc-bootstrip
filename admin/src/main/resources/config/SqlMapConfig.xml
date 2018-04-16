@@ -4,22 +4,22 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 
-    <!-- 全局 setting 的配置，根据需要进行配置，如Lazy Loading、二级缓存等 -->
+    <!-- 打印查询语句  value="LOG4J"   -->  
+    <settings>  
+        <setting name="logImpl" value="STDOUT_LOGGING"  />  
+    </settings>  
+	<!-- 全局 setting 的配置，根据需要进行配置，如Lazy Loading、二级缓存等 -->
 
-    <!-- 别名的配置    <settings>指定了数据库操作相关的设置，typeAliases指定了可以给数据库表对应的类所在的包路径，可以在sql的xml使用它们的别名   -->
-    <typeAliases>
-        <!-- 批量扫描别名 -->
-        <package name="com.earlybird.entity" />
-    </typeAliases>
+	<!-- 别名的配置 <settings>指定了数据库操作相关的设置，typeAliases指定了可以给数据库表对应的类所在的包路径，可以在sql的xml使用它们的别名 -->
+	<typeAliases>
+		<!-- 批量扫描别名 -->
+		<package name="com.earlybird.entity" />
+	</typeAliases>
 
-    <!-- 配置 mapper
-     由于使用的是在 spring 和 config.mybatis 的整合包中配置的批量扫描 mapper，
-     所以此处不需要配置了。但需要遵循一定的规则：mapper.java 和 mapper.xml 同名且在同一个目录下。-->
-    <mappers>
-        <!-- <mapper resource="config/mybatis/mapper/CnAdminMapper.xml" />
-        <mapper resource="config/mybatis/mapper/CnUserMapper.xml" />
-        <mapper resource="config/mybatis/mapper/CnRoleMapper.xml" />
-        <mapper resource="config/mybatis/mapper/CnPostMapper.xml" />
-        <mapper resource="config/mybatis/mapper/CnCustomerMapper.xml" /> -->
-    </mappers>
+	<!-- 配置 mapper 由于使用的是在 spring 和 config.mybatis 的整合包中配置的批量扫描 mapper， 所以此处不需要配置了。但需要遵循一定的规则：mapper.java 
+		和 mapper.xml 同名且在同一个目录下。 -->
+	<mappers>
+		<!--<mapper resource="com/earlybird/entity/xml/*.xml" />-->
+	</mappers>
+
 </configuration>
