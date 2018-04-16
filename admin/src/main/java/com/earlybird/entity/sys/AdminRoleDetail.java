@@ -54,6 +54,8 @@ public class AdminRoleDetail extends BaseEntity<AdminRole>  {
     private String adminRoleId;
     
     private List<Perms> permsList;
+    
+    private List<String> permsStrList;
 
     public List<Perms> getPermsList() {
         return permsList;
@@ -61,6 +63,14 @@ public class AdminRoleDetail extends BaseEntity<AdminRole>  {
     
     public void  setPermsList(List<Perms> permsList) {
         this.permsList = permsList;
+    }
+    
+    public List<String> getPermsStrList() {
+        return permsStrList;
+    }
+    
+    public void  setPermsStrList(List<String> permsStrList) {
+        this.permsStrList = permsStrList;
     }
 
     public String getAdminRoleId() {

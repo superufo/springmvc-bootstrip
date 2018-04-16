@@ -33,7 +33,7 @@
 <body class="error-500">
     <div class="error-wrap">
         <h1>对不起</h1>
-        <h2>认证失败，请返回!</h2>
+        <h2>用户名或密码错误，认证失败，请返回!</h2>
         <div class="metro green">
            <span> 4 </span>
         </div>
@@ -43,7 +43,7 @@
         <div class="metro purple">
             <span> 3 </span>
         </div>
-        <a href="/admin/index"> 返回 </a>
+        <a  href="javascript:history.go(-1)" ><font size="20">返回</font> </a>
     </div>
 </body>
 <!-- END BODY -->

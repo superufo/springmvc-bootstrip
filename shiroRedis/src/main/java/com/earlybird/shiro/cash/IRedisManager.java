@@ -58,6 +58,10 @@ public interface IRedisManager {
 	Map<String, String> hgetAll(String key);
 
 	long del(String key);
+
+	Long sadd(String key, String[] members);
+
+	Set<String> smembers(String key);
     
     
 

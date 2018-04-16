@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.earlybird.dao.annotation.MyBatisDao;
 import com.earlybird.entity.sys.Role;
+import com.earlybird.entity.sys.RolePermsDetail;
 
 @MyBatisDao
 public interface RoleDao {

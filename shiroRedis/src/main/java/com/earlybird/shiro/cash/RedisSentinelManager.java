@@ -6,6 +6,7 @@ import redis.clients.jedis.Protocol;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 public class RedisSentinelManager extends BaseRedisManager implements IRedisManager {
@@ -93,6 +94,24 @@ public class RedisSentinelManager extends BaseRedisManager implements IRedisMana
 
 	public void setSoTimeout(int soTimeout) {
 		this.soTimeout = soTimeout;
+	}
+
+	@Override
+	public byte[] hset(byte[] key, byte[] value, byte[] field, int exipreTime) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public byte[] hget(byte[] key, byte[] field) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Map<byte[], byte[]> hgetAll(byte[] key) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

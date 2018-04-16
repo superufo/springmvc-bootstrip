@@ -10,6 +10,10 @@ import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,10 +64,6 @@ public class LoginController {
 		// Try to get session from redis
         Session session = currentUser.getSession();
         
-        // Try to set value to redis-based session
-        session.setAttribute("someKey", "aValue");
-		
-        logger.info("enter into index");
         logger.info("session："+JSON.toJSONString(session));
 		
         SysRedisCache sysRedisCache = new SysRedisCache();
@@ -73,6 +73,24 @@ public class LoginController {
 		String pwd =  Md5Utils.getMD5(cnAdmin.getPassword());
 		logger.info("userName:"+ JSON.toJSONString(userName) );
 		logger.info("pwd:"+ JSON.toJSONString(pwd) );
+		
+		
+		  // let's login the current user so we can check against roles and permissions:
+        if (!currentUser.isAuthenticated()) {
+            UsernamePasswordToken token = new UsernamePasswordToken(userName, pwd);
+            try {
+                currentUser.login(token);
+            } catch (UnknownAccountException uae) {
+            	logger.info("There is no user with username of " + token.getPrincipal());
+            	return "redirect:error";
+            }  catch ( IncorrectCredentialsException ice ) {
+            	logger.info("Password for account " + token.getPrincipal() + " was incorrect! error info:"+ice.getMessage());
+            	model.addAttribute("exHint", ice.getMessage());
+            	return "redirect:refuse";
+            }
+        }
+        logger.info("User [" + currentUser.getPrincipal() + "] logged in successfully.");
+		
 		
 		Admin  retAdminInfo  = this.adminService.selectByLoginInfo(userName,pwd);
 		logger.info("cnAdminInfo:"+ JSON.toJSONString(retAdminInfo) );
@@ -91,6 +109,16 @@ public class LoginController {
 			return "admin/index";
 		}
 		
+	}
+	
+	@RequestMapping(value="/refuse", method=RequestMethod.GET)
+	public String refuse(HttpServletRequest request, Model model) {
+		return "admin/refuse";
+	}
+	
+	@RequestMapping(value="/error", method=RequestMethod.GET)
+	public String error(HttpServletRequest request, Model model) {
+		return "admin/error";
 	}
 	
 	@RequestMapping(value="/index1", method=RequestMethod.POST)

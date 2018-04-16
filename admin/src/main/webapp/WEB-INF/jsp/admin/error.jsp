@@ -33,7 +33,7 @@
 <body class="error-500">
     <div class="error-wrap">
         <h1>对不起</h1>
-        <h2>页面发生错误，请返回!</h2>
+        <h2>页面发生未知错误，请返回!</h2>
         <div class="metro green">
            <span> 5 </span>
         </div>

@@ -93,11 +93,12 @@ public class RedisClusterManager implements IRedisManager {
         return value;
     }
 
-    public void del(byte[] key) {
+    @Override
+    public long del(String key) {
         if (key == null) {
-            return;
+            return 0;
         }
-        getJedisCluster().del(key);
+        return getJedisCluster().del(key);
     }
 
     public Long dbSize() {
@@ -226,4 +227,41 @@ public class RedisClusterManager implements IRedisManager {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public long del(byte[] key) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public String hset(String key, String field, String value, int exipreTime) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String hget(String key, String field) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Map<String, String> hgetAll(String key) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Long sadd(String key, String[] members) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Set<String> smembers(String key) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

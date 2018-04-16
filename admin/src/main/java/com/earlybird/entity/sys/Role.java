@@ -6,37 +6,36 @@ import java.util.List;
 import com.earlybird.entity.BaseEntity;
 
 public class Role extends BaseEntity<Role> {
-    private String id;
+	private String id;
 
-    private String officeId;
+    protected String officeId;
 
-    private String name;
+    protected String name;
 
-    private String enname;
+    protected String enname;
 
-    private String roleType;
+    protected String roleType;
 
-    private String dataScope;
+    protected String dataScope;
 
-    private String isSys;
+    protected String isSys;
 
-    private String useable;
+    protected String useable;
 
-    private String createBy;
+    protected String createBy;
 
-    private Date createDate;
+    protected Date createDate;
 
-    private String updateBy;
+    protected String updateBy;
 
-    private Date updateDate;
+    protected Date updateDate;
 
-    private String remarks;
+    protected String remarks;
 
-    private String delFlag;
+    protected String delFlag;
     
-    private List<Perms> permsList;
+    protected List<Perms> permsList;
 
-    
     public List<Perms> getPermsList() {
         return permsList;
     }

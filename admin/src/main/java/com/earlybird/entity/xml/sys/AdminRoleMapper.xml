@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.earlybird.dao.sys.AdminRoleDao">
 	<sql id="AdminRoleColumn">
-		cn_admin_role.adminRoleId, admin_id, role_id,cn_admin.user_name, cn_admin.name,
+		cn_admin_role.id as admin_role_id , cn_admin_role.admin_id AS admin_id, role_id,cn_admin.user_name, cn_admin.name,
 		cn_admin.password, cn_admin.email,
 		cn_admin.mobile, cn_admin.sex, cn_admin.imagin, cn_admin.birth, cn_admin.identity_id,
 		cn_admin.full_name,

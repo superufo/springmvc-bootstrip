@@ -153,6 +153,39 @@ public abstract class BaseRedisManager implements IRedisManager {
     }
     
     
+    @Override
+	public Long sadd(String key,String... members){
+    	 if (key == null) {
+             return null;
+         }
+    	 
+    	 Long value = null;
+         Jedis jedis = getJedis();
+         try {
+         	value = jedis.sadd(key,members);
+          } finally {
+             jedis.close();
+         }
+         return value;
+    }
+    
+    @Override
+	public Set<String> smembers(String key){
+    	 if (key == null) {
+             return null;
+         }
+    	 
+    	 Set<String> value = null;
+         Jedis jedis = getJedis();
+         try {
+         	value = jedis.smembers(key);
+          } finally {
+             jedis.close();
+         }
+         return value;
+    }
+    
+    
     /**
      * Delete a key-value pair.
      * @param key
@@ -161,7 +194,7 @@ public abstract class BaseRedisManager implements IRedisManager {
 	@Override
     public long del(String key) {
         if (key == null) {
-            return -1;
+            return -1L;
         }
         
         long res = 0;
