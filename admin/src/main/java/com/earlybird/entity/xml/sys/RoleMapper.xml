@@ -29,9 +29,10 @@
 		    <result column="available" jdbcType="CHAR" property="available" />
     </collection>
     
-    <!-- <collection property="permsStrList"  >
-		    <result column="percode" jdbcType="VARCHAR" property="percode" />
-    </collection> -->
+    <!-- <collection property="permsStrList" ofType="java.util.List" >
+    		<id column="permission_id" jdbcType="BIGINT" property="id" />
+		    <result column="percode_str" jdbcType="VARCHAR" property="percode" />
+    </collection>  --> 
     
   </resultMap>
 

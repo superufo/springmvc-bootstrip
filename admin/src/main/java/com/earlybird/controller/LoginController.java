@@ -63,8 +63,8 @@ public class LoginController {
 		
 		// Try to get session from redis
         Session session = currentUser.getSession();
-        
-        logger.info("session："+JSON.toJSONString(session));
+       
+        logger.info("session："+JSON.toJSONString(session.getAttribute(currentUser)));
 		
         SysRedisCache sysRedisCache = new SysRedisCache();
         logger.info(" sysRedisCache.getALlPerms："+JSON.toJSONString(sysRedisCache.getALlPerms()));

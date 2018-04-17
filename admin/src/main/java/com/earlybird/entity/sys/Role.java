@@ -35,6 +35,8 @@ public class Role extends BaseEntity<Role> {
     protected String delFlag;
     
     protected List<Perms> permsList;
+    
+    protected List<String> permsStrList;
 
     public List<Perms> getPermsList() {
         return permsList;
@@ -44,10 +46,18 @@ public class Role extends BaseEntity<Role> {
         this.permsList = permsList;
     }
     
+    public List<String> getPermsStrList() {
+        return permsStrList;
+    }
+    
+    public void  setPermsStrList(List<String> permsStrList) {
+        this.permsStrList = permsStrList;
+    }
+    
     public String getId() {
         return id;
     }
-
+    
     public void setId(String id) {
         this.id = id == null ? null : id.trim();
     }

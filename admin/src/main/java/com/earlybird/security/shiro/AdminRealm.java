@@ -70,35 +70,44 @@ public class AdminRealm extends AuthorizingRealm {
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 		SimpleAuthorizationInfo authInfo = new SimpleAuthorizationInfo();
 
-		principals.getPrimaryPrincipal();
+		AdminRoleDetail adminRoleDetail  =  (AdminRoleDetail) principals.getPrimaryPrincipal();
+		
+		logger.info("doGetAuthorizationInfo adminRoleDetail :" + JSON.toJSONString(adminRoleDetail));
+		
+		String roleId = adminRoleDetail.getRoleId();
+		if ( roleId !=null &&  roleId.isEmpty()!=true ) {
+			authInfo.addRole(roleId);
+			String redisKey = new StringBuffer(SysRedisKey.REDIS_PERMISSION).append(":").append(roleId).toString();
+			
+			ArrayList<String> permsStrList =    new ArrayList(this.redisManager.smembers(redisKey));
+			if( ObjectUtils.isNullOrEmpty(permsStrList) == true)  {
+				List<Perms> permsList = roleDao.queryPermsByRoleId(roleId).getPermsList();
+		
+				String members[] = new String[permsList.size()];
 
-		AdminRoleDetail adminRoleDetail = adminRoleDao.queryAdminRoleByUserName("");
+				if (ObjectUtils.isNullOrEmpty(permsList) == false) {
+					int i = 0;
+					for (Perms perm : permsList) {
+						logger.info("AdminRealm perm :" + JSON.toJSONString(perm));
+						members[i] = perm.getPercode();
+						i++;
+					}
+				}
 
-		String roleId = null;
-		ArrayList<Perms> permsList = new ArrayList<Perms>();
-		List<Perms> roleList = roleDao.queryPermsByRoleId(roleId).getPermsList();
-
-		int pageStart = 1;
-		int pageSize = 1;
-		// 查询数据库权限 存入redis
-		PageHelper.startPage(1, 1); // 开始分页
-		permsList = permsDao.queryByRole(roleId);
-		PageInfo<Perms> pageInfo = new PageInfo<>(permsList);
-
-		while (pageInfo.isHasNextPage()) {
-			for (Perms eachItem : permsList) {
-				String permCode = eachItem.getPercode();
-				authInfo.addStringPermission(permCode);
+				if (ObjectUtils.isNullOrEmpty(members) == false) {
+					logger.info("AdminRealm members :" + JSON.toJSONString(members));
+					this.redisManager.sadd(redisKey, members);
+				}
+				
+				permsStrList =    new ArrayList(this.redisManager.smembers(redisKey));
+				logger.info("authInfo:" + JSON.toJSONString(authInfo));
 			}
-
-			pageStart = pageStart + pageSize - 1;
-			PageHelper.startPage(pageStart, pageSize);
-
-			permsList = permsDao.query();
-			pageInfo = new PageInfo<>(permsList);
+			
+			for(String permStr :permsStrList) {
+				authInfo.addStringPermission(permStr);
+			}
 		}
-
-		logger.info("authInfo:" + JSON.toJSONString(authInfo));
+		
 		return authInfo;
 	}
 
@@ -111,15 +120,15 @@ public class AdminRealm extends AuthorizingRealm {
 
 		// 获取用户信息和角色信息
 		AdminRoleDetail arDetail = adminRoleDao.queryAdminRoleByUserName(userName);
-		logger.info("AdminRealm arDetail :" + arDetail.getPassword() + " password:" + password);
+		// logger.info("AdminRealm arDetail :" + arDetail.getPassword() + " password:" +
+		// password);
 		if (arDetail.getPassword().equals(password) == false) {
 			throw new IncorrectCredentialsException("密码错误");
 		}
 
 		// 获取用户角色的权限菜单
 		String roleId = arDetail.getRoleId();
-
-		String redisKey = new StringBuffer(SysRedisKey.REDIS_PERMISSION).append(roleId).toString();
+		String redisKey = new StringBuffer(SysRedisKey.REDIS_PERMISSION).append(":").append(roleId).toString();
 
 		Set<String> res = this.redisManager.smembers(redisKey);
 		if (ObjectUtils.isNullOrEmpty(res) == true) {
@@ -127,7 +136,7 @@ public class AdminRealm extends AuthorizingRealm {
 			ArrayList<Perms> permsList = (ArrayList<Perms>) roleInfo.getPermsList();
 			logger.info("AdminRealm roleInfo :" + JSON.toJSONString(roleInfo) + " permsList:"
 					+ JSON.toJSONString(permsList));
-			
+
 			String members[] = new String[permsList.size()];
 
 			if (ObjectUtils.isNullOrEmpty(permsList) == false) {
@@ -138,9 +147,9 @@ public class AdminRealm extends AuthorizingRealm {
 					i++;
 				}
 			}
-			
+
 			if (ObjectUtils.isNullOrEmpty(members) == false) {
-				logger.info("AdminRealm members :" + JSON.toJSONString(members) );
+				logger.info("AdminRealm members :" + JSON.toJSONString(members));
 				this.redisManager.sadd(redisKey, members);
 			}
 
