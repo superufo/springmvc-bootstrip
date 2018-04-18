@@ -43,7 +43,7 @@
         <div class="metro purple">
             <span> 0 </span>
         </div>
-        <a href="/admin/index"> 返回 </a>
+        <p> <a  href="javascript:history.go(-1)" ><font size="20">返回</font> </a></p>
     </div>
 </body>
 <!-- END BODY -->

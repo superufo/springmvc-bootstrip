@@ -22,6 +22,7 @@
 	 <mapping path="/static/**" exclue="true" />
 	 <mapping path="/login" exclue="true" />
 	 <mapping path="/refuse" exclue="true" />
+	  <mapping path="/error" exclue="true" />
 	 <mapping path="/admin/login" exclue="true" />
 	 <mapping path="/common/**" exclue="true" />
  
