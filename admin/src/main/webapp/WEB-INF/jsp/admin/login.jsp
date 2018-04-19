@@ -1,6 +1,7 @@
 <%@ page language="java" isELIgnored="false" contentType="text/html;"
 	import="java.util.*" pageEncoding="utf-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ page import="org.apache.shiro.web.filter.authc.FormAuthenticationFilter"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ include file="decorators/taglib/taglib.jsp"%>
 
@@ -46,13 +47,13 @@
         </div>
         <div class="metro double-size green">
                 <div class="input-append lock-input">
-                    <form:input type="text" class="" placeholder="Username"  path="userName" />
+                    <form:input type="text" class=""  name="username" placeholder="Username"  path="userName" />
                     <form:errors path="userName" />
                 </div>
         </div>
         <div class="metro double-size yellow">
                 <div class="input-append lock-input">
-                    <form:input type="password" class="" placeholder="Password" path="password" />
+                    <form:input type="password" class="" name="password" placeholder="Password" path="password" />
                     <form:errors path="password" ></form:errors>
                 </div>
         </div>
@@ -66,7 +67,7 @@
         </div>
         <div class="login-footer">
             <div class="remember-hint pull-left">
-                <input type="checkbox" id=""> 记住密码
+                <input type="checkbox" id="" name="rememberMe" > 记住密码
             </div>
             <div class="forgot-hint pull-right">
                 <a id="forget-password" class="" href="static/win8/javascript:;">忘记密码?</a>

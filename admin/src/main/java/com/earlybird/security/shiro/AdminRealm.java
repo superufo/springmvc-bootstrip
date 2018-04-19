@@ -115,13 +115,12 @@ public class AdminRealm extends AuthorizingRealm {
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 		UsernamePasswordToken Token = (UsernamePasswordToken) token;
-		String userName = Token.getUsername();
+		String userName = Token.getUsername(); 
 		String password = String.valueOf(Token.getPassword());
 
 		// 获取用户信息和角色信息
 		AdminRoleDetail arDetail = adminRoleDao.queryAdminRoleByUserName(userName);
-		// logger.info("AdminRealm arDetail :" + arDetail.getPassword() + " password:" +
-		// password);
+	    logger.info("AdminRealm arDetail :" + arDetail.getPassword() + " password:" + password);
 		if (arDetail.getPassword().equals(password) == false) {
 			throw new IncorrectCredentialsException("密码错误");
 		}

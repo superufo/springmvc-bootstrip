@@ -74,7 +74,6 @@ public class LoginController {
 		logger.info("userName:"+ JSON.toJSONString(userName) );
 		logger.info("pwd:"+ JSON.toJSONString(pwd) );
 		
-		
 		  // let's login the current user so we can check against roles and permissions:
         if (!currentUser.isAuthenticated()) {
             UsernamePasswordToken token = new UsernamePasswordToken(userName, pwd);
