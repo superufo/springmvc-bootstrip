@@ -1,6 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <!-- BEGIN JAVASCRIPTS -->
    <!-- Load javascripts at bottom, this will reduce page load time -->
+   <script src="static/win8/js/home-chartjs.js"></script>
+   
    <script src="static/win8/js/jquery-1.8.3.min.js"></script>
    <script src="static/win8/js/jquery.nicescroll.js" type="text/javascript"></script>
    <script type="text/javascript" src="static/win8/assets/jquery-slimscroll/jquery-ui-1.9.2.custom.min.js"></script>
@@ -29,5 +31,6 @@
    <script src="static/win8/js/sparkline-chart.js"></script>
    <script src="static/win8/js/home-page-calender.js"></script>
    <script src="static/win8/js/home-chartjs.js"></script>
-
+   
+   <!-- <script src="static/win8/js/websocket.js"></script>  -->
 <!-- END JAVASCRIPTS --> 

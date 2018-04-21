@@ -346,6 +346,8 @@
 		<module>framework</module>
 		<module>test</module>
 		<module>shiroRedis</module>
+		
+		<module>network</module>
 	</modules>
 
 	<build>
